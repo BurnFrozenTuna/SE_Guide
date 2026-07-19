@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryEngine — Canvas Starter Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2330;
+    --border: #30363d;
+    --border-bright: #444c56;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --text-dim: #484f58;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --accent3: #d2a8ff;
+    --accent4: #ffa657;
+    --accent5: #ff7b72;
+    --tag-bg: #1f3048;
+    --tag-text: #79c0ff;
+    --code-bg: #161b22;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* layout */
+  .shell {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* sidebar */
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 0 40px;
+  }
+
+  .sidebar-logo {
+    padding: 0 24px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .sidebar-logo .product {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-logo .title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .sidebar-logo .subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .nav-section {
+    padding: 8px 0;
+  }
+
+  .nav-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 8px 24px 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 24px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .nav-item.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(88,166,255,0.06);
+  }
+
+  .nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* main */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 48px 60px 80px;
+    max-width: 860px;
+  }
+
+  /* page header */
+  .page-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .page-header .desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* sections */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-anchor {
+    display: block;
+    position: relative;
+    top: -80px;
+    visibility: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .section p {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+
+  .section p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* callout */
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  .callout.info { background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.2); color: #9ecbff; }
+  .callout.tip  { background: rgba(63,185,80,0.08);  border: 1px solid rgba(63,185,80,0.2);  color: #85e89d; }
+  .callout.warn { background: rgba(255,166,87,0.08); border: 1px solid rgba(255,166,87,0.2); color: #ffb86c; }
+
+  /* node cards */
+  .node-grid {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .node-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: border-color 0.15s;
+  }
+
+  .node-card:hover { border-color: var(--border-bright); }
+
+  .node-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .node-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .node-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .node-card-desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* field table */
+  .field-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+
+  .field-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .field-table tr:last-child td { border-bottom: none; }
+
+  .field-table .field-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent3);
+    white-space: nowrap;
+  }
+
+  .field-table .field-desc { color: var(--text-muted); }
+
+  /* code block */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: #c9d1d9;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre;
+  }
+
+  .code-block .cm { color: var(--text-dim); }
+  .code-block .kw { color: var(--accent5); }
+  .code-block .st { color: var(--accent2); }
+  .code-block .nm { color: var(--accent3); }
+  .code-block .vl { color: var(--accent4); }
+
+  /* flow diagram */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .flow-box {
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  .flow-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .flow-down-arrow {
+    color: var(--text-dim);
+    font-size: 18px;
+    line-height: 1.2;
+    padding: 2px 0;
+  }
+
+  /* arch diagram */
+  .arch {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .arch-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .arch-row:last-child { border-bottom: none; }
+
+  .arch-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .arch-content {
+    flex: 1;
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+
+  .arch-content strong { color: var(--text); font-weight: 600; }
+
+  /* tag chip */
+  .chip {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    margin: 1px 2px;
+    white-space: nowrap;
+  }
+
+  .chip.green { background: rgba(63,185,80,0.1); color: #85e89d; }
+  .chip.purple { background: rgba(210,168,255,0.1); color: var(--accent3); }
+  .chip.orange { background: rgba(255,166,87,0.1); color: var(--accent4); }
+  .chip.red { background: rgba(255,123,114,0.1); color: var(--accent5); }
+
+  /* divider */
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* scroll */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 32px 24px 60px; }
+  }
+
+  /* ── screenshots ── */
+  .shot { margin: 22px 0 26px; }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--border-bright);
+    border-radius: 10px;
+    background: var(--bg2);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.35);
+  }
+  .shot figcaption {
+    margin-top: 9px; font-size: 12.5px; line-height: 1.6;
+    color: var(--text-dim); padding-left: 2px;
+  }
+  .shot figcaption b { color: var(--text-muted); font-weight: 600; }
+  .shot.narrow img { max-width: 620px; }
+</style>
+<body>
+
+<div class="shell">
+
+  <!-- sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="product">StoryEngine</div>
+      <div class="title">Fish_In_the_Canvas</div>
+      <div class="subtitle">Canvas Starter Guide v2.0.1</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Getting started</div>
+      <a class="nav-item active" href="#overview">
+        <span class="nav-dot" style="background:#58a6ff"></span>What is the Canvas?
+      </a>
+      <a class="nav-item" href="#two-models">
+        <span class="nav-dot" style="background:#3fb950"></span>The two models
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Core nodes</div>
+      <a class="nav-item" href="#story-node">
+        <span class="nav-dot" style="background:#79c0ff"></span>Story node
+      </a>
+      <a class="nav-item" href="#character-node">
+        <span class="nav-dot" style="background:#d2a8ff"></span>Character node
+      </a>
+      <a class="nav-item" href="#lorebook-node">
+        <span class="nav-dot" style="background:#ffa657"></span>Lorebook (macro)
+      </a>
+      <a class="nav-item" href="#image-node">
+        <span class="nav-dot" style="background:#ff7b72"></span>Image node
+      </a>
+      <a class="nav-item" href="#image-category">
+        <span class="nav-dot" style="background:#ff7b72"></span>Categorize image tags
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Event system</div>
+      <a class="nav-item" href="#variable-node">
+        <span class="nav-dot" style="background:#85e89d"></span>Variable node
+      </a>
+      <a class="nav-item" href="#trigger-node">
+        <span class="nav-dot" style="background:#ffb86c"></span>Trigger node
+      </a>
+      <a class="nav-item" href="#achievement-node">
+        <span class="nav-dot" style="background:#f0c674"></span>Achievement node
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Everything else</div>
+      <a class="nav-item" href="#other-nodes">
+        <span class="nav-dot" style="background:#444c56"></span>Other nodes
+      </a>
+      <a class="nav-item" href="#advanced">
+        <span class="nav-dot" style="background:#bc8cff"></span>Advanced settings
+      </a>
+      <a class="nav-item" href="#publish">
+        <span class="nav-dot" style="background:#f0c674"></span>Publish settings
+      </a>
+    </div>
+  </nav>
+
+  <!-- main -->
+  <main class="main">
+
+    <div class="page-header">
+      <div class="eyebrow">Canvas Node Reference</div>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide v2.0.1</span></h1>
+      <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
+    </div>
+
+    <div class="callout warn" style="margin-top:0">
+      <span class="callout-icon">📌</span>
+      <div>This is <strong>not official documentation.</strong> It was put together by <strong>Frozen_Tuna</strong> while actually building on the Canvas, so some details may be slightly off. <strong>You're strongly encouraged to keep the Canvas open and read this alongside it.</strong></div>
+    </div>
+
+    <!-- ─── overview ─── -->
+    <div class="section">
+      <span class="section-anchor" id="overview"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(88,166,255,0.12)">🗂️</div>
+        <h2>What is the Canvas?</h2>
+      </div>
+      <p>The Canvas is the <strong>workspace where you place and connect the nodes (blocks)</strong> that make up a story chat. Each node has a defined role, and you wire them together to create the flow of data.</p>
+
+      <div class="node-grid">
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(88,166,255,0.1);color:#58a6ff">Minimum setup</span>
+            <span class="node-card-title">Story + Character + User</span>
+          </div>
+          <div class="node-card-desc">Connect these three and the chat works. Everything else is added capability.</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(63,185,80,0.1);color:#3fb950">Data flow</span>
+            <span class="node-card-title">What's in a node reaches the AI</span>
+          </div>
+          <div class="node-card-desc">The Canvas is a tool for structuring "what gets handed to the AI." Whatever you write in a node is compiled and enters the AI's context.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── two models ─── -->
+    <div class="section">
+      <span class="section-anchor" id="two-models"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(63,185,80,0.12)">⚙️</div>
+        <h2>The two models — main and sub</h2>
+      </div>
+      <p>StoryEngine runs on <strong>two AI models working together</strong> under the hood.</p>
+
+      <div class="arch">
+        <div class="arch-row">
+          <div class="arch-label">User input</div>
+          <div class="arch-content">The text typed into the chat box.</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">Sub-model</div>
+          <div class="arch-content">
+            <strong>Handles retrieval.</strong> Pulls situationally relevant information from two spaces. The internal search method has not been disclosed.<br><br>
+            <strong>[1] Lorebook (macro) entries</strong> — keyword-matched. When a registered keyword appears in user input, the matching content is injected.
+            <span class="chip">max 5 injected at once</span> Higher priority entries win the slots.<br><br>
+            <strong>[2] Full Story</strong> — the text field on story nodes and character nodes alike. A 30,000-token space holding bulk data: worldbuilding, detailed character info, and so on.
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">Main model</div>
+          <div class="arch-content">
+            <strong>Handles generation.</strong> Always receives, fixed: story Core Context + prologue + character Core Context.<br>
+            Whatever the sub-model retrieved (lorebook + Full Story) is added on top, and the response is generated from the combination.<br>
+            Image tag output <span class="chip">smile</span> <span class="chip">angry</span> and variable update instructions are also the main model's job.
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">Output</div>
+          <div class="arch-content">Narrative text + image tags → rendered to screen.</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div><strong>Core Context vs Full Story</strong><br>
+        Core Context is injected into the main model <strong>every single turn</strong>. Put your hard rules here — the settings that must never be forgotten.<br>
+        Full Story is fetched by the sub-model <strong>only when the situation calls for it</strong>. It's storage for bulk worldbuilding and character data.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── story node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="story-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(121,192,255,0.12)">📋</div>
+        <h2>Story node</h2>
+      </div>
+      <p>The <strong>central node</strong> of the Canvas. Character, lorebook and achievement nodes all connect into it and get compiled together. What you write here reaches the main model <strong>first, at the highest priority</strong>.</p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div>You can create multiple story nodes — useful for chapter or scenario branching. The one set to <span class="chip green">Is Start: Yes</span> is the entry point.</div>
+      </div>
+
+      <figure class="shot">
+        <img src="img/StoryNode.png" alt="Story node panel showing Is Start, Core Context, Full Story, Prologue Message, Prologue Guide and Creator Notice fields">
+        <figcaption><b>The story node, with its input ports down the left side.</b> Those port labels — Trigger, Characters, Background Image, Macro Prompts, Update Rule, Status View, Achievement, Preset Notes — aren't just decoration. <b>Click or tap one and a list of every node belonging to that category appears; pick one and it connects automatically.</b> This exists because dragging wires by hand is miserable on mobile, so if you're building on a phone, connect this way instead.</figcaption>
+      </figure>
+
+      <p>The fields you <strong>actually fill in</strong>:</p>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Is Start</td>
+            <td class="field-desc">Marks this node as the entry point. Exactly one story node should be set to Yes.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Core Context<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(2,000 tokens base)</span></td>
+            <td class="field-desc">The hard-rules space. Directives the AI must always obey — SYSTEM_LAYER / WORLD_LAYER / DIRECTIVE and so on. The main model reads this before anything else.<br><strong>The budget is 2,000 tokens by default</strong>, and grows if you enable toggles in <a href="#advanced" style="color:var(--accent)">Advanced Settings</a>. A canvas showing 3,800 has +1,800 worth of toggles switched on.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Full Story<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(30,000 tokens)</span></td>
+            <td class="field-desc"><strong>The sub-model's retrieval space.</strong> Worldbuilding knowledge, location details, per-scene setup — all the bulk goes here. Unlike Core Context it is <strong>not</strong> always injected; the sub-model pulls from it as the situation calls for. The internal search method is undisclosed.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Prologue Message<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(700 tokens)</span></td>
+            <td class="field-desc">The opening scene shown on the chat start screen — the first thing a user sees on entry.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Prologue Guide<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(300 tokens)</span></td>
+            <td class="field-desc">First-turn handling instructions given <strong>only to the AI</strong>. "Open the next turn this way," "initial variable values are these," and so on. Never shown to the user.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Creator Notice<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(500 chars)</span></td>
+            <td class="field-desc">A note from you to your readers. Commonly used to state which models the story was tuned for and which ones misbehave with it — worth filling in, since readers can pick their own model.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── character node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="character-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(210,168,255,0.12)">👤</div>
+        <h2>Character node</h2>
+      </div>
+      <p>One node per NPC. Appearance, personality, speech style, relationships — every piece of character information lives here. Connect it to a story node and the main model becomes aware of that character.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>Speech style goes <strong>directly inside the character node</strong>. There used to be a separate text node for it; it's since been folded in.</div>
+      </div>
+
+      <figure class="shot">
+        <img src="img/CharacterNode.png" alt="Character node showing Profile image, Name, Core Context and Description fields">
+        <figcaption><b>The clearest way to hold the two fields apart:</b> Core Context is what the <b>main model</b> reads every turn, Description is what the <b>sub-model</b> retrieves when relevant. (The labels in this screenshot were typed in by hand to illustrate that split — they aren't part of the UI.) Note the <b>Emotion Image</b> and <b>Situation Image</b> ports on the left.</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Name<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(100 chars)</span></td>
+            <td class="field-desc">The character's display name. Non-Latin scripts are fine.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Core Context<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(300 tokens)</span></td>
+            <td class="field-desc"><strong>Shown in the key-information panel.</strong> Keep it to essential attributes only — name, age, gender. The budget is small on purpose, so spending tokens carefully here matters.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Description / Full Story<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(30,000 tokens)</span></td>
+            <td class="field-desc">The same sub-model retrieval space as the story node's, though it's understood to be classified differently internally (exact behavior undisclosed). <strong>Keep it to character-related material only</strong> — personality, speech patterns, behavior, backstory, relationships.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Show in character preview</td>
+            <td class="field-desc">Whether this character appears in the preview section on the detail page. Usually left off for characters meant to be discovered in play.</td>
+          </tr>
+          <tr>
+            <td class="field-name">title</td>
+            <td class="field-desc">An internal code label, just for your own sorting. e.g. <span class="chip purple">KMR</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── lorebook ─── -->
+    <div class="section">
+      <span class="section-anchor" id="lorebook-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,166,87,0.12)">📚</div>
+        <h2>Lorebook node (Macro Prompts)</h2>
+      </div>
+      <p><strong>This is the RAG space the sub-model searches.</strong> Write entries inside a lorebook node, and when the sub-model spots a registered keyword in user input, that entry's content is injected into the main model's context.</p>
+      <p>Unlike story and character nodes, which are always present, <strong>the lorebook is injected dynamically</strong> based on what's happening.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>At most <strong>5 entries</strong> are injected in a single turn. Past that, higher <strong>Priority</strong> values win the slots. The more important the rule, the higher you should set it.</div>
+      </div>
+
+      <figure class="shot">
+        <img src="img/Macro_Lorebook.png" alt="Three macro prompt nodes showing empty state, a new entry, and a filled entry">
+        <figcaption><b>All three stages in one shot.</b> Left: an empty node — "No macro prompt entries yet." Right: a fresh entry with blank Trigger Words. Bottom: a completed entry with the keyword <b>Call_Keyword</b> registered and prompt text written in. Note the <b>Always</b> toggle beside Trigger Words — switch it on and the entry injects every turn regardless of keywords, which costs you one of the five slots permanently.</figcaption>
+      </figure>
+
+      <p>What one entry consists of:</p>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Trigger Words<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(up to 5)</span></td>
+            <td class="field-desc">The keywords that fire this entry. Add them one at a time; each becomes its own chip.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Always</td>
+            <td class="field-desc">Injects the entry every turn, ignoring keywords entirely. Use sparingly — it permanently occupies one of the five slots.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Prompt Text<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(300 tokens)</span></td>
+            <td class="field-desc">The actual content injected when the entry fires.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Priority</td>
+            <td class="field-desc">Higher values win the five slots first. OOC and system rules are typically set around 99–100.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Duration (turns)</td>
+            <td class="field-desc">How many turns the injection persists. Usually 1.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div>Feel free to create several lorebook nodes and split them by purpose — an OOC-rules node, a worldbuilding node, an image-rules node. Much easier to maintain than one giant pile.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── image node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="image-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,123,114,0.12)">🖼️</div>
+        <h2>Image node</h2>
+      </div>
+      <p>Manages the image set shown for a character. Each image is bound to a <strong>tag</strong>, and the main model's tag output decides which image gets displayed. Image nodes connect to character nodes.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>The filename is the tag.</strong> There's no separate tag field to fill in — whatever the file is called becomes the tag. Name your files accordingly before uploading.</div>
+      </div>
+
+      <figure class="shot">
+        <img src="img/ImageNode01.png" alt="An empty image node beside a filled one showing Situation Image Tags and Paid Unlock Settings">
+        <figcaption><b>Empty node on the left, populated node on the right.</b> The uploaded image carries the tag <b>smile</b> under Situation Image Tags. Below it, <b>Paid Unlock Settings</b> — switch it on and readers spend credits to reveal that image (50 per image here).</figcaption>
+      </figure>
+
+      <figure class="shot narrow">
+        <img src="img/ImageNode02.png" alt="Bulk tag editing panel with Bulk Tag Application, Add Images, Filter by Tag and CSV export controls">
+        <figcaption><b>The bulk editor — worth opening early if you have more than a handful of images.</b> <b>Bulk Tag Application</b> adds or removes a tag across every image at once, <b>Filter by Tag</b> narrows the view, and <b>Copy as CSV / Copy Tags Only</b> get your tag list out for editing elsewhere. Retagging fifty images one by one is a genuinely bad afternoon.</figcaption>
+      </figure>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── categorize ─── -->
+    <div class="section">
+      <span class="section-anchor" id="image-category"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,123,114,0.12)">🗂️</div>
+        <h2>Categorize Image Tags</h2>
+      </div>
+      <p>Images on StoryEngine behave as an <strong>independent module, not an extension of your prompt</strong>. So for the AI to know which image suits which moment, you have to sort your tags into categories and write the descriptions yourself.</p>
+      <p>Found under the top menu: <strong>Canvas → Categorize Image Tags</strong>.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>Category descriptions <strong>must stay under 25 tokens</strong>. Longer descriptions simply don't work correctly.</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="img/ImageCategorize.png" alt="Categorize Image Tags dialog showing an uncategorized smile tag and an empty category list">
+        <figcaption><b>What it looks like before you've done anything.</b> The tag <b>smile</b> sits on the left as an uncategorized situation tag, and there are no categories yet. Note the warning that appears underneath — <b>"Uncategorized situation tags exist"</b> — which is the platform telling you the AI has no idea when to use that image.</figcaption>
+      </figure>
+
+      <p>The order to do it in:</p>
+
+      <table class="field-table">
+        <thead><tr><th>Step</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">1. Create a category</td>
+            <td class="field-desc">Type a name and add it. e.g. <span class="chip">Emotions</span> <span class="chip">Locations</span> <span class="chip">Activities</span></td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">2. Write the description</td>
+            <td class="field-desc">In under 25 tokens, state <strong>when and in what situation</strong> the category applies. The AI reads this to decide which image to reach for.</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">3. Assign tags</td>
+            <td class="field-desc">Add the tags from your image nodes into the matching category. e.g. Emotions → <span class="chip">smile</span> <span class="chip">angry</span> <span class="chip">sad</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>The category description is a live instruction the AI reads. Keep it <strong>short and unambiguous</strong> — "used when expressing emotion" is the right register. The better your categories, the more accurately images land.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── variable node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="variable-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(133,232,157,0.12)">🔢</div>
+        <h2>Variable node</h2>
+      </div>
+      <p>Stores a value tracked across the chat. Boolean, number and string types are supported. Variables are either read by a trigger node to test a condition, or displayed in a custom status view.</p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div><strong>The normal pattern:</strong> variables usually don't go through a trigger at all. You pair a <span class="chip green">Variable node</span> with an <span class="chip purple">Update Rule node</span> and hang them <strong>straight off the story node.</strong> Triggers and achievements are the extra branch you add only when you want a variable to become a milestone event.</div>
+      </div>
+
+      <figure class="shot">
+        <img src="img/VariableNode.png" alt="Three variable nodes of type String, Number and Boolean feeding into a single Update Rule node">
+        <figcaption><b>Three variables — A (String), B (Number), C (Boolean) — all feeding one Update Rule node.</b> This is the shape most of your event work will take. One update rule can govern several variables at once; you don't need a separate rule per variable.</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Variable Name<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(100 chars)</span></td>
+            <td class="field-desc">
+              The variable's identifier.<br>
+              A <span class="chip green">var_</span> prefix makes it readable from a status view HTML panel as <code style="font-family:monospace">{{var_NAME}}</code>.<br>
+              The prefix is <strong>only</strong> needed for status view display. Without it, trigger and achievement wiring still works perfectly.
+            </td>
+          </tr>
+          <tr>
+            <td class="field-name">Variable Type</td>
+            <td class="field-desc"><span class="chip">Boolean</span> <span class="chip">Number</span> <span class="chip">String</span></td>
+          </tr>
+          <tr>
+            <td class="field-name">Initial Value</td>
+            <td class="field-desc">Starting state. Boolean defaults to No, Number to 0, String to empty.</td>
+          </tr>
+          <tr>
+            <td class="field-name">title</td>
+            <td class="field-desc">Internal code label. Matching it to the related trigger and achievement makes them easy to pair up later. e.g. <span class="chip purple">A1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── trigger node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="trigger-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,184,108,0.12)">⚡</div>
+        <h2>Trigger node</h2>
+      </div>
+      <p>Fires an achievement when a variable meets a condition. It takes the story node and a variable node as inputs, and signals the connected achievement node when the condition is met. <strong>You only need a trigger when you want an achievement to unlock.</strong> A variable that merely tracks a value doesn't need one.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div><strong>How the event system is assembled:</strong> story node + variable node + trigger node + update rule node, with the <strong>achievement node added as needed</strong>. The flow below is the branch that goes all the way to an achievement.</div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-box" style="background:rgba(121,192,255,0.08);border:1px solid rgba(121,192,255,0.2);color:#79c0ff">Story node</div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-box" style="background:rgba(133,232,157,0.08);border:1px solid rgba(133,232,157,0.2);color:#85e89d">Variable node</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(255,184,108,0.08);border:1px solid rgba(255,184,108,0.2);color:#ffb86c">Trigger node</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(240,198,116,0.08);border:1px solid rgba(240,198,116,0.2);color:#f0c674">Achievement <span style="font-size:11px;opacity:0.7">(optional)</span></div>
+        </div>
+      </div>
+
+      <figure class="shot">
+        <img src="img/Trigger_ACH.png" alt="Variable node connected through a trigger node into an achievement node, with an update rule above">
+        <figcaption><b>The full chain, wired up.</b> Variable <b>C</b> (Boolean, initial value No) runs into a trigger watching for the value <b>Yes</b>, which fires the achievement node on the right. The Update Rule node sits above, connected separately — it's what actually moves C from No to Yes during play.</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Variable to watch</td>
+            <td class="field-desc">The variable this trigger monitors. Must match the name on the connected variable node.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Value</td>
+            <td class="field-desc">The trigger fires when the watched variable reaches this value. For a Boolean, usually <span class="chip">Yes</span>.</td>
+          </tr>
+          <tr>
+            <td class="field-name">title</td>
+            <td class="field-desc">Use the same label as the paired variable and achievement. e.g. <span class="chip purple">A1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── achievement node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="achievement-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,198,116,0.12)">🏆</div>
+        <h2>Achievement node</h2>
+      </div>
+      <p>A milestone shown to the reader when its trigger fires. Connect the achievement node back into the story node so the story itself can react to it having been earned.</p>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Achievement Image</td>
+            <td class="field-desc">Optional artwork shown with the unlock. Click or drag-and-drop to set it.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Achievement Name<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(100 chars)</span></td>
+            <td class="field-desc">The name the reader sees.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Description</td>
+            <td class="field-desc">Flavour text displayed when the achievement is earned.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Display Priority</td>
+            <td class="field-desc">Higher numbers appear first in the achievement list. Useful for putting story-critical unlocks at the top.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Hidden achievement</td>
+            <td class="field-desc">Hides both name and description until earned. Recommended for anything that would spoil the story.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div>Give the variable, trigger and achievement of a set the <strong>same title label</strong> (A1, A2, A3…). Once the canvas gets busy, this is the difference between reading your own structure at a glance and hunting through wires.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── other nodes ─── -->
+    <div class="section">
+      <span class="section-anchor" id="other-nodes"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(68,76,86,0.4)">🔧</div>
+        <h2>Other nodes</h2>
+      </div>
+      <p>Supporting nodes you'll meet once the basics are in place. These are covered lightly on purpose — <strong>they're best learned by clicking on them and seeing what happens.</strong></p>
+
+      <div class="node-grid">
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(88,166,255,0.1);color:#58a6ff">Preset Notes</span>
+            <span class="node-card-title">Reader-selectable prompts</span>
+          </div>
+          <div class="node-card-desc">A list of presets the reader can choose mid-chat. Picking one appends its prompt to the context. Each is an emoji, a title, a description, and the prompt that actually gets injected.</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(210,168,255,0.1);color:#d2a8ff">Update Rule</span>
+            <span class="node-card-title">Milestones for your variables</span>
+          </div>
+          <div class="node-card-desc"><strong>Defines the milestones a variable moves through.</strong> Tells the AI when, under what conditions, and by how much to update a variable. Pairs with variable nodes off the story node, and is heavily used alongside a status view. 400-token budget. e.g. affection, fatigue, location.</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(63,185,80,0.1);color:#3fb950">Status View</span>
+            <span class="node-card-title">Custom HTML panel</span>
+          </div>
+          <div class="node-card-desc">A status panel you write in HTML/CSS/JS. Read live variable values with the <code style="font-family:monospace">{{var_NAME}}</code> syntax. Only variables carrying the var_ prefix are visible here.</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(255,166,87,0.1);color:#ffa657">Background Image</span>
+            <span class="node-card-title">Scene backdrop</span>
+          </div>
+          <div class="node-card-desc">Connects to the story node to set the backdrop behind the chat. Go press it and see.</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔍</span>
+        <div>Anything not documented here is genuinely worth <strong>just poking at</strong>. Nothing on the Canvas is destructive to open, and half of what KR creators know was learned exactly this way.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── advanced settings ─── -->
+    <div class="section">
+      <span class="section-anchor" id="advanced"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(188,140,255,0.12)">⚙️</div>
+        <h2>Advanced Settings</h2>
+      </div>
+      <p>A panel that switches off parts of StoryEngine's built-in behavior. Every toggle is <strong>OFF by default, and OFF means the feature is in use.</strong> Switching one <strong>ON disables</strong> the thing named. Read them literally — "Turn off X" set to ON means X is now off.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Community knowledge, not official.</strong> The platform has never fully documented what each switch removes internally, and some of it is deliberately undisclosed. What follows is what KR creators have pieced together from actual use. Expect gaps.</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="img/AdvancedSettings.png" alt="Advanced Settings panel with eight toggles and a token bonus counter at the top">
+        <figcaption><b>Note the counter at the top: "Additional tokens for core prompts: +1,800."</b> That figure is the sum of the three toggles switched on here — Content Policy (+800), Shorten Narrative Instructions (+500), Emotion Images (+500). Turning off a built-in feature frees the space its prompt occupied and hands it back to your Core Context.</figcaption>
+      </figure>
+
+      <div class="callout info">
+        <span class="callout-icon">🧮</span>
+        <div><strong>This is why Core Context budgets differ between canvases.</strong> The baseline is <strong>2,000 tokens</strong>. A screenshot showing 3,800 simply has +1,800 worth of toggles enabled. Your own number depends entirely on what you've switched on — so don't treat any single figure you see online as the real limit.</div>
+      </div>
+
+      <table class="field-table">
+        <thead><tr><th>Toggle</th><th>What switching it ON does</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Turn off Info Management</td>
+            <td class="field-desc">Stops the system auto-managing conversation memory. In practice it also <strong>removes RAG retrieval</strong>, which is the larger consequence. Readers tend to hit long-term memory problems partway through a chat. Leave it alone unless you know exactly why you want it off.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Turn off Long-term Memory</td>
+            <td class="field-desc">The chat continues on recent messages only, without drawing on the story summary. <strong>Be aware:</strong> the observable symptoms overlap heavily with Info Management above, and the two have never been cleanly told apart from the outside. Treat them as related rather than independent.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Turn off Macro Prompts</td>
+            <td class="field-desc">Disables macro prompts — meaning <strong>your lorebook stops firing entirely.</strong> Unambiguous, unlike the two above.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Turn off Content Policy <span class="chip">+800</span></td>
+            <td class="field-desc">Disables StoryEngine's default content moderation and safety guidelines. Conceptually paired with <em>Shorten Narrative Instructions</em> below — both strip out vendor-supplied baseline prompting. Largest token refund of the set.<br><strong>Platform rules still apply either way.</strong> The toggle changes prompting, not your obligations — regional title restrictions, terms of service and moderation of published work all remain in force.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Shorten Narrative Instructions <span class="chip">+500</span></td>
+            <td class="field-desc">Uses a condensed version of the narrative engine prompts. These vendor defaults handle plot scaffolding and general storytelling posture, and they're <strong>deliberately broad</strong> — which suits most creators fine. If you're writing your own tight core logic, though, that generic layer works against you. Commonly enabled by creators doing heavy custom prompt work.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Turn off Emotion Images <span class="chip">+500</span></td>
+            <td class="field-desc">Stops emotion image cues during character dialogue. Normally the character profile area calls an image whenever an emotion is detected in the exchange. That detection is <strong>computationally expensive</strong>, and creators who don't need per-emotion portraits often switch it off for that reason alone.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Turn off Situation Images</td>
+            <td class="field-desc">The same idea applied to situation image cues during narration, rather than character emotion.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Use Legacy Image Tagging</td>
+            <td class="field-desc"><strong>Don't.</strong> Reverts to the old manual-description tagging method; output quality and accuracy are both worse. The real cost is that failures become <strong>unexplainable</strong> — calls that look entirely correct still don't behave, with nothing telling you why. Leave this off.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── publish settings ─── -->
+    <div class="section">
+      <span class="section-anchor" id="publish"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,198,116,0.12)">🚀</div>
+        <h2>Publish settings — the page outside the Canvas</h2>
+      </div>
+      <p>These fields live <strong>outside</strong> the Canvas and don't affect the AI at all. They're the storefront: what a reader sees before they ever press start. Most creators ignore this page entirely until the Canvas work is finished, which is why it's last here too.</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>The numbers below — file sizes especially — <strong>get changed by the platform fairly often.</strong> Treat them as "last confirmed," not as law. Corrections are very welcome.</div>
+      </div>
+
+      <figure class="shot">
+        <img src="img/Thumbnail.png" alt="The publish settings page showing Thumbnail, Title, Brief Introduction, Description, Tags, Creator Settings, Intro Video and Add Collaborators">
+        <figcaption><b>The whole publish page in one view.</b> Thumbnail and Creator Settings run down the left, everything else on the right. Note the upload box under Intro Video spelling out its own limits — <b>MP4, max 200MB, max 2min</b> — and the Add Collaborators field, which takes a StoryEngine account email.</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>What to know</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Title</td>
+            <td class="field-desc">The story's name. If you plan to localize: on the <strong>KR</strong> side, explicitly crude or vulgar phrasing in a title is <strong>not permitted</strong>. Pick something that survives the trip.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Brief Introduction</td>
+            <td class="field-desc"><strong>40-character limit.</strong> It's a one-line hook, not a summary. Easiest to write last, once you know what the story actually became.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Description</td>
+            <td class="field-desc">Supports a <strong>minimal subset of Markdown</strong>: bold, a little font-size control, simple tables, and externally hosted images. Don't expect full Markdown — anything fancier won't render. Images must be hosted elsewhere and linked in.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Tags</td>
+            <td class="field-desc">You can dump in <strong>every tag across every supported language at once.</strong> The platform automatically surfaces only the tags matching the viewer's language, so there is no downside to tagging in all of them. Do it.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Thumbnail</td>
+            <td class="field-desc"><strong>4:5 ratio.</strong> Animated WebP sits around <strong>2–3&nbsp;MB</strong> (this ceiling keeps shifting). GIF was last confirmed near <strong>10&nbsp;MB</strong>. If an upload fails without explanation, size is the first thing to check.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Intro Video</td>
+            <td class="field-desc"><strong>MP4, max 200MB, hard 2-minute cap.</strong> No leniency on the length — trim before uploading.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Add Collaborators</td>
+            <td class="field-desc">Enter another creator's <strong>StoryEngine account email</strong> to bring them onto the work. You control whether they get Canvas access, and revenue can be split <strong>in 10% increments</strong>.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Creator Settings</td>
+            <td class="field-desc">Chooses which collaborator is shown as the <strong>representative creator</strong>. Takes a creator nickname or OID.</td>
+          </tr>
+          <tr>
+            <td class="field-name">StoryChat Original</td>
+            <td class="field-desc">An opt-in exclusivity designation: works provided exclusively to StoryEngine become eligible, and standard creators receive an additional <strong>5 percentage-point settlement bonus</strong>. For 90 days after designation, deleting the work, making it private, or uploading it elsewhere is restricted.<br><strong>Do not try to game this.</strong> The operations team has stated plainly that workarounds — publishing elsewhere first and staggering the upload here, or re-uploading the same build under a different name — result in a ban, no exceptions.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <span class="callout-icon">🚨</span>
+        <div><strong>Multi-language releases — read this before you publish.</strong> Localized text does <strong>not</strong> apply until you actually press the upload button. Half-saved states are easy to create without noticing, so keep <strong>Publicity set to Private</strong> until every language is uploaded and confirmed, then flip it public once everything is in.</div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>Ordinary practice among KR creators: tag in every language you can, keep the thumbnail comfortably under the stated cap so a limit change doesn't break it later, and settle the collaborator revenue split <strong>before</strong> publishing rather than after.</div>
+      </div>
+    </div>
+
+    <div class="callout tip" style="margin-top:36px">
+      <span class="callout-icon">🐟</span>
+      <div>That's the whole tour. If something here turns out to be wrong — and some of it will, the platform moves — corrections are genuinely welcome. Now go open the Canvas and press things.</div>
+    </div>
+
+  </main>
+</div>
+
+<style>
+  .fish-sign { position: fixed; bottom: 18px; right: 20px; z-index: 50; display: flex; align-items: center; gap: 8px; text-decoration: none; user-select: none; cursor: pointer; }
+  .fish-sign-tip { font-size: 12px; line-height: 1.4; color: var(--text-muted); background: var(--bg3); border: 1px solid var(--border-bright); padding: 6px 11px; border-radius: 999px; white-space: nowrap; box-shadow: 0 4px 14px rgba(0,0,0,0.35); opacity: 0; transform: translateX(8px); transition: opacity 0.22s ease, transform 0.22s ease; pointer-events: none; }
+  .fish-sign-tip b { color: var(--accent3); font-weight: 600; }
+  .fish-sign-emoji { font-size: 26px; opacity: 0.55; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); transition: opacity 0.22s ease, transform 0.22s ease; }
+  .fish-sign:hover .fish-sign-tip { opacity: 1; transform: translateX(0); }
+  .fish-sign:hover .fish-sign-emoji { opacity: 1; transform: translateY(-2px) scale(1.08); }
+</style>
+<a class="fish-sign" href="https://storyengine.live/c/frozen_tuna" target="_blank" rel="noopener noreferrer" aria-label="Made with Frozen_Tuna — open StoryEngine page">
+  <span class="fish-sign-tip">🐟Made with <b>Frozen_Tuna</b>🐟</span>
+  <span class="fish-sign-emoji">🐟</span>
+</a>
+<script>
+  // active nav highlight on scroll
+  (function () {
+    var navItems = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+    var targets = navItems.map(function (item) {
+      var id = item.getAttribute('href').slice(1);
+      return { item: item, el: document.getElementById(id) };
+    }).filter(function (t) { return t.el; });
+
+    if (!targets.length) return;
+
+    var OFFSET = 120;   // treat a section as "current" once its top passes this
+    var ticking = false;
+
+    function setActive(active) {
+      targets.forEach(function (t) {
+        t.item.classList.toggle('active', t.item === active);
+      });
+    }
+
+    function update() {
+      ticking = false;
+      var y = window.scrollY || window.pageYOffset;
+      var atBottom = (window.innerHeight + y) >= (document.body.scrollHeight - 4);
+
+      // bottom of page: always light up the last entry, since short final
+      // sections can never scroll far enough to become "current" on their own
+      if (atBottom) {
+        setActive(targets[targets.length - 1].item);
+        return;
+      }
+
+      var current = targets[0].item;
+      for (var i = 0; i < targets.length; i++) {
+        var top = targets[i].el.getBoundingClientRect().top + y;
+        if (top - OFFSET <= y) current = targets[i].item;
+        else break;
+      }
+      setActive(current);
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+
+    // smooth scroll on nav click
+    navItems.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        var el = document.getElementById(item.getAttribute('href').slice(1));
+        if (!el) return;
+        e.preventDefault();
+        var top = el.getBoundingClientRect().top + (window.scrollY || window.pageYOffset) - 24;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
+</body>
+</html>
