@@ -2,7 +2,7 @@
 
 An unofficial starter guide to the StoryEngine Canvas, written by **Frozen_Tuna**.
 
-**📖 Read it here:** https://burnfrozentuna.github.io/SE_Guide/
+**📖 Read it here:** https://github.com/BurnFrozenTuna/SE_Guide/edit/main/README.md
 
 ---
 
