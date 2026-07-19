@@ -1,8 +1,8 @@
-# Fish_In_the_Canvas
+# SE_Guide — Fish_In_the_Canvas
 
 An unofficial starter guide to the StoryEngine Canvas, written by **Frozen_Tuna**.
 
-**📖 Read it here:** https://YOUR-USERNAME.github.io/fish-in-the-canvas/
+**📖 Read it here:** https://burnfrozentuna.github.io/SE_Guide/
 
 ---
 
