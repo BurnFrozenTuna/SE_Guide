@@ -51,6 +51,9 @@ If it saved you some time and you'd like to say thanks, you can support me here:
 
 **https://rplay.live/c/frozen_tuna**
 
+The platform eats like 30% of it??? But let me have this — I want to feel like
+a popular author too (?)
+
 > Yes, that's a different domain. RPLAY and StoryEngine are the same site under
 > different branding — the support option just doesn't open on the StoryEngine
 > side, so that link goes where it actually works.
