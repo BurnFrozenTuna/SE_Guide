@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide v2.0.1</div>
+      <div class="subtitle">Canvas Starter Guide v2.0.2</div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -538,7 +538,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide v2.0.1</span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide v2.0.2</span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -636,7 +636,7 @@
 
       <div class="callout tip">
         <span class="callout-icon">✅</span>
-        <div>You can create multiple story nodes — useful for chapter or scenario branching. The one set to <span class="chip green">Is Start: Yes</span> is the entry point.</div>
+        <div>You can create multiple story nodes — useful for chapter or scenario branching. Turn <span class="chip green">Is Start: Yes</span> on for <strong>every node you want offered as an opening</strong>, and the reader chooses which one to begin from.</div>
       </div>
 
       <figure class="shot">
@@ -651,7 +651,7 @@
         <tbody>
           <tr>
             <td class="field-name">Is Start</td>
-            <td class="field-desc">Marks this node as the entry point. Exactly one story node should be set to Yes.</td>
+            <td class="field-desc">Marks this node as a <strong>selectable starting point.</strong> Switch it on for each story node you want offered at the beginning — <strong>if more than one is set to Yes, the reader picks which opening situation to start from</strong> before the chat begins. This is how you offer several routes into the same story, so don't assume you're limited to one.</td>
           </tr>
           <tr>
             <td class="field-name">Core Context<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(2,000 tokens base)</span></td>
@@ -675,6 +675,16 @@
           </tr>
         </tbody>
       </table>
+
+      <div style="margin-top:18px;padding:12px 14px;border-left:2px solid var(--border-bright);background:rgba(255,255,255,0.02);border-radius:0 6px 6px 0">
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.7">
+          <strong style="color:var(--text-muted)">❓ Help wanted — how to branch with story nodes</strong><br>
+          There's said to be a technique where story nodes are chained through triggers and used as
+          <strong>branch destinations</strong>, which is part of why <span style="font-family:monospace">Is Start</span> has a No option at all.
+          I haven't worked out how to do it myself, so it isn't documented here.<br>
+          If you know how this works, please <a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">open an issue</a> — it'll go into the next version, credited.
+        </div>
+      </div>
     </div>
 
     <hr class="divider">
