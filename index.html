@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide v2.0.2</div>
+      <div class="subtitle">Canvas Starter Guide v2.0.3</div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -538,7 +538,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide v2.0.2</span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide v2.0.3</span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -1080,22 +1080,23 @@
 
       <div class="callout info">
         <span class="callout-icon">🧮</span>
-        <div><strong>This is why Core Context budgets differ between canvases.</strong> The baseline is <strong>2,000 tokens</strong>. A screenshot showing 3,800 simply has +1,800 worth of toggles enabled. Your own number depends entirely on what you've switched on — so don't treat any single figure you see online as the real limit.</div>
+        <div><strong>This is why Core Context budgets differ between canvases.</strong> The baseline is <strong>2,000 tokens</strong>. A screenshot showing 3,800 simply has +1,800 worth of toggles enabled. Your own number depends entirely on what you've switched on — so don't treat any single figure you see online as the real limit.<br><br>
+        Every bonus below was <strong>measured one toggle at a time</strong>. Switching on all seven that carry a bonus adds <strong>+5,500</strong>, which takes Core Context from 2,000 up to <strong>7,500 tokens</strong> — nearly four times the default. <em>Use Legacy Image Tagging</em> changes no budget at all, since it swaps a method rather than removing a prompt.</div>
       </div>
 
       <table class="field-table">
         <thead><tr><th>Toggle</th><th>What switching it ON does</th></tr></thead>
         <tbody>
           <tr>
-            <td class="field-name">Turn off Info Management</td>
+            <td class="field-name">Turn off Info Management <span class="chip">+800</span></td>
             <td class="field-desc">Stops the system auto-managing conversation memory. In practice it also <strong>removes RAG retrieval</strong>, which is the larger consequence. Readers tend to hit long-term memory problems partway through a chat. Leave it alone unless you know exactly why you want it off.</td>
           </tr>
           <tr>
-            <td class="field-name">Turn off Long-term Memory</td>
+            <td class="field-name">Turn off Long-term Memory <span class="chip">+1,200</span></td>
             <td class="field-desc">The chat continues on recent messages only, without drawing on the story summary. <strong>Be aware:</strong> the observable symptoms overlap heavily with Info Management above, and the two have never been cleanly told apart from the outside. Treat them as related rather than independent.</td>
           </tr>
           <tr>
-            <td class="field-name">Turn off Macro Prompts</td>
+            <td class="field-name">Turn off Macro Prompts <span class="chip">+1,200</span></td>
             <td class="field-desc">Disables macro prompts — meaning <strong>your lorebook stops firing entirely.</strong> Unambiguous, unlike the two above.</td>
           </tr>
           <tr>
@@ -1111,11 +1112,11 @@
             <td class="field-desc">Stops emotion image cues during character dialogue. Normally the character profile area calls an image whenever an emotion is detected in the exchange. That detection is <strong>computationally expensive</strong>, and creators who don't need per-emotion portraits often switch it off for that reason alone.</td>
           </tr>
           <tr>
-            <td class="field-name">Turn off Situation Images</td>
+            <td class="field-name">Turn off Situation Images <span class="chip">+500</span></td>
             <td class="field-desc">The same idea applied to situation image cues during narration, rather than character emotion.</td>
           </tr>
           <tr>
-            <td class="field-name">Use Legacy Image Tagging</td>
+            <td class="field-name">Use Legacy Image Tagging <span class="chip" style="opacity:0.6">no change</span></td>
             <td class="field-desc"><strong>Don't.</strong> Reverts to the old manual-description tagging method; output quality and accuracy are both worse. The real cost is that failures become <strong>unexplainable</strong> — calls that look entirely correct still don't behave, with nothing telling you why. Leave this off.</td>
           </tr>
         </tbody>
