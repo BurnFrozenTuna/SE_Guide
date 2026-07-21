@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide v2.0.4</div>
+      <div class="subtitle">Canvas Starter Guide v2.1.0</div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -518,6 +518,9 @@
       <a class="nav-item" href="#achievement-node">
         <span class="nav-dot" style="background:#f0c674"></span>Achievement node
       </a>
+      <a class="nav-item" href="#branching">
+        <span class="nav-dot" style="background:#ff7b72"></span>Scenario branching
+      </a>
     </div>
     <div class="nav-section">
       <div class="nav-label">Everything else</div>
@@ -538,7 +541,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide v2.0.4</span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide v2.1.0</span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -678,11 +681,9 @@
 
       <div style="margin-top:18px;padding:12px 14px;border-left:2px solid var(--border-bright);background:rgba(255,255,255,0.02);border-radius:0 6px 6px 0">
         <div style="font-size:12px;color:var(--text-dim);line-height:1.7">
-          <strong style="color:var(--text-muted)">❓ Help wanted — how to branch with story nodes</strong><br>
-          There's said to be a technique where story nodes are chained through triggers and used as
-          <strong>branch destinations</strong>, which is part of why <span style="font-family:monospace">Is Start</span> has a No option at all.
-          I haven't worked out how to do it myself, so it isn't documented here.<br>
-          If you know how this works, please <a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">open an issue</a> — it'll go into the next version, credited.
+          <strong style="color:var(--text-muted)">↓ So why does Is Start have a "No" option?</strong><br>
+          Because a node set to No isn't unused — it's a <strong>branch destination</strong> you arrive at mid-chat.
+          See <a href="#branching" style="color:var(--accent)">Scenario branching</a> below.
         </div>
       </div>
     </div>
@@ -1006,6 +1007,77 @@
       <div class="callout tip">
         <span class="callout-icon">✅</span>
         <div>Give the variable, trigger and achievement of a set the <strong>same title label</strong> (A1, A2, A3…). Once the canvas gets busy, this is the difference between reading your own structure at a glance and hunting through wires.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── scenario branching ─── -->
+    <div class="section">
+      <span class="section-anchor" id="branching"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,123,114,0.12)">🔀</div>
+        <h2>Scenario branching — multiple routes through one story</h2>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">🙏</span>
+        <div>This technique was <strong>reported by <a href="https://storyengine.live/c/osoond" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">ㅇㅅㅇㅇㄴㄷ</a></strong>, not worked out by me. Thank you. <span style="color:var(--text-dim)">(Their page shows a Korean handle because an earlier error wiped the English one.)</span></div>
+      </div>
+
+      <p>A story node set to <span class="chip">Is Start: No</span> isn't a leftover — it's a <strong>destination you arrive at partway through a chat.</strong> Wire a trigger into one, and when that trigger fires, the story hands off to it. The practical result is a <strong>visual-novel style route select</strong>: one work containing several distinct paths.</p>
+
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-box" style="background:rgba(133,232,157,0.08);border:1px solid rgba(133,232,157,0.2);color:#85e89d">Variable</div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-box" style="background:rgba(210,168,255,0.08);border:1px solid rgba(210,168,255,0.2);color:#d2a8ff">Update Rule</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(255,184,108,0.08);border:1px solid rgba(255,184,108,0.2);color:#ffb86c">Trigger</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(121,192,255,0.08);border:1px solid rgba(121,192,255,0.2);color:#79c0ff">Story node <span style="font-size:11px;opacity:0.7">(Is Start: No)</span></div>
+        </div>
+      </div>
+
+      <p>It's the same chain you already use for achievements, with one difference: <strong>the far end is a story node instead of an achievement node.</strong></p>
+
+      <figure class="shot">
+        <img src="ScenarioBranching.png" alt="A canvas showing an opening story node, two variables with update rule and triggers, feeding two separate story nodes set to Is Start No">
+        <figcaption><b>Two routes wired from one opening.</b> On the left, the starting story node (<b>Is Start: Yes</b>). In the middle, string variables <b>part1</b> and <b>part2</b> with an update rule, each feeding a trigger that watches for a specific value — <b>P1</b> and <b>P2</b>. On the right, two story nodes set to <b>Is Start: No</b>, one per route. <b>This diagram was assembled from a verbal description rather than a verified build</b> — read it as the shape of the thing, not a blueprint to copy pin-for-pin.</figcaption>
+      </figure>
+
+      <p>How it plays out in practice:</p>
+
+      <table class="field-table">
+        <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">1. Offer the choice</td>
+            <td class="field-desc">In your opening scenario, give the reader a way to pick. That might be an instruction to type a specific keyword, an in-character question, a menu written into the prologue — whatever suits the story. <strong>The reader's input is what drives this</strong>, so it has to be discoverable.</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">2. Update the variable</td>
+            <td class="field-desc">Your update rule catches the input and writes the corresponding value into the variable. In the screenshot these are strings — <span class="chip">part1</span> starting at <em>wait</em>, changing to <em>P1</em> once the choice is made.</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">3. Trigger fires</td>
+            <td class="field-desc">The trigger watching that variable sees its value and fires, exactly as it would for an achievement.</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">4. Route opens</td>
+            <td class="field-desc">The story node behind the trigger takes over, and the chat continues from that node's context instead of the original one. That's the branch.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>Give each route its own variable and trigger, and label them in matching sets (<span class="chip purple">P1</span>, <span class="chip purple">P2</span>…) the same way you would for achievements. A branching canvas gets crowded fast, and the labels are what keep it readable.</div>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>This section is <strong>newer and less tested than the rest of this guide</strong> — it comes from a single report rather than from repeated building. If you try it and find that something works differently, please <a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">say so</a>.</div>
       </div>
     </div>
 
