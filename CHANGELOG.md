@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.2.4
+
+- Added a real-canvas screenshot to the Achievement node section, showing four
+  variable → trigger → achievement chains running in parallel. Variable names are
+  blurred by the author.
+
 ## v2.2.3
 
 - Fixed a unit typo: the Preset Notes **Prompt** limit is **500 tokens**, not 500 chars.

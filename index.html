@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.2.3</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.2.4</a></div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -544,7 +544,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.2.3</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.2.4</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -980,6 +980,11 @@
         <h2>Achievement node</h2>
       </div>
       <p>A milestone shown to the reader when its trigger fires. Connect the achievement node back into the story node so the story itself can react to it having been earned.</p>
+
+      <figure class="shot">
+        <img src="AchievementExample.png" alt="A production canvas with four variable-to-trigger-to-achievement chains running in parallel, each achievement carrying its own image, name, description and priority">
+        <figcaption><b>A real canvas, not a demo — four achievement chains running side by side.</b> Each row is the same shape repeated: a Boolean <b>Variable</b> → a <b>Trigger</b> watching it for <span style="font-family:monospace">Yes</span> → an <b>Achievement</b> holding its own artwork, name and description. <b>The variable names are blurred by the author</b>; what matters here is the repetition. This is what a story with several unlocks actually looks like once it's built, and it's why matching title labels across each set is worth the effort — at this density, wires alone won't tell you which trigger belongs to which achievement.</figcaption>
+      </figure>
 
       <table class="field-table">
         <thead><tr><th>Field</th><th>Description</th></tr></thead>
