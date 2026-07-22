@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.2.3
+
+- Fixed a unit typo: the Preset Notes **Prompt** limit is **500 tokens**, not 500 chars.
+
 ## v2.2.2
 
 - Added an **author-side (canvas) screenshot** to the Preset Notes section, shown before

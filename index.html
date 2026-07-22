@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.2.2</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.2.3</a></div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -544,7 +544,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.2.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.2.3</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -1097,7 +1097,7 @@
 
       <figure class="shot narrow">
         <img src="PresetNotes_Canvas.png" alt="The preset note node on the canvas, showing Icon, Title, Description, Prompt and Priority fields for two notes, with the prompt bodies deliberately blurred">
-        <figcaption><b>Author side — the preset note node on the canvas.</b> Each note is an Icon, a Title, a Description (what the reader sees), a Prompt (what actually gets injected, out of 500 chars), and a Priority. <b>The prompt bodies here are blurred on purpose</b> — those are the author's own, and a real tutorial build would leave them empty for you to fill in. The point is the field layout, not the contents.</figcaption>
+        <figcaption><b>Author side — the preset note node on the canvas.</b> Each note is an Icon, a Title, a Description (what the reader sees), a Prompt (what actually gets injected, out of 500 tokens), and a Priority. <b>The prompt bodies here are blurred on purpose</b> — those are the author's own, and a real tutorial build would leave them empty for you to fill in. The point is the field layout, not the contents.</figcaption>
       </figure>
 
       <div class="callout warn">
@@ -1147,7 +1147,7 @@
             <td class="field-desc">A short line explaining what enabling this note does — shown to the reader to help them decide.</td>
           </tr>
           <tr>
-            <td class="field-name">Prompt<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(500 chars)</span></td>
+            <td class="field-name">Prompt<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(500 tokens)</span></td>
             <td class="field-desc">The text injected into context when the note is on. This is what actually spends the reader's tokens.</td>
           </tr>
           <tr>
