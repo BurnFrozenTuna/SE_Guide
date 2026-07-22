@@ -1,5 +1,22 @@
 # Changelog
 
+## v2.3.1
+
+- Corrected a conflation in the v2.3.0 tip. The **in-reply summary code block** (which
+  the model prints because Core Context instructed it to) is **not** the **Status View
+  node** (a separate side panel). Reworded to keep the two apart, and cross-linked both
+  ways.
+
+## v2.3.0
+
+- **Added craft guidance on status view placement.** Because the status block renders
+  inside the model's output and a model writes top to bottom, its position decides what
+  it can draw on: placed at the bottom, values are derived from the prose above; placed
+  at the top, the prose is written to match the figures.
+- Documented that **inner-thought lines steer the next turn** rather than being purely
+  decorative — whatever the character is left thinking becomes context for the following
+  response.
+
 ## v2.2.4
 
 - Added a real-canvas screenshot to the Achievement node section, showing four

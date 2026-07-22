@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.2.4</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.3.1</a></div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -544,7 +544,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.2.4</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.3.1</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -681,6 +681,20 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">🧭</span>
+        <div><strong>Craft tip — the in-reply summary block, and why its position matters.</strong><br><br>
+        A common pattern is to instruct the model, from Core Context, to end each reply with a <strong>code block summarising the current state</strong> — stats, relationship values, what each character is thinking. This is <strong>not</strong> the <a href="#other-nodes" style="color:var(--accent)">Status View node</a>, which is a separate side panel; this block is written by the model as part of its own output, because you told it to in Core Context.<br><br>
+        Since a language model writes top to bottom, <strong>where you ask for that block decides what it can draw on.</strong><br><br>
+        <strong>At the end of the reply</strong> (the usual choice): the scene is already written by the time the model reaches the block, so the values are <strong>derived from the prose immediately above.</strong> State follows narration — the numbers describe what just happened.<br><br>
+        <strong>At the start</strong>: the block is committed before the prose exists, so the figures come first and the narration is written to justify them. Neither is wrong — they simply run in opposite directions, and it's worth knowing which one you're asking for.</div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💭</span>
+        <div><strong>Inner-thought lines do double duty.</strong> A "what the character is thinking" line inside that summary block reads as interiority to the reader — but functionally, <strong>it steers the next turn.</strong> Whatever the character is left thinking at the end of a response becomes context the following response is written against. Treat it as a steering handle, not just flavour: a thought that closes a door will narrow what happens next, and a thought that opens one will widen it.</div>
+      </div>
 
       <div style="margin-top:18px;padding:12px 14px;border-left:2px solid var(--border-bright);background:rgba(255,255,255,0.02);border-radius:0 6px 6px 0">
         <div style="font-size:12px;color:var(--text-dim);line-height:1.7">
@@ -1192,7 +1206,7 @@
             <span class="node-badge" style="background:rgba(63,185,80,0.1);color:#3fb950">Status View</span>
             <span class="node-card-title">Custom HTML panel</span>
           </div>
-          <div class="node-card-desc">A status panel you write in HTML/CSS/JS. Read live variable values with the <code style="font-family:monospace">{{var_NAME}}</code> syntax. Only variables carrying the var_ prefix are visible here.</div>
+          <div class="node-card-desc">A status panel you write in HTML/CSS/JS. Read live variable values with the <code style="font-family:monospace">{{var_NAME}}</code> syntax. Only variables carrying the var_ prefix are visible here. <strong>Don't confuse this with the summary code block</strong> some stories print at the end of each reply — that one is written by the model because Core Context told it to, and is covered <a href="#story-node" style="color:var(--accent)">up in Story node</a>.</div>
         </div>
         <div class="node-card">
           <div class="node-card-head">
