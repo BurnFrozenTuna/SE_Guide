@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.3.2
+
+- **Corrected the reader token budget.** It is **2,000 tokens shared between User Notes
+  and User Persona**, not 1,000 for notes alone as previously written. Past 2,000, the
+  usage fee rises 10% per additional 600 tokens. Worked example updated to 776 of 2,000.
+  Reported by [ㅇㅅㅇㅇㄴㄷ](https://storyengine.live/c/osoond) — second correction from
+  them, thank you.
+
 ## v2.3.1
 
 - Corrected a conflation in the v2.3.0 tip. The **in-reply summary code block** (which
