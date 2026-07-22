@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.1.1</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.2.2</a></div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -521,6 +521,9 @@
       <a class="nav-item" href="#branching">
         <span class="nav-dot" style="background:#ff7b72"></span>Scenario branching
       </a>
+      <a class="nav-item" href="#preset-notes">
+        <span class="nav-dot" style="background:#58a6ff"></span>Preset Notes
+      </a>
     </div>
     <div class="nav-section">
       <div class="nav-label">Everything else</div>
@@ -541,7 +544,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.1.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.2.2</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -1083,6 +1086,85 @@
 
     <hr class="divider">
 
+    <!-- ─── preset notes ─── -->
+    <div class="section">
+      <span class="section-anchor" id="preset-notes"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(88,166,255,0.12)">📝</div>
+        <h2>Preset Notes — reader-toggled prompt modules</h2>
+      </div>
+      <p>Preset notes are <strong>optional prompt blocks that you write and the reader switches on.</strong> Each one has an icon, a title, a short description the reader sees, and the prompt text that gets injected when it's enabled. Think of them as opt-in modifiers for your story — an extra mode, a content emphasis, a tone shift — that the reader chooses rather than you forcing.</p>
+
+      <figure class="shot narrow">
+        <img src="PresetNotes_Canvas.png" alt="The preset note node on the canvas, showing Icon, Title, Description, Prompt and Priority fields for two notes, with the prompt bodies deliberately blurred">
+        <figcaption><b>Author side — the preset note node on the canvas.</b> Each note is an Icon, a Title, a Description (what the reader sees), a Prompt (what actually gets injected, out of 500 chars), and a Priority. <b>The prompt bodies here are blurred on purpose</b> — those are the author's own, and a real tutorial build would leave them empty for you to fill in. The point is the field layout, not the contents.</figcaption>
+      </figure>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>The important catch: preset notes spend the reader's User Notes token budget — and that budget is only partly free.</strong> Each chatroom gives the reader a User Notes space with <strong>the first 1,000 tokens free</strong>; beyond that, the reader pays real money in increments of a few hundred tokens. When a reader turns a preset note ON, <strong>its tokens come out of that same allowance.</strong> So a big preset note doesn't just crowd out the reader's own notes — <strong>it can push them into paying.</strong></div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🧮</span>
+        <div><strong>Worked example</strong>, using the two notes in the screenshot below. Sweat Overdrive is 368 tokens, Event Overlord 408. Turn both on and that's <strong>776 of the free 1,000</strong> gone — leaving the reader just 224 for anything they wanted to write themselves. Add a third note, or a reader with existing notes, and they cross into the paid tier. <strong>Every token you put in a preset note is a token you're potentially asking the reader to pay for.</strong></div>
+      </div>
+
+      <p>Two consequences fall out of that, and both matter when you're authoring:</p>
+
+      <table class="field-table">
+        <thead><tr><th>Consequence</th><th>What it means for you</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">Can't all run at once</td>
+            <td class="field-desc">You can define up to <strong>10</strong> preset notes, but the reader can't enable all of them together — each one consumed comes out of a finite budget, so they'll run out of room. Design them as <strong>choices</strong>, not a stack meant to be fully on.</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">Keep each one lean</td>
+            <td class="field-desc">A heavy preset note (real ones run ~370–410 tokens) eats a large chunk of the free 1,000 on its own. Two of them and the reader is most of the way to the paid tier before writing a single word of their own. If a note has to be big, make sure it earns the cost.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="shot narrow">
+        <img src="PresetNotes.png" alt="The reader-side User Notes menu, showing a personal notes field above a list of preset notes with ON/OFF toggles and per-note token counts">
+        <figcaption><b>Reader side — the same notes, as a reader sees them.</b> Up top is their own <b>User Notes</b> field with its token counter. Below, the author's preset notes — each with an ON/OFF switch, a <b>View full</b> link so the reader can read the whole prompt before enabling, and its <b>token cost</b> (368, 408). The header reads <b>0/10 notes active</b>: ten slots exist, none are on here. That token counter at the top of the reader's own field is the meter that matters — the first 1,000 are free, and preset notes draw from the same pool.</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">Icon</td>
+            <td class="field-desc">A small emoji shown next to the note in the reader's list.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Title</td>
+            <td class="field-desc">The note's name, as the reader sees it in the toggle list.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Description</td>
+            <td class="field-desc">A short line explaining what enabling this note does — shown to the reader to help them decide.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Prompt<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(500 chars)</span></td>
+            <td class="field-desc">The text injected into context when the note is on. This is what actually spends the reader's tokens.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Priority</td>
+            <td class="field-desc">Ordering value among enabled notes.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>Preset note input lands at the <strong>bottom of the priority order</strong> — it's read after your core directives and character data, not ahead of them. So a preset note nudges the story; it won't override rules you've set higher up. Keep that in mind when you write one: phrase it as an addition, not a contradiction of your core context.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
     <!-- ─── other nodes ─── -->
     <div class="section">
       <span class="section-anchor" id="other-nodes"></span>
@@ -1093,13 +1175,6 @@
       <p>Supporting nodes you'll meet once the basics are in place. These are covered lightly on purpose — <strong>they're best learned by clicking on them and seeing what happens.</strong></p>
 
       <div class="node-grid">
-        <div class="node-card">
-          <div class="node-card-head">
-            <span class="node-badge" style="background:rgba(88,166,255,0.1);color:#58a6ff">Preset Notes</span>
-            <span class="node-card-title">Reader-selectable prompts</span>
-          </div>
-          <div class="node-card-desc">A list of presets the reader can choose mid-chat. Picking one appends its prompt to the context. Each is an emoji, a title, a description, and the prompt that actually gets injected.</div>
-        </div>
         <div class="node-card">
           <div class="node-card-head">
             <span class="node-badge" style="background:rgba(210,168,255,0.1);color:#d2a8ff">Update Rule</span>

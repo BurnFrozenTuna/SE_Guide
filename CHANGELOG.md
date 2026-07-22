@@ -1,5 +1,25 @@
 # Changelog
 
+## v2.2.2
+
+- Added an **author-side (canvas) screenshot** to the Preset Notes section, shown before
+  the reader-side one, so both perspectives are covered. Prompt bodies in it are blurred
+  by the author on purpose — a real tutorial build leaves them empty.
+
+## v2.2.1
+
+- Clarified the Preset Notes token cost: the reader's User Notes budget is **free only
+  up to 1,000 tokens**, and paid beyond that. Enabling preset notes draws from that pool,
+  so a heavy note can push the reader into paying. Added a worked example (368 + 408 =
+  776 of the free 1,000).
+
+## v2.2.0
+
+- **Preset Notes promoted from a one-line card to a full section.** Documented the key
+  behavior that was missing: enabling a preset note **spends the reader's User Notes
+  token budget**, which is why not all 10 can run at once. Also noted preset input lands
+  at the bottom of the priority order. Added a reader-side screenshot.
+
 ## v2.1.1
 
 - **Removed the word "RAG" from the lorebook section.** The lorebook fires on **exact
