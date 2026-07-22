@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.1.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.1.1</a></div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -541,7 +541,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.1.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.1.1</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -745,7 +745,7 @@
         <div class="section-icon" style="background:rgba(255,166,87,0.12)">📚</div>
         <h2>Lorebook node (Macro Prompts)</h2>
       </div>
-      <p><strong>This is the RAG space the sub-model searches.</strong> Write entries inside a lorebook node, and when the sub-model spots a registered keyword in user input, that entry's content is injected into the main model's context.</p>
+      <p><strong>Keyword-triggered injected memory.</strong> Write entries inside a lorebook node, and when a registered keyword appears in user input, that entry's content is injected into the main model's context. This is <strong>exact keyword matching, not similarity search</strong> — an entry fires when its trigger word shows up, nothing fuzzier than that.</p>
       <p>Unlike story and character nodes, which are always present, <strong>the lorebook is injected dynamically</strong> based on what's happening.</p>
 
       <div class="callout warn">
@@ -1161,7 +1161,7 @@
         <tbody>
           <tr>
             <td class="field-name">Turn off Info Management <span class="chip">+800</span></td>
-            <td class="field-desc">Stops the system auto-managing conversation memory. In practice it also <strong>removes RAG retrieval</strong>, which is the larger consequence. Readers tend to hit long-term memory problems partway through a chat. Leave it alone unless you know exactly why you want it off.</td>
+            <td class="field-desc">Stops the system auto-managing conversation memory. In practice it also <strong>disables the retrieval that keeps older context available</strong>, which is the larger consequence. Readers tend to hit long-term memory problems partway through a chat. Leave it alone unless you know exactly why you want it off.</td>
           </tr>
           <tr>
             <td class="field-name">Turn off Long-term Memory <span class="chip">+1,200</span></td>

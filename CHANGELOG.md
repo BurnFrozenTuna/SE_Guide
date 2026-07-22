@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.1.1
+
+- **Removed the word "RAG" from the lorebook section.** The lorebook fires on **exact
+  keyword matching**, not similarity/vector search, so calling it RAG was inaccurate.
+  Reworded to describe the actual mechanism. The internal method behind Full Story
+  remains undocumented and is left as such.
+
 ## v2.1.0
 
 - **New section: Scenario branching.** Story nodes set to `Is Start: No` can be wired
