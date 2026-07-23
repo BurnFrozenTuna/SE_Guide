@@ -1,5 +1,30 @@
 # Changelog
 
+## v2.4.3
+
+- Credited **Scoot** by name with a link to their page, which the previous entry was
+  missing, and noted that the check was a creator-to-creator one rather than an
+  official statement from the platform.
+
+## v2.4.2
+
+- **Established that the StoryEngine Original terms are region-independent.** The
+  previous version flagged the KRW milestone figures as possibly KR-only.
+  [Scoot](https://storyengine.live/c/scootster), a creator working in the
+  English-language region, checked the panel on their own account and the wording came
+  back identical. The uncertainty note is replaced with that finding, shared with their
+  permission — thank you.
+
+## v2.4.1
+
+- **StoryChat Original is now StoryEngine Original, and its terms were overhauled.** The
+  old percentage-point settlement bonus is gone, replaced by fixed milestone payouts
+  (KRW 100,000 at 10,000 eligible chats, a further KRW 200,000 at 50,000). Added the new
+  rules: activate before first upload or within 6 hours, 2 works per month, only
+  post-activation chats count, and collaborators/revenue shares are frozen for 90 days.
+- Added a regional caveat: those amounts are quoted in KRW and it is **not confirmed**
+  that non-KR creators see the same figures.
+
 ## v2.4.0
 
 - **Corrected the retrieval architecture.** The lorebook (macro) is **not** handled by the
