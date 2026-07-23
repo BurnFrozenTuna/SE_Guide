@@ -478,7 +478,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.3.2</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.4.0</a></div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Getting started</div>
@@ -544,7 +544,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.3.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.4.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -601,17 +601,21 @@
         <div class="arch-row">
           <div class="arch-label">Sub-model</div>
           <div class="arch-content">
-            <strong>Handles retrieval.</strong> Pulls situationally relevant information from two spaces. The internal search method has not been disclosed.<br><br>
-            <strong>[1] Lorebook (macro) entries</strong> — keyword-matched. When a registered keyword appears in user input, the matching content is injected.
-            <span class="chip">max 5 injected at once</span> Higher priority entries win the slots.<br><br>
-            <strong>[2] Full Story</strong> — the text field on story nodes and character nodes alike. A 30,000-token space holding bulk data: worldbuilding, detailed character info, and so on.
+            <strong>Handles Full Story retrieval.</strong> Semantically searches the <strong>Full Story</strong> space — the 30,000-token text field on story and character nodes, holding bulk worldbuilding and character data — and pulls out the chunks relevant to the current moment. This is the only part of the system that works by meaning rather than exact wording. The internal search method is undisclosed.
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">Lorebook</div>
+          <div class="arch-content">
+            <strong>A separate, direct path — not the sub-model.</strong> Lorebook (macro) entries are <strong>keyword-matched and injected straight into the main context</strong>. When a registered keyword appears in user input, the matching entry is added — no model reads or reworks it in between, it's a rule-based trigger.
+            <span class="chip">max 5 injected at once</span> Higher priority entries win the slots.
           </div>
         </div>
         <div class="arch-row">
           <div class="arch-label">Main model</div>
           <div class="arch-content">
             <strong>Handles generation.</strong> Always receives, fixed: story Core Context + prologue + character Core Context.<br>
-            Whatever the sub-model retrieved (lorebook + Full Story) is added on top, and the response is generated from the combination.<br>
+            The Full Story chunks the sub-model retrieved, plus any keyword-matched lorebook entries, are added on top — and the response is generated from the combination.<br>
             Image tag output <span class="chip">smile</span> <span class="chip">angry</span> and variable update instructions are also the main model's job.
           </div>
         </div>
@@ -623,9 +627,10 @@
 
       <div class="callout info">
         <span class="callout-icon">💡</span>
-        <div><strong>Core Context vs Full Story</strong><br>
-        Core Context is injected into the main model <strong>every single turn</strong>. Put your hard rules here — the settings that must never be forgotten.<br>
-        Full Story is fetched by the sub-model <strong>only when the situation calls for it</strong>. It's storage for bulk worldbuilding and character data.</div>
+        <div><strong>Two different retrieval paths — don't lump them together</strong><br>
+        <strong>Full Story</strong> goes through the sub-model: <strong>semantic search</strong>, fetched only when the situation calls for it. It matches on meaning.<br>
+        <strong>Lorebook</strong> does not touch the sub-model: <strong>exact keyword matching</strong>, injected directly. It fires when a specific word shows up, nothing fuzzier.<br>
+        And separate from both, <strong>Core Context</strong> is injected into the main model <strong>every single turn</strong> — that's where your hard rules go.</div>
       </div>
     </div>
 
@@ -762,7 +767,7 @@
         <div class="section-icon" style="background:rgba(255,166,87,0.12)">📚</div>
         <h2>Lorebook node (Macro Prompts)</h2>
       </div>
-      <p><strong>Keyword-triggered injected memory.</strong> Write entries inside a lorebook node, and when a registered keyword appears in user input, that entry's content is injected into the main model's context. This is <strong>exact keyword matching, not similarity search</strong> — an entry fires when its trigger word shows up, nothing fuzzier than that.</p>
+      <p><strong>Keyword-triggered injected memory.</strong> Write entries inside a lorebook node, and when a registered keyword appears in user input, that entry's content is injected <strong>directly into the main context</strong> — no sub-model reads or reworks it in between. This is <strong>exact keyword matching, not similarity search</strong>: an entry fires when its trigger word shows up, nothing fuzzier than that.</p>
       <p>Unlike story and character nodes, which are always present, <strong>the lorebook is injected dynamically</strong> based on what's happening.</p>
 
       <div class="callout warn">

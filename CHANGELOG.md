@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.4.0
+
+- **Corrected the retrieval architecture.** The lorebook (macro) is **not** handled by the
+  sub-model. It's a separate, rule-based path: keyword-matched and injected directly into
+  the main context, with no model reworking it in between. The **sub-model handles only
+  Full Story**, via semantic search. The "two models" section and the lorebook section
+  were reworded to keep these two paths clearly apart.
+
 ## v2.3.2
 
 - **Corrected the reader token budget.** It is **2,000 tokens shared between User Notes
