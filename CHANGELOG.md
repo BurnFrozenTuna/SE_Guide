@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.5.0
+
+- **Added a multilingual invitation to the issue tracker.** Readers can open an issue in
+  their own language (Korean, English, Japanese, or Spanish) and get a reply in that
+  language; rough machine translation is welcome too. Added to both the guide's closing
+  note and the README.
+
 ## v2.4.3
 
 - Credited **Scoot** by name with a link to their page, which the previous entry was

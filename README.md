@@ -36,6 +36,11 @@ Please tell me. Open an [issue](../../issues) with what's wrong and, if you have
 a screenshot. Corrections are genuinely welcome — that's how most of what's in here
 got worked out in the first place.
 
+**Not comfortable in English?** Open the issue in your own language and say which one
+it is. Korean, English, Japanese, and Spanish are all fine, and I'll do my best to
+reply in the language you wrote in — a rough machine translation is welcome too. I'd
+rather have the report than have you skip it over the language.
+
 ## Files
 
 ```
