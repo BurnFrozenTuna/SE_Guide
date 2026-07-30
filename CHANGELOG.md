@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.5.1
+
+- **Thumbnail WebP limit raised to 5 MB** (from the old ~2–3 MB) per a mid-2026 platform
+  update. Also noted the platform's caveat that high-file-size or multi-frame images may
+  lose some quality in the shrunk main-screen thumbnail.
+
 ## v2.5.0
 
 - **Added a multilingual invitation to the issue tracker.** Readers can open an issue in
