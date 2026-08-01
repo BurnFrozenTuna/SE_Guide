@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.6.1
+
+- Fixed the language tabs and image paths in the Japanese edition, which used relative
+  paths and could resolve to /ja/ja/ (404) or miss shared images. All switched to
+  absolute /SE_Guide/... paths so they work from either page.
+
 ## v2.6.0
 
 - **Added a Japanese edition (ja/index.html).** Full translation of the guide, reached
