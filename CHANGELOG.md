@@ -1,5 +1,20 @@
 # Changelog
 
+## v2.8.1
+
+- **Two "don't let names collide" tips.** Lorebook: pick distinctive trigger words, since
+  literal matching means a common word misfires (from a fellow creator who hit this).
+  Variables: keep names clearly distinct, since look-alike names can cross their values.
+  Both editions.
+
+## v2.8.0
+
+- **Made the click-to-connect port behavior a general point, not a story-node aside.**
+  Every node's input ports open a pick-list when clicked — image ports included — and this
+  was previously only mentioned in a story-node caption, which made creators think it was
+  story-node-only. Added a shared explanation and a screenshot (an image port opened to its
+  node list) to the overview. Same image in both editions.
+
 ## v2.7.3
 
 - (JA) **Native-speaker polish.** Reworded the awkward 操舵 ("steer") metaphor in the

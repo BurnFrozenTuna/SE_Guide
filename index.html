@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.7.3</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.8.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -561,7 +561,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.7.3</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.8.1</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -603,6 +603,16 @@
           <div class="node-card-desc">The Canvas is a tool for structuring "what gets handed to the AI." Whatever you write in a node is compiled and enters the AI's context.</div>
         </div>
       </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">🔌</span>
+        <div><strong>Connecting nodes: click the port, don't drag the wire.</strong> Every node has labelled input ports down its side — and <strong>this works the same way on all of them,</strong> not just the story node. Click or tap a port and a list of every node eligible for that slot pops up; pick one and it wires itself. Image ports behave identically: tap an emotion- or situation-image port and it lists the image nodes you can attach, each with its tag. Hand-dragging wires is miserable on mobile, so this is usually the faster way to build regardless of device.</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="PortConnect.png" alt="An image port on a character node clicked open, showing a dropdown list of selectable image nodes each marked with its tag">
+        <figcaption><b>The same click-to-connect behaviour, on an image port.</b> The port has been tapped and the list shows every image node available to attach — each with its tag (서A01, 서A016…) and a checkmark where already linked. This dropdown is not unique to images or to the story node; it's how <b>every</b> port on <b>every</b> node offers its connections.</figcaption>
+      </figure>
     </div>
 
     <hr class="divider">
@@ -836,6 +846,11 @@
         <span class="callout-icon">✅</span>
         <div>Feel free to create several lorebook nodes and split them by purpose — an OOC-rules node, a worldbuilding node, an image-rules node. Much easier to maintain than one giant pile.</div>
       </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Pick trigger words that won't collide with ordinary text.</strong> Because matching is literal, a common word as a trigger fires the entry constantly and at the wrong moments — a keyword that overlaps something the reader or the story naturally says will misfire and can throw the scene off. Favour distinctive tokens (a coined term, a rare compound) over everyday words. <span style="color:var(--text-dim)">(Tip from a fellow creator who got tangled up by exactly this.)</span></div>
+      </div>
     </div>
 
     <hr class="divider">
@@ -959,6 +974,11 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Keep variable names clearly distinct from one another.</strong> Names that look alike can bleed into each other — updates meant for one variable landing on another, values quietly getting crossed. Give each variable a name that can't be mistaken for its neighbours (not <span class="chip">affection</span> / <span class="chip">affection2</span>, but names that read differently at a glance), and the problem doesn't come up.</div>
+      </div>
     </div>
 
     <hr class="divider">
