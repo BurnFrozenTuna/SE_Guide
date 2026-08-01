@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.8.2
+
+- **StoryEngine Original lock period corrected: 90 days → 180 days.** The post-activation
+  restriction window (no deleting, privating, disabling Original, or uploading elsewhere)
+  is now 180 days. Updated in both the field description and the regional-confirmation
+  note, both editions. Reported by a fellow creator.
+
 ## v2.8.1
 
 - **Two "don't let names collide" tips.** Lorebook: pick distinctive trigger words, since
