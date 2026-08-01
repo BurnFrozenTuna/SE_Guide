@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.8.2</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.9.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -553,6 +553,9 @@
       <a class="nav-item" href="#publish">
         <span class="nav-dot" style="background:#f0c674"></span>公開設定
       </a>
+      <a class="nav-item" href="#contributors">
+        <span class="nav-dot" style="background:#3fb950"></span>協力者
+      </a>
     </div>
   </nav>
 
@@ -561,7 +564,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.8.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.9.0</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -575,7 +578,7 @@
     <div class="callout tip" style="margin-top:0">
       <span class="callout-icon">🔢</span>
       <div><strong>貼り付ける前にトークン数を数えたい？</strong>このガイドにはトークン制限がたくさん出てきます——コアコンテキストは2,000、プリセットノートは500など——が、キャンバスは入力中に数を表示してくれません。便利な代用ツール：<a href="https://tiktokenizer.vercel.app/?model=o200k_base" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600">Tiktokenizer（o200k_baseエンコーディング）</a>。テキストを貼り付けると、リアルタイムでトークン数を数えてくれます。<br><br>
-      <span style="color:var(--text-dim)">なぜo200k_baseか：StoryEngineのクリエイターは、基盤モデルがGPT-4oだと案内されています。o200k_baseはGPT-4oのトークナイザーなので、数はおおむね一致するはずです。<strong>完全一致ではなく、近い目安として扱ってください</strong>——キャンバスと並べて検証したわけではなく、特にCJK（日中韓）テキストはトークナイザーによって差が出やすいです。重要な場面ではキャンバス自身のカウンターを信じましょう。（あるクリエイターからの情報。）</span></div>
+      <span style="color:var(--text-dim)">なぜo200k_baseか：StoryEngineのクリエイターは、基盤モデルがGPT-4oだと案内されています。o200k_baseはGPT-4oのトークナイザーなので、数はおおむね一致するはずです。<strong>完全一致ではなく、近い目安として扱ってください</strong>——キャンバスと並べて検証したわけではなく、特にCJK（日中韓）テキストはトークナイザーによって差が出やすいです。重要な場面ではキャンバス自身のカウンターを信じましょう。（<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの情報。）</span></div>
     </div>
 
     <!-- ─── overview ─── -->
@@ -634,7 +637,7 @@
         <div class="arch-row">
           <div class="arch-label">サブモデル</div>
           <div class="arch-content">
-            <strong>全ストーリーの検索を担当——それだけではありません。</strong>主な役割は「<strong>全ストーリー</strong>」欄（ストーリーノードとキャラクターノードにある3万トークンのテキスト欄で、大量の世界観・キャラクター情報が入る）の意味ベース検索で、今の場面に関係するチャンクを取り出します。システム内で唯一、完全一致ではなく「意味」で動く部分です（内部方式は非公開）。<br><br>サブモデルは<strong>記憶——進行中の会話の要約と管理</strong>も担っていると考えられており、これによって古いコンテキストが使える状態に保たれます。（詳細設定の<em>情報管理</em>・<em>長期記憶</em>トグルがオフにするのは、この仕組みです。）さらに<strong>変数の管理</strong>にも関わっていると<strong>報告されています</strong>——ここは見落としやすく、新しいクリエイターがつまずくポイントなので、知っておく価値があります。<span style="color:var(--text-dim)">（あるクリエイターからの報告。変数管理の部分は未確認で、本ガイドの「2つのモデル」では変数の<em>更新指示</em>はメインモデルの出力として説明しています。）</span>
+            <strong>全ストーリーの検索を担当——それだけではありません。</strong>主な役割は「<strong>全ストーリー</strong>」欄（ストーリーノードとキャラクターノードにある3万トークンのテキスト欄で、大量の世界観・キャラクター情報が入る）の意味ベース検索で、今の場面に関係するチャンクを取り出します。システム内で唯一、完全一致ではなく「意味」で動く部分です（内部方式は非公開）。<br><br>サブモデルは<strong>記憶——進行中の会話の要約と管理</strong>も担っていると考えられており、これによって古いコンテキストが使える状態に保たれます。（詳細設定の<em>情報管理</em>・<em>長期記憶</em>トグルがオフにするのは、この仕組みです。）さらに<strong>変数の管理</strong>にも関わっていると<strong>報告されています</strong>——ここは見落としやすく、新しいクリエイターがつまずくポイントなので、知っておく価値があります。<span style="color:var(--text-dim)">（<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの報告。変数管理の部分は未確認で、本ガイドの「2つのモデル」では変数の<em>更新指示</em>はメインモデルの出力として説明しています。）</span>
           </div>
         </div>
         <div class="arch-row">
@@ -849,7 +852,7 @@
 
       <div class="callout warn">
         <span class="callout-icon">⚠️</span>
-        <div><strong>トリガーワードは、普通の文章と被らない語を選びましょう。</strong>一致は文字通りに行われるため、ありふれた語をトリガーにすると、そのエントリーが意図しない場面で何度も発火してしまいます——読者や物語が自然に口にする言葉と重なるキーワードは誤爆し、場面を崩しかねません。日常語より、独特なトークン（造語や珍しい複合語）を選びましょう。<span style="color:var(--text-dim)">（まさにこれで絡まってしまった、あるクリエイターからの情報。）</span></div>
+        <div><strong>トリガーワードは、普通の文章と被らない語を選びましょう。</strong>一致は文字通りに行われるため、ありふれた語をトリガーにすると、そのエントリーが意図しない場面で何度も発火してしまいます——読者や物語が自然に口にする言葉と重なるキーワードは誤爆し、場面を崩しかねません。日常語より、独特なトークン（造語や珍しい複合語）を選びましょう。<span style="color:var(--text-dim)">（まさにこれで絡まってしまった、<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの情報。）</span></div>
       </div>
     </div>
 
@@ -1428,6 +1431,25 @@
       <div>ツアーは以上です。ここに間違いがあったら——プラットフォームは動くので、いくつかは必ずあります——ぜひ教えてください：<a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600">GitHubでissueを開く</a>。訂正も計測も、クレジット付きで次のバージョンに直接反映します。<br><br>
       <strong>英語で書くのが苦手ですか？</strong><strong>自分の言語</strong>でissueを開いて、どの言語かを書いてください——韓国語・英語・日本語・スペイン語ならどれでも大丈夫で、書かれた言語で返せるよう最善を尽くします。ざっくりした機械翻訳でも全然かまいません。言語のせいで報告をあきらめられるより、報告があるほうがずっといいので。<br><br>
       さあ、キャンバスを開いて、いろいろ押してみましょう。</div>
+    </div>
+
+    <div class="section" style="margin-top:40px">
+      <span class="section-anchor" id="contributors"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(63,185,80,0.12)">🙏</div>
+        <h2>協力してくれた方々</h2>
+      </div>
+      <p>このガイドの正確な部分の多くは、他のクリエイターが時間を割いて訂正・検証・翻訳してくれたおかげです。感謝を込めてお名前を記します：</p>
+      <table class="field-table">
+        <tbody>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/osoond" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">ㅇㅅㅇㅇㄴㄷ</a></td><td class="field-desc">シナリオ分岐の手法。読者のトークン予算（ペルソナと共有の2,000）の訂正。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/scootster" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Scoot</a></td><td class="field-desc">StoryEngine Originalの条件を英語圏から照合。</td></tr>
+          <tr><td class="field-name"><a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a></td><td class="field-desc">サブモデルの記憶・変数の役割、トークン計測ツール、プロローグメッセージがAIにも読まれる点、ポート接続の一覧が全ノード共通である点、被りにくいトリガーワードの助言。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/yatoming" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">yatoming</a></td><td class="field-desc">日本語版の表現をネイティブ校正。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/689947bee7c5df8723a5c5d2?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">夢見月ひいな</a></td><td class="field-desc">Originalのロック期間が90日から180日に変わったことを指摘。</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--text-dim);font-size:13px">報告したのに載っていない、または表記を変えてほしい場合は教えてください——抜けているのは単なる見落としで、他意はありません。</p>
     </div>
 
   </main>

@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.8.2</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.9.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -553,6 +553,9 @@
       <a class="nav-item" href="#publish">
         <span class="nav-dot" style="background:#f0c674"></span>Publish settings
       </a>
+      <a class="nav-item" href="#contributors">
+        <span class="nav-dot" style="background:#3fb950"></span>Contributors
+      </a>
     </div>
   </nav>
 
@@ -561,7 +564,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.8.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.9.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -575,7 +578,7 @@
     <div class="callout tip" style="margin-top:0">
       <span class="callout-icon">🔢</span>
       <div><strong>Want to count tokens before you paste?</strong> This guide is full of token limits — 2,000 for Core Context, 500 for a preset note, and so on — but the Canvas doesn't show you a count while you write. A handy stand-in: <a href="https://tiktokenizer.vercel.app/?model=o200k_base" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600">Tiktokenizer with the o200k_base encoding</a>. Paste your text and it counts tokens live.<br><br>
-      <span style="color:var(--text-dim)">Why o200k_base: StoryEngine creators were told the underlying model is GPT-4o, and o200k_base is GPT-4o's tokenizer — so the counts should line up. <strong>Treat it as a close estimate, not an exact match</strong> — this hasn't been verified side-by-side against the Canvas, and CJK text especially can differ between tokenizers. When it matters, trust the Canvas's own counter. (Tip via a fellow creator.)</span></div>
+      <span style="color:var(--text-dim)">Why o200k_base: StoryEngine creators were told the underlying model is GPT-4o, and o200k_base is GPT-4o's tokenizer — so the counts should line up. <strong>Treat it as a close estimate, not an exact match</strong> — this hasn't been verified side-by-side against the Canvas, and CJK text especially can differ between tokenizers. When it matters, trust the Canvas's own counter. (Tip from <a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>.)</span></div>
     </div>
 
     <!-- ─── overview ─── -->
@@ -634,7 +637,7 @@
         <div class="arch-row">
           <div class="arch-label">Sub-model</div>
           <div class="arch-content">
-            <strong>Handles Full Story retrieval — and quietly does more.</strong> Its main job is semantic search of the <strong>Full Story</strong> space — the 30,000-token text field on story and character nodes, holding bulk worldbuilding and character data — pulling out the chunks relevant to the current moment. This is the only part of the system that works by meaning rather than exact wording; the internal method is undisclosed.<br><br>The sub-model is also understood to handle <strong>memory: summarising and managing the running conversation</strong> so older context stays usable. (This is the machinery the <em>Info Management</em> and <em>Long-term Memory</em> toggles in Advanced Settings switch off.) It's <strong>reportedly</strong> involved in <strong>variable management</strong> as well — worth knowing, since this side of the sub-model is easy to overlook and trips up new creators. <span style="color:var(--text-dim)">(Reported by a creator; the variable-management part isn't fully confirmed, and note the two-model split elsewhere in this guide describes variable <em>update instructions</em> as the main model's output.)</span>
+            <strong>Handles Full Story retrieval — and quietly does more.</strong> Its main job is semantic search of the <strong>Full Story</strong> space — the 30,000-token text field on story and character nodes, holding bulk worldbuilding and character data — pulling out the chunks relevant to the current moment. This is the only part of the system that works by meaning rather than exact wording; the internal method is undisclosed.<br><br>The sub-model is also understood to handle <strong>memory: summarising and managing the running conversation</strong> so older context stays usable. (This is the machinery the <em>Info Management</em> and <em>Long-term Memory</em> toggles in Advanced Settings switch off.) It's <strong>reportedly</strong> involved in <strong>variable management</strong> as well — worth knowing, since this side of the sub-model is easy to overlook and trips up new creators. <span style="color:var(--text-dim)">(Reported by <a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>; the variable-management part isn't fully confirmed, and note the two-model split elsewhere in this guide describes variable <em>update instructions</em> as the main model's output.)</span>
           </div>
         </div>
         <div class="arch-row">
@@ -849,7 +852,7 @@
 
       <div class="callout warn">
         <span class="callout-icon">⚠️</span>
-        <div><strong>Pick trigger words that won't collide with ordinary text.</strong> Because matching is literal, a common word as a trigger fires the entry constantly and at the wrong moments — a keyword that overlaps something the reader or the story naturally says will misfire and can throw the scene off. Favour distinctive tokens (a coined term, a rare compound) over everyday words. <span style="color:var(--text-dim)">(Tip from a fellow creator who got tangled up by exactly this.)</span></div>
+        <div><strong>Pick trigger words that won't collide with ordinary text.</strong> Because matching is literal, a common word as a trigger fires the entry constantly and at the wrong moments — a keyword that overlaps something the reader or the story naturally says will misfire and can throw the scene off. Favour distinctive tokens (a coined term, a rare compound) over everyday words. <span style="color:var(--text-dim)">(Tip from <a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>, who got tangled up by exactly this.)</span></div>
       </div>
     </div>
 
@@ -1428,6 +1431,25 @@
       <div>That's the whole tour. If something here turns out to be wrong — and some of it will, the platform moves — please tell me: <a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600">open an issue on GitHub</a>. Corrections and measurements both go straight into the next version, credited.<br><br>
       <strong>Not comfortable writing in English?</strong> Open the issue in <strong>your own language</strong> and say which one it is — Korean, English, Japanese, and Spanish are all fine, and I'll do my best to reply in the language you wrote in. A rough machine translation is completely welcome too; I'd rather have the report than have you skip it over the language.<br><br>
       Now go open the Canvas and press things.</div>
+    </div>
+
+    <div class="section" style="margin-top:40px">
+      <span class="section-anchor" id="contributors"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(63,185,80,0.12)">🙏</div>
+        <h2>Contributors</h2>
+      </div>
+      <p>Most of what's accurate in this guide got that way because other creators took the time to correct it, test it, or translate it. Named here with thanks:</p>
+      <table class="field-table">
+        <tbody>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/osoond" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">ㅇㅅㅇㅇㄴㄷ</a></td><td class="field-desc">Scenario-branching technique; corrected the reader token budget (2,000 shared with persona).</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/scootster" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Scoot</a></td><td class="field-desc">Cross-checked the StoryEngine Original terms from the English-language region.</td></tr>
+          <tr><td class="field-name"><a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a></td><td class="field-desc">Sub-model's memory/variable roles; the token-counter tip; prologue message doubling as AI-read context; and the port-connect list being universal across nodes; distinctive trigger words.</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/yatoming" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">yatoming</a></td><td class="field-desc">Native-speaker review of the Japanese edition's phrasing.</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/689947bee7c5df8723a5c5d2?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">夢見月ひいな</a></td><td class="field-desc">Caught the Original lock period changing from 90 to 180 days.</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--text-dim);font-size:13px">If you reported something and aren't listed, or want your name shown differently, tell me — the omission is an oversight, not a slight.</p>
     </div>
 
   </main>

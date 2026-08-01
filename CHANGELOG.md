@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.9.0
+
+- **Added a Contributors section** (and sidebar link) crediting the creators whose reports
+  shaped the guide: ㅇㅅㅇㅇㄴㄷ, Scoot, アヤイヤオ, yatoming, and 夢見月ひいな. Also added
+  アヤイヤオ's name and link inline on the three tips that came from them (tokenizer,
+  sub-model roles, distinctive trigger words), which had been left anonymous. Both editions.
+
 ## v2.8.2
 
 - **StoryEngine Original lock period corrected: 90 days → 180 days.** The post-activation
