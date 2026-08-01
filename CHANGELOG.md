@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.6.0
+
+- **Added a Japanese edition (ja/index.html).** Full translation of the guide, reached
+  via a language tab (English / 日本語) in the sidebar. UI labels use the actual
+  in-product Japanese wording; Japanese UI screenshots are used where available, and the
+  rest are shared with the English edition.
+
 ## v2.5.1
 
 - **Thumbnail WebP limit raised to 5 MB** (from the old ~2–3 MB) per a mid-2026 platform
