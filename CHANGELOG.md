@@ -1,5 +1,38 @@
 # Changelog
 
+## v2.7.3
+
+- (JA) **Native-speaker polish.** Reworded the awkward 操舵 ("steer") metaphor in the
+  inner-thought tip to natural Japanese, and smoothed several sentences in the header and
+  disclaimer (guide intro, node-reference eyebrow spacing, the "believe the Canvas" line).
+  Thanks to fellow creators for the review.
+
+## v2.7.2
+
+- **Clarified what the Prologue Message actually does.** It isn't only the reader's opening
+  screen — the AI reads it too and treats it as established opening context (who's present,
+  what's in motion, whether a macro should fire on turn one). Also documented a common
+  practical trick: since the Prologue Guide is only 300 tokens, creators seed first-turn
+  overflow into the prologue message, which the AI reads anyway. Both editions.
+
+## v2.7.1
+
+- Added a tip box near the top linking to Tiktokenizer (o200k_base) for counting tokens
+  before pasting, since the Canvas shows no live count while writing. Framed as a close
+  estimate, not verified against the Canvas — StoryEngine creators were told the model is
+  GPT-4o, whose tokenizer is o200k_base. Added to both editions.
+
+## v2.7.0
+
+- **Expanded the sub-model description.** Beyond Full Story retrieval, the sub-model also
+  handles memory — summarising and managing the running conversation (the machinery the
+  Info Management / Long-term Memory toggles switch off) — and is reportedly involved in
+  variable management too. This side is easy to overlook and was a common stumbling
+  point. Reported by a creator; the variable-management part is flagged as not fully
+  confirmed. Applied to both editions.
+- (JA) Annotated the first lorebook mention as ロアブック（マクロ） to tie the term to the
+  in-product マクロプロンプト label.
+
 ## v2.6.1
 
 - Fixed the language tabs and image paths in the Japanese edition, which used relative

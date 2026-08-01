@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.6.1</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.7.3</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -561,7 +561,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.6.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.7.3</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -570,6 +570,12 @@
       <div><strong style="font-size:16px;display:block;margin-bottom:6px">⚠️ This is NOT official documentation.</strong>
         A fan-made guide by <strong>Frozen_Tuna</strong>, written while actually building on the Canvas. It is <strong>not written, reviewed, or endorsed by StoryEngine</strong> and has no affiliation with the platform.<br>
         Parts of the platform's internals are deliberately undisclosed, so some of this is guesswork and <strong>some of it is simply wrong.</strong> Numbers change without notice. <strong>Keep the Canvas open and believe the Canvas over this document, every time.</strong></div>
+    </div>
+
+    <div class="callout tip" style="margin-top:0">
+      <span class="callout-icon">🔢</span>
+      <div><strong>Want to count tokens before you paste?</strong> This guide is full of token limits — 2,000 for Core Context, 500 for a preset note, and so on — but the Canvas doesn't show you a count while you write. A handy stand-in: <a href="https://tiktokenizer.vercel.app/?model=o200k_base" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600">Tiktokenizer with the o200k_base encoding</a>. Paste your text and it counts tokens live.<br><br>
+      <span style="color:var(--text-dim)">Why o200k_base: StoryEngine creators were told the underlying model is GPT-4o, and o200k_base is GPT-4o's tokenizer — so the counts should line up. <strong>Treat it as a close estimate, not an exact match</strong> — this hasn't been verified side-by-side against the Canvas, and CJK text especially can differ between tokenizers. When it matters, trust the Canvas's own counter. (Tip via a fellow creator.)</span></div>
     </div>
 
     <!-- ─── overview ─── -->
@@ -618,7 +624,7 @@
         <div class="arch-row">
           <div class="arch-label">Sub-model</div>
           <div class="arch-content">
-            <strong>Handles Full Story retrieval.</strong> Semantically searches the <strong>Full Story</strong> space — the 30,000-token text field on story and character nodes, holding bulk worldbuilding and character data — and pulls out the chunks relevant to the current moment. This is the only part of the system that works by meaning rather than exact wording. The internal search method is undisclosed.
+            <strong>Handles Full Story retrieval — and quietly does more.</strong> Its main job is semantic search of the <strong>Full Story</strong> space — the 30,000-token text field on story and character nodes, holding bulk worldbuilding and character data — pulling out the chunks relevant to the current moment. This is the only part of the system that works by meaning rather than exact wording; the internal method is undisclosed.<br><br>The sub-model is also understood to handle <strong>memory: summarising and managing the running conversation</strong> so older context stays usable. (This is the machinery the <em>Info Management</em> and <em>Long-term Memory</em> toggles in Advanced Settings switch off.) It's <strong>reportedly</strong> involved in <strong>variable management</strong> as well — worth knowing, since this side of the sub-model is easy to overlook and trips up new creators. <span style="color:var(--text-dim)">(Reported by a creator; the variable-management part isn't fully confirmed, and note the two-model split elsewhere in this guide describes variable <em>update instructions</em> as the main model's output.)</span>
           </div>
         </div>
         <div class="arch-row">
@@ -691,7 +697,8 @@
           </tr>
           <tr>
             <td class="field-name">Prologue Message<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(700 tokens)</span></td>
-            <td class="field-desc">The opening scene shown on the chat start screen — the first thing a user sees on entry.</td>
+            <td class="field-desc">The opening scene shown on the chat start screen — the first thing a user sees on entry. <strong>But it isn't only for the reader: the AI reads it too</strong>, and treats it as established opening context — which characters are present, what's already been set in motion, whether a macro should fire from the very first turn. So write it as a scene that primes the story, not just a greeting.<br><br>
+              A practical use of that: <strong>Prologue Guide is only 300 tokens</strong>, which gets tight. When first-turn setup won't fit there, creators often seed the overflow here instead — folding a hint or a bit of initial state into the prologue message, since the AI reads this anyway.</td>
           </tr>
           <tr>
             <td class="field-name">Prologue Guide<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(300 tokens)</span></td>
