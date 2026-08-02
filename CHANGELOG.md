@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.10.1
+
+- Fixed the framing added in v2.10.0: the keyword-toggled mode (!free mode) was described
+  as "the same idea" as Always, but it's the opposite — Always injects every turn, whereas
+  a keyword mode stays off until the reader types the keyword. Reworded both the note and
+  the caption to separate the two clearly. Both editions.
+
 ## v2.10.0
 
 - **Documented the Always toggle and keyword-driven modes in the lorebook.** Added a
