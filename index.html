@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.9.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.9.2</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -564,7 +564,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.9.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.9.2</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -960,7 +960,7 @@
             <td class="field-desc">
               The variable's identifier.<br>
               A <span class="chip green">var_</span> prefix makes it readable from a status view HTML panel as <code style="font-family:monospace">{{var_NAME}}</code>.<br>
-              The prefix is <strong>only</strong> needed for status view display. Without it, trigger and achievement wiring still works perfectly.
+              The prefix is <strong>only strictly required</strong> for status view display — without it, trigger and achievement wiring still works. But there's more to it (see the note below), so prefixing is worth doing as a habit.
             </td>
           </tr>
           <tr>
@@ -981,6 +981,11 @@
       <div class="callout warn">
         <span class="callout-icon">⚠️</span>
         <div><strong>Keep variable names clearly distinct from one another.</strong> Names that look alike can bleed into each other — updates meant for one variable landing on another, values quietly getting crossed. Give each variable a name that can't be mistaken for its neighbours (not <span class="chip">affection</span> / <span class="chip">affection2</span>, but names that read differently at a glance), and the problem doesn't come up.</div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔎</span>
+        <div><strong>Where the <code style="font-family:monospace">var_</code> prefix actually comes from.</strong> It isn't in the official documentation, and older builds didn't use it — it appears to have been introduced fairly recently. Looking into it: the prefix seems to exist to <strong>keep variable data from getting crossed during compilation</strong> as canvases grew larger and more crowded. In other words it's the same collision problem as above, addressed with a naming convention. <strong>Things still run without it, but prefixing is recommended.</strong> <span style="color:var(--text-dim)">(Not officially confirmed — a definitive answer would need to come from the platform. Flagged by <a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>, checked together.)</span></div>
       </div>
     </div>
 

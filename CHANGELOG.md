@@ -1,5 +1,26 @@
 # Changelog
 
+## v2.9.3
+
+- (JA) Swapped in dedicated Japanese-UI screenshots for the story node, character node,
+  and trigger node, replacing the shared/combined captures used before. The story and
+  character nodes now have their own images instead of one split shot, and the trigger
+  node gets a clearer standalone capture.
+
+## v2.9.2
+
+- (JA) Reduced the overuse of 発火 ("fire/trigger"), which appeared 15 times and read
+  stiffly. Spread it across natural synonyms by context (作動 / 引かれる / 反応 / 呼び出す
+  / 働く). Flagged by アヤイヤオ.
+
+## v2.9.1
+
+- **Explained where the var_ prefix actually comes from.** It's not in the official docs
+  and older builds didn't use it; it appears to be a fairly recent, unofficial convention
+  meant to stop variable data getting crossed during compilation as canvases grew — the
+  same collision issue as the naming tip. Runs without it, but recommended. Flagged as not
+  officially confirmed. Credit to アヤイヤオ. Both editions.
+
 ## v2.9.0
 
 - **Added a Contributors section** (and sidebar link) crediting the creators whose reports

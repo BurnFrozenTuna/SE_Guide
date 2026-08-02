@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.9.0</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.9.3</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -564,7 +564,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.9.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.9.3</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -665,7 +665,7 @@
         <span class="callout-icon">💡</span>
         <div><strong>2つの異なる検索経路 — 混同しないこと</strong><br>
         <strong>全ストーリー</strong>はサブモデル経由：<strong>意味ベースの検索</strong>で、必要な場面でだけ取り出されます。意味で一致します。<br>
-        <strong>ロアブック</strong>はサブモデルを経由しません：<strong>キーワード完全一致</strong>で直接注入。特定の語が出たときに発火し、それ以上あいまいなことはしません。<br>
+        <strong>ロアブック</strong>はサブモデルを経由しません：<strong>キーワード完全一致</strong>で直接注入。特定の語が出たときに作動し、それ以上あいまいなことはしません。<br>
         そしてこの2つとは別に、<strong>コアコンテキスト</strong>は<strong>毎ターン</strong>メインモデルに注入されます——絶対に守らせたいルールはここに書きます。</div>
       </div>
     </div>
@@ -687,7 +687,7 @@
       </div>
 
       <figure class="shot">
-        <img src="/SE_Guide/ja/StoryCharacterNode_JP.png" alt="Story node panel showing Is Start, Core Context, Full Story, Prologue Message, Prologue Guide and Creator Notice fields">
+        <img src="/SE_Guide/ja/StoryNode_JP.png" alt="ストーリーノードのパネル：スタートノード、コアコンテキスト、全ストーリー、プロローグメッセージ、スタートガイド、制作者からのお知らせの各フィールド">
         <figcaption><b>ストーリーノード。左側に入力ポートが並んでいます。</b>それらのポート名——トリガー、キャラクター、背景画像、マクロプロンプト、アップデートルール、ステータスビュー、アチーブメント、プリセットノート——は飾りではありません。<b>クリックまたはタップすると、そのカテゴリーに属するノードの一覧が出て、選ぶと自動でつながります。</b>これは、モバイルで配線を手でドラッグするのが大変だから用意された機能です。スマホで制作しているなら、この方法でつなぎましょう。</figcaption>
       </figure>
 
@@ -710,7 +710,7 @@
           </tr>
           <tr>
             <td class="field-name">プロローグメッセージ<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（700トークン）</span></td>
-            <td class="field-desc">チャット開始画面に表示される冒頭シーン——入室時にユーザーが最初に目にするものです。<strong>ただし読者向けだけではありません：AIもこれを読み</strong>、確定した開始状況として扱います——どのキャラクターがその場にいるか、すでに何が動き出しているか、初手からマクロを発火させるべきか、など。ですから単なる挨拶ではなく、物語を方向づける「場面」として書きましょう。<br><br>
+            <td class="field-desc">チャット開始画面に表示される冒頭シーン——入室時にユーザーが最初に目にするものです。<strong>ただし読者向けだけではありません：AIもこれを読み</strong>、確定した開始状況として扱います——どのキャラクターがその場にいるか、すでに何が動き出しているか、初手からマクロを作動させるべきか、など。ですから単なる挨拶ではなく、物語を方向づける「場面」として書きましょう。<br><br>
               その実用的な使い方：<strong>スタートガイドは300トークンしかなく</strong>、手狭になりがちです。初手の設定がそこに収まらないとき、クリエイターはあふれた分をここに仕込むことがよくあります——AIはどのみちこれを読むので、ヒントや初期状態の一部をプロローグメッセージに織り込むわけです。</td>
           </tr>
           <tr>
@@ -764,7 +764,7 @@
       </div>
 
       <figure class="shot">
-        <img src="/SE_Guide/ja/StoryCharacterNode_JP.png" alt="Character node showing Profile image, Name, Core Context and Description fields">
+        <img src="/SE_Guide/ja/CharacterNode_JP.png" alt="キャラクターノード：プロフィール画像、名前、コアコンテキスト、詳細説明の各フィールド">
         <figcaption><b>2つのフィールドを取り違えないための一番わかりやすい区別：</b>コアコンテキストは<b>メインモデル</b>が毎ターン読むもの、詳細説明は<b>サブモデル</b>が必要に応じて取り出すもの。（このスクショ内のラベルは、その違いを示すために手で入力したもので、UIの一部ではありません。）左側の<b>感情画像</b>・<b>状況画像</b>ポートにも注目。</figcaption>
       </figure>
 
@@ -804,7 +804,7 @@
         <div class="section-icon" style="background:rgba(255,166,87,0.12)">📚</div>
         <h2>ロアブックノード（マクロプロンプト）</h2>
       </div>
-      <p><strong>キーワードで発火する注入メモです。</strong>ロアブックノードにエントリーを書いておくと、登録キーワードがユーザー入力に現れたとき、その内容が<strong>メインコンテキストへ直接注入</strong>されます——間にサブモデルが読んだり加工したりはしません。これは<strong>類似検索ではなくキーワード完全一致</strong>で、トリガーワードが出たときに発火し、それ以上あいまいなことはしません。</p>
+      <p><strong>キーワードで反応する注入メモです。</strong>ロアブックノードにエントリーを書いておくと、登録キーワードがユーザー入力に現れたとき、その内容が<strong>メインコンテキストへ直接注入</strong>されます——間にサブモデルが読んだり加工したりはしません。これは<strong>類似検索ではなくキーワード完全一致</strong>で、トリガーワードが現れたときに反応するだけで、それ以上あいまいなことはしません。</p>
       <p>常に存在するストーリーノードやキャラクターノードと違い、<strong>ロアブックは状況に応じて動的に注入</strong>されます。</p>
 
       <div class="callout warn">
@@ -824,7 +824,7 @@
         <tbody>
           <tr>
             <td class="field-name">トリガーワード<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（最大5個）</span></td>
-            <td class="field-desc">このエントリーを発火させるキーワード。1つずつ追加し、それぞれがチップになります。</td>
+            <td class="field-desc">このエントリーを呼び出すキーワード。1つずつ追加し、それぞれがチップになります。</td>
           </tr>
           <tr>
             <td class="field-name">常時</td>
@@ -832,7 +832,7 @@
           </tr>
           <tr>
             <td class="field-name">プロンプトテキスト<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（300トークン）</span></td>
-            <td class="field-desc">エントリーが発火したときに実際に注入される内容。</td>
+            <td class="field-desc">エントリーが呼び出されたときに実際に注入される内容。</td>
           </tr>
           <tr>
             <td class="field-name">優先度</td>
@@ -852,7 +852,7 @@
 
       <div class="callout warn">
         <span class="callout-icon">⚠️</span>
-        <div><strong>トリガーワードは、普通の文章と被らない語を選びましょう。</strong>一致は文字通りに行われるため、ありふれた語をトリガーにすると、そのエントリーが意図しない場面で何度も発火してしまいます——読者や物語が自然に口にする言葉と重なるキーワードは誤爆し、場面を崩しかねません。日常語より、独特なトークン（造語や珍しい複合語）を選びましょう。<span style="color:var(--text-dim)">（まさにこれで絡まってしまった、<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの情報。）</span></div>
+        <div><strong>トリガーワードは、普通の文章と被らない語を選びましょう。</strong>一致は文字通りに行われるため、ありふれた語をトリガーにすると、そのエントリーが意図しない場面で何度も作動してしまいます——読者や物語が自然に口にする言葉と重なるキーワードは誤爆し、場面を崩しかねません。日常語より、独特なトークン（造語や珍しい複合語）を選びましょう。<span style="color:var(--text-dim)">（まさにこれで絡まってしまった、<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの情報。）</span></div>
       </div>
     </div>
 
@@ -960,7 +960,7 @@
             <td class="field-desc">
               変数の識別子。<br>
               <span class="chip green">var_</span>という接頭辞を付けると、ステータスビューのHTMLパネルから<code style="font-family:monospace">{{var_NAME}}</code>として読めます。<br>
-              接頭辞が必要なのはステータスビュー表示のとき<strong>だけ</strong>です。なくても、トリガーやアチーブメントの配線は問題なく動きます。
+              接頭辞が<strong>厳密に必須</strong>なのはステータスビュー表示のときだけで——なくてもトリガーやアチーブメントの配線は動きます。ただし、それだけではありません（下の注記を参照）。習慣として付けておく価値があります。
             </td>
           </tr>
           <tr>
@@ -982,6 +982,11 @@
         <span class="callout-icon">⚠️</span>
         <div><strong>変数名は、互いにはっきり区別できるものにしましょう。</strong>見た目が似た名前は混ざることがあります——ある変数向けの更新が別の変数に当たったり、値が知らないうちに入れ替わったり。隣の変数と見間違えようのない名前を付ければ（<span class="chip">affection</span> / <span class="chip">affection2</span>のような紛らわしい形ではなく、一目で違うと分かる名前で）、この問題は起きません。</div>
       </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔎</span>
+        <div><strong><code style="font-family:monospace">var_</code>接頭辞は、そもそもどこから来たのか。</strong>公式ドキュメントには記載がなく、古いビルドでは使われていませんでした——比較的最近になって導入されたようです。調べてみると、この接頭辞は、キャンバスが大きく複雑になるにつれて<strong>コンパイル中に変数データが混ざるのを防ぐ</strong>ために存在しているようです。つまり上と同じ「衝突」の問題を、命名規則で対処したものです。<strong>付けなくても動作はしますが、付けることが推奨されます。</strong><span style="color:var(--text-dim)">（公式に確認された情報ではなく、確定的な答えは運営への問い合わせが必要です。<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんの指摘により、一緒に確認しました。）</span></div>
+      </div>
     </div>
 
     <hr class="divider">
@@ -993,7 +998,7 @@
         <div class="section-icon" style="background:rgba(255,184,108,0.12)">⚡</div>
         <h2>トリガーノード</h2>
       </div>
-      <p>変数が条件を満たしたときにアチーブメントを発火させます。ストーリーノードと変数ノードを入力に取り、条件が満たされると、つながったアチーブメントノードに信号を送ります。<strong>トリガーが必要なのは、アチーブメントを解除させたいときだけ</strong>です。ただ値を追跡するだけの変数には要りません。</p>
+      <p>変数が条件を満たしたときにアチーブメントを作動させます。ストーリーノードと変数ノードを入力に取り、条件が満たされると、つながったアチーブメントノードに信号を送ります。<strong>トリガーが必要なのは、アチーブメントを解除させたいときだけ</strong>です。ただ値を追跡するだけの変数には要りません。</p>
 
       <div class="callout info">
         <span class="callout-icon">💡</span>
@@ -1013,8 +1018,8 @@
       </div>
 
       <figure class="shot">
-        <img src="/SE_Guide/ja/Trigger_ACH_JP.png" onerror="this.onerror=null;this.src='Trigger%2BACH.png'" alt="Variable node connected through a trigger node into an achievement node, with an update rule above">
-        <figcaption><b>鎖全体を配線した状態。</b>変数<b>C</b>（ブール値、初期値「いいえ」）が、値<b>はい</b>を監視するトリガーへつながり、右のアチーブメントノードを発火させます。上にあるアップデートルールノードは別途つながっており、プレイ中にCを「いいえ」から「はい」へ実際に動かす役割です。</figcaption>
+        <img src="/SE_Guide/ja/TriggerNode_JP.png" alt="変数ノードがトリガーノードを介してアチーブメントノードにつながり、上にアップデートルールがある構成">
+        <figcaption><b>鎖全体を配線した状態。</b>変数<b>C</b>（ブール値、初期値「いいえ」）が、値<b>はい</b>を監視するトリガーへつながり、右のアチーブメントノードを作動させます。上にあるアップデートルールノードは別途つながっており、プレイ中にCを「いいえ」から「はい」へ実際に動かす役割です。</figcaption>
       </figure>
 
       <table class="field-table">
@@ -1026,7 +1031,7 @@
           </tr>
           <tr>
             <td class="field-name">値</td>
-            <td class="field-desc">監視中の変数がこの値になるとトリガーが発火します。ブール値なら通常<span class="chip">はい</span>。</td>
+            <td class="field-desc">監視中の変数がこの値になるとトリガーが引かれます。ブール値なら通常<span class="chip">はい</span>。</td>
           </tr>
           <tr>
             <td class="field-name">title</td>
@@ -1045,7 +1050,7 @@
         <div class="section-icon" style="background:rgba(240,198,116,0.12)">🏆</div>
         <h2>アチーブメントノード</h2>
       </div>
-      <p>トリガーが発火したときに読者へ表示されるマイルストーンです。アチーブメントノードをストーリーノードに戻してつなぐと、獲得されたことに物語自身が反応できます。</p>
+      <p>トリガーが引かれたときに読者へ表示されるマイルストーンです。アチーブメントノードをストーリーノードに戻してつなぐと、獲得されたことに物語自身が反応できます。</p>
 
       <figure class="shot">
         <img src="/SE_Guide/ja/Trigger_ACH_JP.png" alt="A production canvas with four variable-to-trigger-to-achievement chains running in parallel, each achievement carrying its own image, name, description and priority">
@@ -1099,7 +1104,7 @@
         <div>この手法は私が見つけたものではなく、<strong><a href="https://storyengine.live/c/osoond" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">ㅇㅅㅇㅇㄴㄷ</a>さんからの報告</strong>によるものです。ありがとうございます。<span style="color:var(--text-dim)">（以前のエラーで英語ハンドルが消えたため、ページには韓国語ハンドルが表示されています。）</span></div>
       </div>
 
-      <p><span class="chip">スタートノード：いいえ</span>に設定したストーリーノードは、余り物ではありません——<strong>チャットの途中で到達する「行き先」</strong>です。そこにトリガーを配線すると、トリガーが発火したときに物語がそのノードへ引き継がれます。実際の結果は<strong>ノベルゲーム風のルート選択</strong>：1つの作品の中に複数の異なる道が入っている状態です。</p>
+      <p><span class="chip">スタートノード：いいえ</span>に設定したストーリーノードは、余り物ではありません——<strong>チャットの途中で到達する「行き先」</strong>です。そこにトリガーを配線すると、トリガーが引かれたときに物語がそのノードへ引き継がれます。実際の結果は<strong>ノベルゲーム風のルート選択</strong>：1つの作品の中に複数の異なる道が入っている状態です。</p>
 
       <div class="flow">
         <div class="flow-row">
@@ -1134,8 +1139,8 @@
             <td class="field-desc">アップデートルールが入力を捉え、対応する値を変数に書き込みます。スクショでは文字列で——<span class="chip">part1</span>が<em>wait</em>から始まり、選択されると<em>P1</em>に変わります。</td>
           </tr>
           <tr>
-            <td class="field-name" style="white-space:nowrap">3. トリガーが発火</td>
-            <td class="field-desc">その変数を監視しているトリガーが値を見て発火します。アチーブメントのときとまったく同じです。</td>
+            <td class="field-name" style="white-space:nowrap">3. トリガーが作動</td>
+            <td class="field-desc">その変数を監視しているトリガーが値を検知して反応します。アチーブメントのときとまったく同じです。</td>
           </tr>
           <tr>
             <td class="field-name" style="white-space:nowrap">4. ルートが開く</td>
@@ -1316,7 +1321,7 @@
           </tr>
           <tr>
             <td class="field-name">マクロプロンプトをオフにする <span class="chip">+1,200</span></td>
-            <td class="field-desc">マクロプロンプトを無効化します——つまり<strong>ロアブックが完全に発火しなくなります。</strong>上の2つと違い、これは曖昧さがありません。</td>
+            <td class="field-desc">マクロプロンプトを無効化します——つまり<strong>ロアブックがまったく働かなくなります。</strong>上の2つと違い、これは曖昧さがありません。</td>
           </tr>
           <tr>
             <td class="field-name">コンテンツポリシーをオフにする <span class="chip">+800</span></td>
