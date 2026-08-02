@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.10.1</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.10.2</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -564,7 +564,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.10.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.10.2</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -850,16 +850,6 @@
         <figcaption><b>The Always toggle, switched on.</b> Notice the Trigger Words field is empty — with <b>Always: ON</b> the entry needs no keyword, it's injected every single turn. This is how you pin a rule that must be present in every response (an OOC directive, a hard constraint), at the cost of one permanent slot out of five.</figcaption>
       </figure>
 
-      <div class="callout info">
-        <span class="callout-icon">🔀</span>
-        <div><strong>A separate use of keywords: reader-toggled "modes."</strong> This is the opposite of Always — instead of injecting every turn, the entry stays off until the reader types a specific keyword. A common pattern is a distinctive trigger like <span class="chip">!free mode</span> with the mode's prompt in that entry; typing it switches the mode on. <strong>This overlaps with what preset notes do</strong>, and both are valid — the choice is a matter of taste. The practical differences are <strong>how many tokens it costs and where it lands in priority</strong>: a preset note spends the reader's own budget and reads at the bottom of the order, while a macro entry spends your node's budget and can be prioritised wherever you like. <span style="color:var(--text-dim)">(Screenshots and this suggestion from <a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a>.)</span></div>
-      </div>
-
-      <figure class="shot">
-        <img src="MacroKeyword_Mode.png" alt="A macro prompt entry with Always OFF and a keyword trigger of exclamation-free-mode, used as a mode toggle">
-        <figcaption><b>A keyword-toggled mode.</b> <b>Always is OFF</b> here and the trigger word is <span style="font-family:monospace">!free mode</span> — the entry does nothing until the reader types that keyword, then switches on. The leading <span style="font-family:monospace">!</span> is just a convention to make the keyword distinctive and unlikely to fire by accident.</figcaption>
-      </figure>
-
       <div class="callout tip">
         <span class="callout-icon">✅</span>
         <div>Feel free to create several lorebook nodes and split them by purpose — an OOC-rules node, a worldbuilding node, an image-rules node. Much easier to maintain than one giant pile.</div>
@@ -869,6 +859,16 @@
         <span class="callout-icon">⚠️</span>
         <div><strong>Pick trigger words that won't collide with ordinary text.</strong> Because matching is literal, a common word as a trigger fires the entry constantly and at the wrong moments — a keyword that overlaps something the reader or the story naturally says will misfire and can throw the scene off. Favour distinctive tokens (a coined term, a rare compound) over everyday words. <span style="color:var(--text-dim)">(Tip from <a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>, who got tangled up by exactly this.)</span></div>
       </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔀</span>
+        <div><strong>One more thing you can do with a keyword: reader-toggled "modes."</strong> Separate from the Always behaviour above — here the entry stays <em>off</em> until the reader types a specific keyword, then switches on. A common pattern is a distinctive trigger like <span class="chip">!free mode</span> with the mode's prompt in that entry. <strong>This overlaps with what preset notes do</strong>, and both are valid — the choice is a matter of taste. The practical differences are <strong>how many tokens it costs and where it lands in priority</strong>: a preset note spends the reader's own budget and reads at the bottom of the order, while a macro entry spends your node's budget and can be prioritised wherever you like. <span style="color:var(--text-dim)">(Screenshots and this suggestion from <a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a>.)</span></div>
+      </div>
+
+      <figure class="shot">
+        <img src="MacroKeyword_Mode.png" alt="A macro prompt entry with Always OFF and a keyword trigger of exclamation-free-mode, used as a mode toggle">
+        <figcaption><b>A keyword-toggled mode.</b> <b>Always is OFF</b> here and the trigger word is <span style="font-family:monospace">!free mode</span> — the entry does nothing until the reader types that keyword, then switches on. The leading <span style="font-family:monospace">!</span> is just a convention to make the keyword distinctive and unlikely to fire by accident.</figcaption>
+      </figure>
     </div>
 
     <hr class="divider">

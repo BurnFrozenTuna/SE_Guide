@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.10.2
+
+- Physically separated the Always example from the keyword-mode example in the lorebook
+  section. They were adjacent in one block, which read as a single set even after the
+  v2.10.1 wording fix; the keyword-mode note and image now sit lower in the section, after
+  the other macro tips, so the two opposite behaviours don't get conflated. Both editions.
+
 ## v2.10.1
 
 - Fixed the framing added in v2.10.0: the keyword-toggled mode (!free mode) was described

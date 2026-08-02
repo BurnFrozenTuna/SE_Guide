@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.10.1</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.10.2</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -564,7 +564,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.10.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.10.2</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -850,16 +850,6 @@
         <figcaption><b>Alwaysトグルをオンにした状態。</b>トリガーワード欄が空になっている点に注目——<b>Always：ON</b>ならキーワードは不要で、毎ターン注入されます。すべての応答に必ず存在させたいルール（OOC指示や厳格な制約）を固定する方法で、代わりに5枠のうち1つを恒久的に消費します。</figcaption>
       </figure>
 
-      <div class="callout info">
-        <span class="callout-icon">🔀</span>
-        <div><strong>キーワードの別の使い方：読者が切り替える「モード」。</strong>これはAlwaysとは逆で、毎ターン注入するのではなく、読者が特定のキーワードを入力するまでエントリーはオフのままです。よくあるやり方は、<span class="chip">!free mode</span>のような独特なトリガーにモード用のプロンプトを入れておき、それを入力するとモードがオンになる、というもの。<strong>これはプリセットノートと役割が重なり</strong>、どちらも有効で、選択は好みの問題です。実際の違いは<strong>消費するトークン量と、優先順位のどこに入るか</strong>です：プリセットノートは読者自身の予算を使い、優先順位の最下部で読まれます。一方マクロエントリーはあなたのノードの予算を使い、優先度を好きなように設定できます。<span style="color:var(--text-dim)">（スクリーンショットとこの提案は<a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a>さんより。）</span></div>
-      </div>
-
-      <figure class="shot">
-        <img src="/SE_Guide/MacroKeyword_Mode.png" alt="AlwaysをOFFにし、!free modeというキーワードをモード切り替えとして使うマクロプロンプトエントリー">
-        <figcaption><b>キーワードで切り替えるモード。</b>ここでは<b>AlwaysがOFF</b>で、トリガーワードは<span style="font-family:monospace">!free mode</span>——読者がこのキーワードを入力するまでエントリーは何もせず、入力するとオンになります。先頭の<span style="font-family:monospace">!</span>は、キーワードを独特にして誤作動しにくくするための慣習です。</figcaption>
-      </figure>
-
       <div class="callout tip">
         <span class="callout-icon">✅</span>
         <div>ロアブックノードは複数作って用途で分けてもかまいません——OOCルール用、世界観用、画像ルール用など。1つの巨大な塊よりずっと管理しやすくなります。</div>
@@ -869,6 +859,16 @@
         <span class="callout-icon">⚠️</span>
         <div><strong>トリガーワードは、普通の文章と被らない語を選びましょう。</strong>一致は文字通りに行われるため、ありふれた語をトリガーにすると、そのエントリーが意図しない場面で何度も作動してしまいます——読者や物語が自然に口にする言葉と重なるキーワードは誤爆し、場面を崩しかねません。日常語より、独特なトークン（造語や珍しい複合語）を選びましょう。<span style="color:var(--text-dim)">（まさにこれで絡まってしまった、<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの情報。）</span></div>
       </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔀</span>
+        <div><strong>キーワードのもう一つの使い方：読者が切り替える「モード」。</strong>上のAlwaysの挙動とは別物で——こちらは、読者が特定のキーワードを入力するまでエントリーは<em>オフ</em>のままで、入力するとオンになります。よくあるやり方は、<span class="chip">!free mode</span>のような独特なトリガーにモード用のプロンプトを入れておくこと。<strong>これはプリセットノートと役割が重なり</strong>、どちらも有効で、選択は好みの問題です。実際の違いは<strong>消費するトークン量と、優先順位のどこに入るか</strong>です：プリセットノートは読者自身の予算を使い、優先順位の最下部で読まれます。一方マクロエントリーはあなたのノードの予算を使い、優先度を好きなように設定できます。<span style="color:var(--text-dim)">（スクリーンショットとこの提案は<a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a>さんより。）</span></div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/MacroKeyword_Mode.png" alt="AlwaysをOFFにし、!free modeというキーワードをモード切り替えとして使うマクロプロンプトエントリー">
+        <figcaption><b>キーワードで切り替えるモード。</b>ここでは<b>AlwaysがOFF</b>で、トリガーワードは<span style="font-family:monospace">!free mode</span>——読者がこのキーワードを入力するまでエントリーは何もせず、入力するとオンになります。先頭の<span style="font-family:monospace">!</span>は、キーワードを独特にして誤作動しにくくするための慣習です。</figcaption>
+      </figure>
     </div>
 
     <hr class="divider">
