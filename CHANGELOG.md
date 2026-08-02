@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.10.0
+
+- **Documented the Always toggle and keyword-driven modes in the lorebook.** Added a
+  screenshot of an entry with Always ON (empty trigger, injected every turn), and a note
+  that some creators build on/off modes from a macro keyword like !free mode — which
+  overlaps with preset notes. Framed as a matter of taste: the real differences are token
+  cost and priority placement. Second screenshot shows the keyword-mode setup. Screenshots
+  and suggestion from Mukmul, now in Contributors. Both editions.
+
 ## v2.9.3
 
 - (JA) Swapped in dedicated Japanese-UI screenshots for the story node, character node,

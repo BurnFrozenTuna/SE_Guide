@@ -491,7 +491,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.9.2</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.10.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -564,7 +564,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.9.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.10.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -844,6 +844,21 @@
           </tr>
         </tbody>
       </table>
+
+      <figure class="shot">
+        <img src="MacroAlways_On.png" alt="A macro prompt entry with the Always toggle switched ON and the Trigger Words field left empty">
+        <figcaption><b>The Always toggle, switched on.</b> Notice the Trigger Words field is empty — with <b>Always: ON</b> the entry needs no keyword, it's injected every single turn. This is how you pin a rule that must be present in every response (an OOC directive, a hard constraint), at the cost of one permanent slot out of five.</figcaption>
+      </figure>
+
+      <div class="callout info">
+        <span class="callout-icon">🔀</span>
+        <div><strong>You can also drive an on/off "mode" from the lorebook, using a keyword.</strong> A common creator pattern is to set a distinctive trigger like <span class="chip">!free mode</span> and put the mode's prompt in that entry — the reader types the keyword to switch it on. <strong>This overlaps with what preset notes do</strong>, and both are valid; the choice is a matter of taste. The practical differences are <strong>how many tokens it costs and where it lands in priority</strong>: a preset note spends the reader's own budget and reads at the bottom of the order, while a macro entry spends your node's budget and can be prioritised wherever you like. Pick whichever fits how you want the mode to behave. <span style="color:var(--text-dim)">(Screenshots and this suggestion from <a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a>.)</span></div>
+      </div>
+
+      <figure class="shot">
+        <img src="MacroKeyword_Mode.png" alt="A macro prompt entry with Always OFF and a keyword trigger of exclamation-free-mode, used as a mode toggle">
+        <figcaption><b>The same idea as a keyword mode.</b> Here <b>Always is OFF</b> and the trigger word is <span style="font-family:monospace">!free mode</span> — the reader types that to flip the entry on. The leading <span style="font-family:monospace">!</span> is just a convention to make the keyword distinctive and unlikely to fire by accident.</figcaption>
+      </figure>
 
       <div class="callout tip">
         <span class="callout-icon">✅</span>
@@ -1452,6 +1467,7 @@
           <tr><td class="field-name"><a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a></td><td class="field-desc">Sub-model's memory/variable roles; the token-counter tip; prologue message doubling as AI-read context; and the port-connect list being universal across nodes; distinctive trigger words.</td></tr>
           <tr><td class="field-name"><a href="https://storyengine.live/c/yatoming" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">yatoming</a></td><td class="field-desc">Native-speaker review of the Japanese edition's phrasing.</td></tr>
           <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/689947bee7c5df8723a5c5d2?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">夢見月ひいな</a></td><td class="field-desc">Caught the Original lock period changing from 90 to 180 days.</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a></td><td class="field-desc">Screenshots for the Always toggle and using a macro keyword as a mode switch.</td></tr>
         </tbody>
       </table>
       <p style="color:var(--text-dim);font-size:13px">If you reported something and aren't listed, or want your name shown differently, tell me — the omission is an oversight, not a slight.</p>
