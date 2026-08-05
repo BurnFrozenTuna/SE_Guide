@@ -1,5 +1,24 @@
 # Changelog
 
+## v2.11.1
+
+- Fixed the categorize-flow GIF from v2.11.0, which was cropped too tight at the bottom and
+  cut off the part where tags actually get added to a category. Rebuilt at full height so
+  the whole flow, including the tag-assignment step, is visible.
+
+## v2.11.0
+
+- **Added an animated walkthrough to the Categorize Image Tags section** — a short screen
+  recording of the full flow: opening the panel, creating a category, writing its
+  description, and assigning tags, with the "Uncategorized situation tags" warning visible
+  the whole time. Optimized from 3.4 MB down to ~570 KB. Same GIF in both editions.
+
+## v2.10.3
+
+- (JA) Use the author's Japanese handle 冷凍ツナ in the Japanese edition (disclaimer and
+  signature), with Frozen_Tuna kept in parentheses once for cross-reference. The profile
+  link URL is unchanged.
+
 ## v2.10.2
 
 - Physically separated the Always example from the keyword-mode example in the lorebook
