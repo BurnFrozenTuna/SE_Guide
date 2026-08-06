@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.11.2
+
+- Corrected the tokenizer note: it now says creators were told the *tokenization follows
+  GPT-4o's scheme* — a statement about how tokens are counted — rather than claiming the
+  underlying model is GPT-4o, which was never stated and shouldn't be implied. Both editions.
+
 ## v2.11.1
 
 - Fixed the categorize-flow GIF from v2.11.0, which was cropped too tight at the bottom and
