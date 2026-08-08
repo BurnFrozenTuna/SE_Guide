@@ -1,6 +1,7 @@
 # SE_Guide — Fish_In_the_Canvas
 
 > # ⚠️ THIS IS NOT OFFICIAL DOCUMENTATION
+> ## (StoryEngine Canvas Guide — Unofficial Creator Tutorial)
 >
 > This is a **fan-made guide written by a creator.** It is not written, reviewed, or
 > endorsed by StoryEngine, and it is not affiliated with the platform in any way.
