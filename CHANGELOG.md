@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.12.0
+
+- **Added search/discovery metadata** so the guide can actually be found. Both editions now
+  have a meta description, Open Graph and Twitter card tags (proper link previews when
+  shared), a canonical URL, author, hreflang links between the EN/JA editions, and JSON-LD
+  structured data describing the page as a TechArticle. Fixed the page lang attribute
+  (was "ko" on both). Added sitemap.xml and robots.txt at the repo root.
+
 ## v2.11.2
 
 - Corrected the tokenizer note: it now says creators were told the *tokenization follows

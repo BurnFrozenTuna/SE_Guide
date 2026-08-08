@@ -1,9 +1,42 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StoryEngine — Canvas Starter Guide</title>
+<title>StoryEngine Canvas Starter Guide — Nodes, Tokens & Macros (Unofficial)</title>
+<meta name="description" content="An unofficial, hands-on guide to the StoryEngine Canvas: what each node does (story, character, lorebook/macro, variable, trigger, achievement), token budgets, image tagging, preset notes, and publishing. Written by a working creator.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://burnfrozentuna.github.io/SE_Guide/">
+<meta name="author" content="Frozen_Tuna">
+<!-- Open Graph (link previews on Discord, Twitter, etc.) -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="StoryEngine Canvas Starter Guide">
+<meta property="og:title" content="StoryEngine Canvas Starter Guide (Unofficial)">
+<meta property="og:description" content="What each Canvas node does, token budgets, image tagging, macros/lorebook, preset notes, and publishing — a hands-on guide written while actually building on StoryEngine.">
+<meta property="og:url" content="https://burnfrozentuna.github.io/SE_Guide/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="StoryEngine Canvas Starter Guide (Unofficial)">
+<meta name="twitter:description" content="Nodes, token budgets, image tagging, macros, preset notes, and publishing on the StoryEngine Canvas — a hands-on creator guide.">
+<!-- hreflang: English / Japanese editions -->
+<link rel="alternate" hreflang="en" href="https://burnfrozentuna.github.io/SE_Guide/">
+<link rel="alternate" hreflang="ja" href="https://burnfrozentuna.github.io/SE_Guide/ja/">
+<link rel="alternate" hreflang="x-default" href="https://burnfrozentuna.github.io/SE_Guide/">
+<!-- Structured data: tells crawlers exactly what this page is -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "StoryEngine Canvas Starter Guide (Unofficial)",
+  "description": "A hands-on, unofficial guide to the StoryEngine Canvas: nodes, token budgets, image tagging, macros/lorebook, preset notes, and publishing.",
+  "author": { "@type": "Person", "name": "Frozen_Tuna", "url": "https://storyengine.live/c/frozen_tuna" },
+  "inLanguage": "en",
+  "url": "https://burnfrozentuna.github.io/SE_Guide/",
+  "about": "StoryEngine Canvas — interactive story chat creation",
+  "keywords": "StoryEngine, Canvas, story chat, nodes, lorebook, macro prompts, tokens, character node, achievement, preset notes"
+}
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -491,7 +524,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.11.2</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -564,7 +597,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.11.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 

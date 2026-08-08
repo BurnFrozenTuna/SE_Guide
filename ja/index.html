@@ -1,9 +1,39 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StoryEngine — キャンバス入門ガイド</title>
+<title>StoryEngine キャンバス入門ガイド — ノード・トークン・マクロ（非公式）</title>
+<meta name="description" content="StoryEngineキャンバスの非公式・実践ガイド。各ノード（ストーリー、キャラクター、ロアブック/マクロ、変数、トリガー、アチーブメント）の役割、トークン予算、画像タグ分類、プリセットノート、公開設定までを、実際に制作しながらまとめました。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://burnfrozentuna.github.io/SE_Guide/ja/">
+<meta name="author" content="冷凍ツナ / Frozen_Tuna">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="StoryEngine キャンバス入門ガイド">
+<meta property="og:title" content="StoryEngine キャンバス入門ガイド（非公式）">
+<meta property="og:description" content="各ノードの役割、トークン予算、画像タグ分類、マクロ/ロアブック、プリセットノート、公開設定——実際にキャンバスで制作しながらまとめた実践ガイド。">
+<meta property="og:url" content="https://burnfrozentuna.github.io/SE_Guide/ja/">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="StoryEngine キャンバス入門ガイド（非公式）">
+<meta name="twitter:description" content="ノード、トークン予算、画像タグ分類、マクロ、プリセットノート、公開設定——StoryEngineキャンバスの実践的なクリエイター向けガイド。">
+<link rel="alternate" hreflang="en" href="https://burnfrozentuna.github.io/SE_Guide/">
+<link rel="alternate" hreflang="ja" href="https://burnfrozentuna.github.io/SE_Guide/ja/">
+<link rel="alternate" hreflang="x-default" href="https://burnfrozentuna.github.io/SE_Guide/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "StoryEngine キャンバス入門ガイド（非公式）",
+  "description": "StoryEngineキャンバスの実践的な非公式ガイド。ノード、トークン予算、画像タグ分類、マクロ/ロアブック、プリセットノート、公開設定。",
+  "author": { "@type": "Person", "name": "冷凍ツナ", "url": "https://storyengine.live/c/frozen_tuna" },
+  "inLanguage": "ja",
+  "url": "https://burnfrozentuna.github.io/SE_Guide/ja/",
+  "about": "StoryEngine Canvas — interactive story chat creation",
+  "keywords": "StoryEngine, キャンバス, ストーリーチャット, ノード, ロアブック, マクロプロンプト, トークン, キャラクターノード, アチーブメント, プリセットノート"
+}
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
@@ -491,7 +521,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.11.2</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -564,7 +594,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.11.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.0</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
