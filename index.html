@@ -524,7 +524,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -548,7 +548,7 @@
         <span class="nav-dot" style="background:#d2a8ff"></span>Character node
       </a>
       <a class="nav-item" href="#lorebook-node">
-        <span class="nav-dot" style="background:#ffa657"></span>Lorebook (macro)
+        <span class="nav-dot" style="background:#ffa657"></span>Macro Prompts (Lorebook)
       </a>
       <a class="nav-item" href="#image-node">
         <span class="nav-dot" style="background:#ff7b72"></span>Image node
@@ -597,7 +597,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.1</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -674,9 +674,9 @@
           </div>
         </div>
         <div class="arch-row">
-          <div class="arch-label">Lorebook</div>
+          <div class="arch-label">Macro Prompts</div>
           <div class="arch-content">
-            <strong>A separate, direct path — not the sub-model.</strong> Lorebook (macro) entries are <strong>keyword-matched and injected straight into the main context</strong>. When a registered keyword appears in user input, the matching entry is added — no model reads or reworks it in between, it's a rule-based trigger.
+            <strong>A separate, direct path — not the sub-model.</strong> Macro Prompt (lorebook) entries are <strong>keyword-matched and injected straight into the main context</strong>. When a registered keyword appears in user input, the matching entry is added — no model reads or reworks it in between, it's a rule-based trigger.
             <span class="chip">max 5 injected at once</span> Higher priority entries win the slots.
           </div>
         </div>
@@ -684,7 +684,7 @@
           <div class="arch-label">Main model</div>
           <div class="arch-content">
             <strong>Handles generation.</strong> Always receives, fixed: story Core Context + prologue + character Core Context.<br>
-            The Full Story chunks the sub-model retrieved, plus any keyword-matched lorebook entries, are added on top — and the response is generated from the combination.<br>
+            The Full Story chunks the sub-model retrieved, plus any keyword-matched macro (lorebook) entries, are added on top — and the response is generated from the combination.<br>
             Image tag output <span class="chip">smile</span> <span class="chip">angry</span> and variable update instructions are also the main model's job.
           </div>
         </div>
@@ -698,7 +698,7 @@
         <span class="callout-icon">💡</span>
         <div><strong>Two different retrieval paths — don't lump them together</strong><br>
         <strong>Full Story</strong> goes through the sub-model: <strong>semantic search</strong>, fetched only when the situation calls for it. It matches on meaning.<br>
-        <strong>Lorebook</strong> does not touch the sub-model: <strong>exact keyword matching</strong>, injected directly. It fires when a specific word shows up, nothing fuzzier.<br>
+        <strong>Macro Prompts</strong> does not touch the sub-model: <strong>exact keyword matching</strong>, injected directly. It fires when a specific word shows up, nothing fuzzier.<br>
         And separate from both, <strong>Core Context</strong> is injected into the main model <strong>every single turn</strong> — that's where your hard rules go.</div>
       </div>
     </div>
@@ -712,7 +712,7 @@
         <div class="section-icon" style="background:rgba(121,192,255,0.12)">📋</div>
         <h2>Story node</h2>
       </div>
-      <p>The <strong>central node</strong> of the Canvas. Character, lorebook and achievement nodes all connect into it and get compiled together. What you write here reaches the main model <strong>first, at the highest priority</strong>.</p>
+      <p>The <strong>central node</strong> of the Canvas. Character, macro and achievement nodes all connect into it and get compiled together. What you write here reaches the main model <strong>first, at the highest priority</strong>.</p>
 
       <div class="callout tip">
         <span class="callout-icon">✅</span>
@@ -830,15 +830,15 @@
 
     <hr class="divider">
 
-    <!-- ─── lorebook ─── -->
+    <!-- ─── macro prompts ─── -->
     <div class="section">
       <span class="section-anchor" id="lorebook-node"></span>
       <div class="section-header">
         <div class="section-icon" style="background:rgba(255,166,87,0.12)">📚</div>
-        <h2>Lorebook node (Macro Prompts)</h2>
+        <h2>Macro Prompts (Lorebook)</h2>
       </div>
-      <p><strong>Keyword-triggered injected memory.</strong> Write entries inside a lorebook node, and when a registered keyword appears in user input, that entry's content is injected <strong>directly into the main context</strong> — no sub-model reads or reworks it in between. This is <strong>exact keyword matching, not similarity search</strong>: an entry fires when its trigger word shows up, nothing fuzzier than that.</p>
-      <p>Unlike story and character nodes, which are always present, <strong>the lorebook is injected dynamically</strong> based on what's happening.</p>
+      <p><strong>Keyword-triggered injected memory.</strong> Write entries inside a macro prompt node, and when a registered keyword appears in user input, that entry's content is injected <strong>directly into the main context</strong> — no sub-model reads or reworks it in between. This is <strong>exact keyword matching, not similarity search</strong>: an entry fires when its trigger word shows up, nothing fuzzier than that.</p>
+      <p>Unlike story and character nodes, which are always present, <strong>the macro prompt is injected dynamically</strong> based on what's happening.</p>
 
       <div class="callout warn">
         <span class="callout-icon">⚠️</span>
@@ -885,7 +885,7 @@
 
       <div class="callout tip">
         <span class="callout-icon">✅</span>
-        <div>Feel free to create several lorebook nodes and split them by purpose — an OOC-rules node, a worldbuilding node, an image-rules node. Much easier to maintain than one giant pile.</div>
+        <div>Feel free to create several macro prompt nodes and split them by purpose — an OOC-rules node, a worldbuilding node, an image-rules node. Much easier to maintain than one giant pile.</div>
       </div>
 
       <div class="callout warn">
@@ -1374,7 +1374,7 @@
           </tr>
           <tr>
             <td class="field-name">Turn off Macro Prompts <span class="chip">+1,200</span></td>
-            <td class="field-desc">Disables macro prompts — meaning <strong>your lorebook stops firing entirely.</strong> Unambiguous, unlike the two above.</td>
+            <td class="field-desc">Disables macro prompts — meaning <strong>your macro prompts stop firing entirely.</strong> Unambiguous, unlike the two above.</td>
           </tr>
           <tr>
             <td class="field-name">Turn off Content Policy <span class="chip">+800</span></td>

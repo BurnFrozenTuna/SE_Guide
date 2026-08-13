@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.12.1
+
+- **Renamed the section to match the UI.** The in-product label is "Macro Prompts," so the
+  heading and nav now read Macro Prompts (Lorebook) — UI name first, role in parentheses —
+  instead of the other way round. Body text that called it "lorebook" is now "macro
+  prompt(s)" for consistency, with the lorebook term kept where it aids understanding.
+  Both editions. (Anchor IDs and image filenames unchanged, so existing links still work.)
+
 ## v2.12.0
 
 - **Added search/discovery metadata** so the guide can actually be found. Both editions now

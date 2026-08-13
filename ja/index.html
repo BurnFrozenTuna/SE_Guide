@@ -521,7 +521,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.0</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -545,7 +545,7 @@
         <span class="nav-dot" style="background:#d2a8ff"></span>キャラクターノード
       </a>
       <a class="nav-item" href="#lorebook-node">
-        <span class="nav-dot" style="background:#ffa657"></span>ロアブック（マクロ）
+        <span class="nav-dot" style="background:#ffa657"></span>マクロプロンプト（ロアブック）
       </a>
       <a class="nav-item" href="#image-node">
         <span class="nav-dot" style="background:#ff7b72"></span>画像ノード
@@ -594,7 +594,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.1</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -671,9 +671,9 @@
           </div>
         </div>
         <div class="arch-row">
-          <div class="arch-label">ロアブック<br><span style="font-size:10px;opacity:0.7">（マクロ）</span></div>
+          <div class="arch-label">マクロプロンプト<br><span style="font-size:10px;opacity:0.7">（ロアブック）</span></div>
           <div class="arch-content">
-            <strong>これはサブモデルではなく、別系統の直接ルートです。</strong>ロアブック（マクロ）のエントリーは<strong>キーワード一致でメインコンテキストに直接注入</strong>されます。登録キーワードがユーザー入力に現れると、一致したエントリーが追加されます——間にモデルが読み直したり加工したりはせず、ルールベースのトリガーです。
+            <strong>これはサブモデルではなく、別系統の直接ルートです。</strong>マクロプロンプト（ロアブック）のエントリーは<strong>キーワード一致でメインコンテキストに直接注入</strong>されます。登録キーワードがユーザー入力に現れると、一致したエントリーが追加されます——間にモデルが読み直したり加工したりはせず、ルールベースのトリガーです。
             <span class="chip">同時に最大5件まで注入</span> 優先度の高いエントリーが枠を取ります。
           </div>
         </div>
@@ -681,7 +681,7 @@
           <div class="arch-label">メインモデル</div>
           <div class="arch-content">
             <strong>生成を担当。</strong>常に固定で受け取るもの：ストーリーのコアコンテキスト + プロローグ + キャラクターのコアコンテキスト。<br>
-            サブモデルが取り出した全ストーリーのチャンクと、キーワード一致したロアブックのエントリーがその上に加わり、その組み合わせから応答が生成されます。<br>
+            サブモデルが取り出した全ストーリーのチャンクと、キーワード一致したマクロプロンプトのエントリーがその上に加わり、その組み合わせから応答が生成されます。<br>
             画像タグの出力 <span class="chip">smile</span> <span class="chip">angry</span> や変数の更新指示も、メインモデルの仕事です。
           </div>
         </div>
@@ -695,7 +695,7 @@
         <span class="callout-icon">💡</span>
         <div><strong>2つの異なる検索経路 — 混同しないこと</strong><br>
         <strong>全ストーリー</strong>はサブモデル経由：<strong>意味ベースの検索</strong>で、必要な場面でだけ取り出されます。意味で一致します。<br>
-        <strong>ロアブック</strong>はサブモデルを経由しません：<strong>キーワード完全一致</strong>で直接注入。特定の語が出たときに作動し、それ以上あいまいなことはしません。<br>
+        <strong>マクロプロンプト</strong>はサブモデルを経由しません：<strong>キーワード完全一致</strong>で直接注入。特定の語が出たときに作動し、それ以上あいまいなことはしません。<br>
         そしてこの2つとは別に、<strong>コアコンテキスト</strong>は<strong>毎ターン</strong>メインモデルに注入されます——絶対に守らせたいルールはここに書きます。</div>
       </div>
     </div>
@@ -709,7 +709,7 @@
         <div class="section-icon" style="background:rgba(121,192,255,0.12)">📋</div>
         <h2>ストーリーノード</h2>
       </div>
-      <p>キャンバスの<strong>中心となるノード</strong>。キャラクター・ロアブック・アチーブメントの各ノードはすべてここにつながり、まとめてコンパイルされます。ここに書いた内容は<strong>最優先で、最初に</strong>メインモデルに届きます。</p>
+      <p>キャンバスの<strong>中心となるノード</strong>。キャラクター・マクロプロンプト・アチーブメントの各ノードはすべてここにつながり、まとめてコンパイルされます。ここに書いた内容は<strong>最優先で、最初に</strong>メインモデルに届きます。</p>
 
       <div class="callout tip">
         <span class="callout-icon">✅</span>
@@ -832,10 +832,10 @@
       <span class="section-anchor" id="lorebook-node"></span>
       <div class="section-header">
         <div class="section-icon" style="background:rgba(255,166,87,0.12)">📚</div>
-        <h2>ロアブックノード（マクロプロンプト）</h2>
+        <h2>マクロプロンプト（ロアブック）</h2>
       </div>
-      <p><strong>キーワードで反応する注入メモです。</strong>ロアブックノードにエントリーを書いておくと、登録キーワードがユーザー入力に現れたとき、その内容が<strong>メインコンテキストへ直接注入</strong>されます——間にサブモデルが読んだり加工したりはしません。これは<strong>類似検索ではなくキーワード完全一致</strong>で、トリガーワードが現れたときに反応するだけで、それ以上あいまいなことはしません。</p>
-      <p>常に存在するストーリーノードやキャラクターノードと違い、<strong>ロアブックは状況に応じて動的に注入</strong>されます。</p>
+      <p><strong>キーワードで反応する注入メモです。</strong>マクロプロンプトノードにエントリーを書いておくと、登録キーワードがユーザー入力に現れたとき、その内容が<strong>メインコンテキストへ直接注入</strong>されます——間にサブモデルが読んだり加工したりはしません。これは<strong>類似検索ではなくキーワード完全一致</strong>で、トリガーワードが現れたときに反応するだけで、それ以上あいまいなことはしません。</p>
+      <p>常に存在するストーリーノードやキャラクターノードと違い、<strong>マクロプロンプトは状況に応じて動的に注入</strong>されます。</p>
 
       <div class="callout warn">
         <span class="callout-icon">⚠️</span>
@@ -882,7 +882,7 @@
 
       <div class="callout tip">
         <span class="callout-icon">✅</span>
-        <div>ロアブックノードは複数作って用途で分けてもかまいません——OOCルール用、世界観用、画像ルール用など。1つの巨大な塊よりずっと管理しやすくなります。</div>
+        <div>マクロプロンプトノードは複数作って用途で分けてもかまいません——OOCルール用、世界観用、画像ルール用など。1つの巨大な塊よりずっと管理しやすくなります。</div>
       </div>
 
       <div class="callout warn">
@@ -1371,7 +1371,7 @@
           </tr>
           <tr>
             <td class="field-name">マクロプロンプトをオフにする <span class="chip">+1,200</span></td>
-            <td class="field-desc">マクロプロンプトを無効化します——つまり<strong>ロアブックがまったく働かなくなります。</strong>上の2つと違い、これは曖昧さがありません。</td>
+            <td class="field-desc">マクロプロンプトを無効化します——つまり<strong>マクロプロンプトがまったく働かなくなります。</strong>上の2つと違い、これは曖昧さがありません。</td>
           </tr>
           <tr>
             <td class="field-name">コンテンツポリシーをオフにする <span class="chip">+800</span></td>
