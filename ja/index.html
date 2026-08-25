@@ -511,6 +511,10 @@
   .lang-tabs a.active {
     background: var(--accent); color: #fff; border-color: var(--accent);
   }
+
+  .shot-row { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
+  .shot-row .shot { flex: 1; min-width: 240px; margin: 0; }
+  @media (max-width: 560px) { .shot-row { flex-direction: column; } }
 </style>
 <body>
 
@@ -521,7 +525,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.1</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.13.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -594,7 +598,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.13.1</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -1323,6 +1327,24 @@
           </div>
           <div class="node-card-desc">ストーリーノードにつないで、チャットの背後の背景を設定します。押して確かめてみてください。</div>
         </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(139,148,158,0.15);color:#8b949e">注釈ノード</span>
+            <span class="node-card-title">自分用のメモ</span>
+          </div>
+          <div class="node-card-desc"><strong>キャンバス上の付箋——ただそれだけ。</strong><strong>ポートがなく</strong>、何にも接続されず、AIが読むこともありません。キャンバスに自分用のコメントを残すためだけのものです（400文字）。<br><br>これは、かつての<strong>テキストノード</strong>の成れの果てです。以前のテキストノードにはポートがあり、キャラクターノードのシステム部分（口調など）につながっていました。その役割は今やキャラクターノード自体に統合され、残ったノードはこの「メモ専用」の注釈ノードに転用されました。接続できたテキストノードを覚えているなら、その行き先がこれです。</div>
+        </div>
+      </div>
+
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="/SE_Guide/TextNode_Legacy.png" alt="ポートを持ち、キャラクターノードのシステム部分に接続されていた旧テキストノード">
+          <figcaption><b>かつて。</b>旧テキストノード——右側の<b>Text</b>ポートに注目。キャラクターノードにつながり、口調の定義（300トークン）を渡していました。<span style="color:var(--text-dim)">なお、このスクショは作者自身の恥ずかしいほど昔のビルドのものです。🙈</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/SE_Guide/ja/AnnotationNode_JP.png" alt="ポートがなく、400文字のメモ欄を持つ現在の注釈ノード">
+          <figcaption><b>いま。</b>同じノードの現在：<b>注釈ノード</b>に改名され、<b>ポートは一切なく</b>、トークンではなく文字数（400文字）で測られます。配線ではなく、メモです。</figcaption>
+        </figure>
       </div>
 
       <div class="callout info">
