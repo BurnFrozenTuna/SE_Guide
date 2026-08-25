@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryEngine キャンバス入門ガイド — ノード・トークン・マクロ（非公式）</title>
+<meta name="description" content="StoryEngineキャンバスの非公式・実践ガイド。各ノード（ストーリー、キャラクター、ロアブック/マクロ、変数、トリガー、アチーブメント）の役割、トークン予算、画像タグ分類、プリセットノート、公開設定までを、実際に制作しながらまとめました。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://burnfrozentuna.github.io/SE_Guide/ja/">
+<meta name="author" content="冷凍ツナ / Frozen_Tuna">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="StoryEngine キャンバス入門ガイド">
+<meta property="og:title" content="StoryEngine キャンバス入門ガイド（非公式）">
+<meta property="og:description" content="各ノードの役割、トークン予算、画像タグ分類、マクロ/ロアブック、プリセットノート、公開設定——実際にキャンバスで制作しながらまとめた実践ガイド。">
+<meta property="og:url" content="https://burnfrozentuna.github.io/SE_Guide/ja/">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="StoryEngine キャンバス入門ガイド（非公式）">
+<meta name="twitter:description" content="ノード、トークン予算、画像タグ分類、マクロ、プリセットノート、公開設定——StoryEngineキャンバスの実践的なクリエイター向けガイド。">
+<link rel="alternate" hreflang="en" href="https://burnfrozentuna.github.io/SE_Guide/">
+<link rel="alternate" hreflang="ja" href="https://burnfrozentuna.github.io/SE_Guide/ja/">
+<link rel="alternate" hreflang="x-default" href="https://burnfrozentuna.github.io/SE_Guide/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "StoryEngine キャンバス入門ガイド（非公式）",
+  "description": "StoryEngineキャンバスの実践的な非公式ガイド。ノード、トークン予算、画像タグ分類、マクロ/ロアブック、プリセットノート、公開設定。",
+  "author": { "@type": "Person", "name": "冷凍ツナ", "url": "https://storyengine.live/c/frozen_tuna" },
+  "inLanguage": "ja",
+  "url": "https://burnfrozentuna.github.io/SE_Guide/ja/",
+  "about": "StoryEngine Canvas — interactive story chat creation",
+  "keywords": "StoryEngine, キャンバス, ストーリーチャット, ノード, ロアブック, マクロプロンプト, トークン, キャラクターノード, アチーブメント, プリセットノート"
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2330;
+    --border: #30363d;
+    --border-bright: #444c56;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --text-dim: #484f58;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --accent3: #d2a8ff;
+    --accent4: #ffa657;
+    --accent5: #ff7b72;
+    --tag-bg: #1f3048;
+    --tag-text: #79c0ff;
+    --code-bg: #161b22;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* layout */
+  .shell {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* sidebar */
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 0 40px;
+  }
+
+  .sidebar-logo {
+    padding: 0 24px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .sidebar-logo .product {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-logo .title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .sidebar-logo .subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .nav-section {
+    padding: 8px 0;
+  }
+
+  .nav-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 8px 24px 4px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 24px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .nav-item.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(88,166,255,0.06);
+  }
+
+  .nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* main */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 48px 60px 80px;
+    max-width: 860px;
+  }
+
+  /* page header */
+  .page-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .page-header .desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* sections */
+  .section {
+    margin-bottom: 56px;
+  }
+
+  .section-anchor {
+    display: block;
+    position: relative;
+    top: -80px;
+    visibility: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .section p {
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.8;
+  }
+
+  .section p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* callout */
+  .callout {
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  .callout.info { background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.2); color: #9ecbff; }
+  .callout.tip  { background: rgba(63,185,80,0.08);  border: 1px solid rgba(63,185,80,0.2);  color: #85e89d; }
+  .callout.warn { background: rgba(255,166,87,0.08); border: 1px solid rgba(255,166,87,0.2); color: #ffb86c; }
+
+  /* node cards */
+  .node-grid {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .node-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: border-color 0.15s;
+  }
+
+  .node-card:hover { border-color: var(--border-bright); }
+
+  .node-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .node-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  .node-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .node-card-desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* field table */
+  .field-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+
+  .field-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .field-table tr:last-child td { border-bottom: none; }
+
+  .field-table .field-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent3);
+    white-space: nowrap;
+  }
+
+  .field-table .field-desc { color: var(--text-muted); }
+
+  /* code block */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: #c9d1d9;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre;
+  }
+
+  .code-block .cm { color: var(--text-dim); }
+  .code-block .kw { color: var(--accent5); }
+  .code-block .st { color: var(--accent2); }
+  .code-block .nm { color: var(--accent3); }
+  .code-block .vl { color: var(--accent4); }
+
+  /* flow diagram */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .flow-box {
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: var(--text-dim);
+    font-size: 16px;
+  }
+
+  .flow-down {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .flow-down-arrow {
+    color: var(--text-dim);
+    font-size: 18px;
+    line-height: 1.2;
+    padding: 2px 0;
+  }
+
+  /* arch diagram */
+  .arch {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .arch-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .arch-row:last-child { border-bottom: none; }
+
+  .arch-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .arch-content {
+    flex: 1;
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+
+  .arch-content strong { color: var(--text); font-weight: 600; }
+
+  /* tag chip */
+  .chip {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    margin: 1px 2px;
+    white-space: nowrap;
+  }
+
+  .chip.green { background: rgba(63,185,80,0.1); color: #85e89d; }
+  .chip.purple { background: rgba(210,168,255,0.1); color: var(--accent3); }
+  .chip.orange { background: rgba(255,166,87,0.1); color: var(--accent4); }
+  .chip.red { background: rgba(255,123,114,0.1); color: var(--accent5); }
+
+  /* divider */
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* scroll */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 32px 24px 60px; }
+  }
+
+  /* ── screenshots ── */
+  .shot { margin: 22px 0 26px; }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--border-bright);
+    border-radius: 10px;
+    background: var(--bg2);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.35);
+  }
+  .shot figcaption {
+    margin-top: 9px; font-size: 12.5px; line-height: 1.6;
+    color: var(--text-dim); padding-left: 2px;
+  }
+  .shot figcaption b { color: var(--text-muted); font-weight: 600; }
+  .shot.narrow img { max-width: 620px; }
+
+  /* ── language tabs ── */
+  .lang-tabs { display: flex; gap: 6px; margin: 4px 0 20px; }
+  .lang-tabs a {
+    flex: 1; text-align: center; font-size: 12px; font-weight: 600;
+    padding: 7px 0; border-radius: 7px; text-decoration: none;
+    color: var(--text-muted); background: var(--bg3);
+    border: 1px solid var(--border-bright); transition: all 0.15s ease;
+  }
+  .lang-tabs a:hover { color: var(--text); }
+  .lang-tabs a.active {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+  }
+
+  .shot-row { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
+  .shot-row .shot { flex: 1; min-width: 240px; margin: 0; }
+  @media (max-width: 560px) { .shot-row { flex-direction: column; } }
+</style>
+<body>
+
+<div class="shell">
+
+  <!-- sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="product">StoryEngine</div>
+      <div class="title">Fish_In_the_Canvas</div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.13.1</a></div>
+    </div>
+    <div class="lang-tabs">
+      <a href="/SE_Guide/">English</a>
+      <a href="/SE_Guide/ja/" class="active">日本語</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">はじめに</div>
+      <a class="nav-item active" href="#overview">
+        <span class="nav-dot" style="background:#58a6ff"></span>キャンバスとは？
+      </a>
+      <a class="nav-item" href="#two-models">
+        <span class="nav-dot" style="background:#3fb950"></span>2つのモデル
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">コアノード</div>
+      <a class="nav-item" href="#story-node">
+        <span class="nav-dot" style="background:#79c0ff"></span>ストーリーノード
+      </a>
+      <a class="nav-item" href="#character-node">
+        <span class="nav-dot" style="background:#d2a8ff"></span>キャラクターノード
+      </a>
+      <a class="nav-item" href="#lorebook-node">
+        <span class="nav-dot" style="background:#ffa657"></span>マクロプロンプト（ロアブック）
+      </a>
+      <a class="nav-item" href="#image-node">
+        <span class="nav-dot" style="background:#ff7b72"></span>画像ノード
+      </a>
+      <a class="nav-item" href="#image-category">
+        <span class="nav-dot" style="background:#ff7b72"></span>イメージタグを分類
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">イベントシステム</div>
+      <a class="nav-item" href="#variable-node">
+        <span class="nav-dot" style="background:#85e89d"></span>変数ノード
+      </a>
+      <a class="nav-item" href="#trigger-node">
+        <span class="nav-dot" style="background:#ffb86c"></span>トリガーノード
+      </a>
+      <a class="nav-item" href="#achievement-node">
+        <span class="nav-dot" style="background:#f0c674"></span>アチーブメントノード
+      </a>
+      <a class="nav-item" href="#branching">
+        <span class="nav-dot" style="background:#ff7b72"></span>シナリオ分岐
+      </a>
+      <a class="nav-item" href="#preset-notes">
+        <span class="nav-dot" style="background:#58a6ff"></span>プリセットノート
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">その他</div>
+      <a class="nav-item" href="#other-nodes">
+        <span class="nav-dot" style="background:#444c56"></span>その他のノード
+      </a>
+      <a class="nav-item" href="#advanced">
+        <span class="nav-dot" style="background:#bc8cff"></span>詳細設定
+      </a>
+      <a class="nav-item" href="#publish">
+        <span class="nav-dot" style="background:#f0c674"></span>公開設定
+      </a>
+      <a class="nav-item" href="#contributors">
+        <span class="nav-dot" style="background:#3fb950"></span>協力者
+      </a>
+    </div>
+  </nav>
+
+  <!-- main -->
+  <main class="main">
+
+    <div class="page-header">
+      <div class="eyebrow">キャンバス・ノードリファレンス</div>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.13.1</a></span></h1>
+      <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
+    </div>
+
+    <div class="callout warn" style="margin-top:0">
+      <span class="callout-icon">📌</span>
+      <div><strong style="font-size:16px;display:block;margin-bottom:6px">⚠️ これは公式ドキュメントではありません。</strong>
+        <strong>冷凍ツナ（Frozen_Tuna）</strong>が実際にキャンバスを使って制作しながらまとめた、非公式のファンメイドガイドです。<strong>StoryEngineが作成・確認・承認したものではなく</strong>、プラットフォームとは一切関係ありません。<br>
+        プラットフォームの内部仕様には意図的に非公開の部分があり、一部は推測で、<strong>一部は単純に間違っています。</strong>数値は予告なく変わります。<strong>キャンバスを開いたまま参照し、このガイドの内容と実際のキャンバスに相違がある場合は、必ずキャンバス側の仕様を優先してください。</strong></div>
+    </div>
+
+    <div class="callout tip" style="margin-top:0">
+      <span class="callout-icon">🔢</span>
+      <div><strong>貼り付ける前にトークン数を数えたい？</strong>このガイドにはトークン制限がたくさん出てきます——コアコンテキストは2,000、プリセットノートは500など——が、キャンバスは入力中に数を表示してくれません。便利な代用ツール：<a href="https://tiktokenizer.vercel.app/?model=o200k_base" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600">Tiktokenizer（o200k_baseエンコーディング）</a>。テキストを貼り付けると、リアルタイムでトークン数を数えてくれます。<br><br>
+      <span style="color:var(--text-dim)">なぜo200k_baseか：StoryEngineのクリエイターは、<strong>トークン化の方式がGPT-4o基準だ</strong>と案内されています——これはトークンの数え方についての説明であって、内部でどのモデルが動いているかを述べたものではない点に注意。o200k_baseはGPT-4oのトークナイザーなので、数はおおむね一致するはずです。<strong>完全一致ではなく、近い目安として扱ってください</strong>——キャンバスと並べて検証したわけではなく、特にCJK（日中韓）テキストはトークナイザーによって差が出やすいです。重要な場面ではキャンバス自身のカウンターを信じましょう。（<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの情報。）</span></div>
+    </div>
+
+    <!-- ─── overview ─── -->
+    <div class="section">
+      <span class="section-anchor" id="overview"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(88,166,255,0.12)">🗂️</div>
+        <h2>キャンバスとは？</h2>
+      </div>
+      <p>キャンバスは、ストーリーチャットを構成する<strong>ノード（ブロック）を配置してつなぐ作業場</strong>です。各ノードには決まった役割があり、それらを配線してデータの流れを作ります。</p>
+
+      <div class="node-grid">
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(88,166,255,0.1);color:#58a6ff">最小構成</span>
+            <span class="node-card-title">ストーリー + キャラクター + ユーザー</span>
+          </div>
+          <div class="node-card-desc">この3つをつなげばチャットは動きます。それ以外はすべて追加機能です。</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(63,185,80,0.1);color:#3fb950">データの流れ</span>
+            <span class="node-card-title">ノードの中身がAIに渡る</span>
+          </div>
+          <div class="node-card-desc">キャンバスは「AIに何を渡すか」を構造化するツールです。ノードに書いた内容はコンパイルされ、AIのコンテキストに入ります。</div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">🔌</span>
+        <div><strong>ノードのつなぎ方：線をドラッグせず、ポートをクリック。</strong>どのノードにも側面にラベル付きの入力ポートが並んでいて——<strong>これはストーリーノードだけでなく、すべてのノードで同じように動きます。</strong>ポートをクリックまたはタップすると、そのスロットに接続できるノードの一覧が出て、選ぶと自動でつながります。画像ポートも同じで、感情画像・状況画像のポートをタップすると、接続できる画像ノードがタグ付きで一覧表示されます。線を手でドラッグするのはモバイルでは大変なので、端末を問わずこちらの方が速いことが多いです。</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/PortConnect.png" alt="キャラクターノードの画像ポートを開いた状態。接続できる画像ノードがタグ付きでドロップダウン表示されている">
+        <figcaption><b>画像ポートでも同じ「クリックでつなぐ」動作。</b>ポートをタップすると、接続できる画像ノードがすべて一覧表示されます——それぞれタグ付き（서A01, 서A016…）で、すでにつながっているものにはチェックマーク。このドロップダウンは画像やストーリーノード特有のものではなく、<b>すべて</b>のノードの<b>すべて</b>のポートが接続候補をこう提示します。</figcaption>
+      </figure>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── two models ─── -->
+    <div class="section">
+      <span class="section-anchor" id="two-models"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(63,185,80,0.12)">⚙️</div>
+        <h2>2つのモデル — メインとサブ</h2>
+      </div>
+      <p>StoryEngineは内部で<strong>2つのAIモデルが連携</strong>して動作します。</p>
+
+      <div class="arch">
+        <div class="arch-row">
+          <div class="arch-label">ユーザー入力</div>
+          <div class="arch-content">チャット欄に入力されたテキスト。</div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">サブモデル</div>
+          <div class="arch-content">
+            <strong>全ストーリーの検索を担当——それだけではありません。</strong>主な役割は「<strong>全ストーリー</strong>」欄（ストーリーノードとキャラクターノードにある3万トークンのテキスト欄で、大量の世界観・キャラクター情報が入る）の意味ベース検索で、今の場面に関係するチャンクを取り出します。システム内で唯一、完全一致ではなく「意味」で動く部分です（内部方式は非公開）。<br><br>サブモデルは<strong>記憶——進行中の会話の要約と管理</strong>も担っていると考えられており、これによって古いコンテキストが使える状態に保たれます。（詳細設定の<em>情報管理</em>・<em>長期記憶</em>トグルがオフにするのは、この仕組みです。）さらに<strong>変数の管理</strong>にも関わっていると<strong>報告されています</strong>——ここは見落としやすく、新しいクリエイターがつまずくポイントなので、知っておく価値があります。<span style="color:var(--text-dim)">（<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの報告。変数管理の部分は未確認で、本ガイドの「2つのモデル」では変数の<em>更新指示</em>はメインモデルの出力として説明しています。）</span>
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">マクロプロンプト<br><span style="font-size:10px;opacity:0.7">（ロアブック）</span></div>
+          <div class="arch-content">
+            <strong>これはサブモデルではなく、別系統の直接ルートです。</strong>マクロプロンプト（ロアブック）のエントリーは<strong>キーワード一致でメインコンテキストに直接注入</strong>されます。登録キーワードがユーザー入力に現れると、一致したエントリーが追加されます——間にモデルが読み直したり加工したりはせず、ルールベースのトリガーです。
+            <span class="chip">同時に最大5件まで注入</span> 優先度の高いエントリーが枠を取ります。
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">メインモデル</div>
+          <div class="arch-content">
+            <strong>生成を担当。</strong>常に固定で受け取るもの：ストーリーのコアコンテキスト + プロローグ + キャラクターのコアコンテキスト。<br>
+            サブモデルが取り出した全ストーリーのチャンクと、キーワード一致したマクロプロンプトのエントリーがその上に加わり、その組み合わせから応答が生成されます。<br>
+            画像タグの出力 <span class="chip">smile</span> <span class="chip">angry</span> や変数の更新指示も、メインモデルの仕事です。
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-label">出力</div>
+          <div class="arch-content">物語のテキスト + 画像タグ → 画面に表示。</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div><strong>2つの異なる検索経路 — 混同しないこと</strong><br>
+        <strong>全ストーリー</strong>はサブモデル経由：<strong>意味ベースの検索</strong>で、必要な場面でだけ取り出されます。意味で一致します。<br>
+        <strong>マクロプロンプト</strong>はサブモデルを経由しません：<strong>キーワード完全一致</strong>で直接注入。特定の語が出たときに作動し、それ以上あいまいなことはしません。<br>
+        そしてこの2つとは別に、<strong>コアコンテキスト</strong>は<strong>毎ターン</strong>メインモデルに注入されます——絶対に守らせたいルールはここに書きます。</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── story node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="story-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(121,192,255,0.12)">📋</div>
+        <h2>ストーリーノード</h2>
+      </div>
+      <p>キャンバスの<strong>中心となるノード</strong>。キャラクター・マクロプロンプト・アチーブメントの各ノードはすべてここにつながり、まとめてコンパイルされます。ここに書いた内容は<strong>最優先で、最初に</strong>メインモデルに届きます。</p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div>ストーリーノードは複数作れます——章立てやシナリオ分岐に便利です。<strong>開始場面として提示したいノードすべて</strong>で<span class="chip green">スタートノード：はい</span>をオンにすると、読者がどこから始めるかを選べます。</div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ja/StoryNode_JP.png" alt="ストーリーノードのパネル：スタートノード、コアコンテキスト、全ストーリー、プロローグメッセージ、スタートガイド、制作者からのお知らせの各フィールド">
+        <figcaption><b>ストーリーノード。左側に入力ポートが並んでいます。</b>それらのポート名——トリガー、キャラクター、背景画像、マクロプロンプト、アップデートルール、ステータスビュー、アチーブメント、プリセットノート——は飾りではありません。<b>クリックまたはタップすると、そのカテゴリーに属するノードの一覧が出て、選ぶと自動でつながります。</b>これは、モバイルで配線を手でドラッグするのが大変だから用意された機能です。スマホで制作しているなら、この方法でつなぎましょう。</figcaption>
+      </figure>
+
+      <p><strong>実際に入力する</strong>フィールド：</p>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">スタートノード</td>
+            <td class="field-desc">このノードを<strong>選択可能な開始地点</strong>として指定します。冒頭で提示したいストーリーノードごとにオンにします——<strong>「はい」が複数あると、チャット開始前に読者がどの開始状況から始めるかを選びます</strong>。同じ物語に複数のルートを用意する方法なので、1つに限られると思い込まないでください。</td>
+          </tr>
+          <tr>
+            <td class="field-name">コアコンテキスト<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（基本2,000トークン）</span></td>
+            <td class="field-desc">絶対ルールを書く場所。AIが常に従うべき指示——SYSTEM_LAYER / WORLD_LAYER / DIRECTIVE など。メインモデルは何よりも先にここを読みます。<br><strong>予算は初期状態で2,000トークン</strong>で、<a href="#advanced" style="color:var(--accent)">詳細設定</a>のトグルをオンにすると増えます。3,800と表示されているキャンバスは、+1,800分のトグルがオンになっている状態です。</td>
+          </tr>
+          <tr>
+            <td class="field-name">全ストーリー<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（30,000トークン）</span></td>
+            <td class="field-desc"><strong>サブモデルが検索する場所。</strong>世界観の知識、場所の詳細、場面ごとの設定——大量の情報はここに入れます。コアコンテキストと違い、常時注入されるわけでは<strong>ありません</strong>。サブモデルが場面に応じて取り出します。内部の検索方式は非公開です。</td>
+          </tr>
+          <tr>
+            <td class="field-name">プロローグメッセージ<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（700トークン）</span></td>
+            <td class="field-desc">チャット開始画面に表示される冒頭シーン——入室時にユーザーが最初に目にするものです。<strong>ただし読者向けだけではありません：AIもこれを読み</strong>、確定した開始状況として扱います——どのキャラクターがその場にいるか、すでに何が動き出しているか、初手からマクロを作動させるべきか、など。ですから単なる挨拶ではなく、物語を方向づける「場面」として書きましょう。<br><br>
+              その実用的な使い方：<strong>スタートガイドは300トークンしかなく</strong>、手狭になりがちです。初手の設定がそこに収まらないとき、クリエイターはあふれた分をここに仕込むことがよくあります——AIはどのみちこれを読むので、ヒントや初期状態の一部をプロローグメッセージに織り込むわけです。</td>
+          </tr>
+          <tr>
+            <td class="field-name">スタートガイド<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（300トークン）</span></td>
+            <td class="field-desc">最初のターンの扱いを<strong>AIにだけ</strong>指示する内容。「次のターンはこう始めろ」「変数の初期値はこれ」など。ユーザーには表示されません。</td>
+          </tr>
+          <tr>
+            <td class="field-name">制作者からのお知らせ<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（500文字）</span></td>
+            <td class="field-desc">制作者から読者へのメモ。この物語がどのモデル向けに調整されているか、どのモデルだと不調かを書くのによく使われます——読者は自分でモデルを選べるので、書いておく価値があります。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">🧭</span>
+        <div><strong>制作のコツ — 応答内の要約ブロックと、その位置が重要な理由。</strong><br><br>
+        よくあるパターンとして、コアコンテキストからモデルに指示して、各応答の末尾に<strong>現在の状態を要約したコードブロック</strong>——ステータス、関係値、各キャラクターの考えなど——を出させる方法があります。これは<a href="#other-nodes" style="color:var(--accent)">ステータスビューノード</a>（別途の横パネル）では<strong>ありません</strong>。このブロックは、あなたがコアコンテキストで指示したために、モデルが自分の出力の一部として書くものです。<br><br>
+        言語モデルは上から下へ書くので、<strong>そのブロックをどこに置くかで、何を参照できるかが決まります。</strong><br><br>
+        <strong>応答の末尾</strong>（一般的な選択）：ブロックに到達する頃には場面はすでに書き終わっているので、値は<strong>すぐ上の文章から導かれます。</strong>状態が物語に従う——数値は「今起きたこと」を表します。<br><br>
+        <strong>冒頭</strong>：文章が存在する前にブロックが確定するので、数値が先に来て、物語がそれに合わせて書かれます。どちらも間違いではなく、単に向きが逆なだけです。自分がどちらを求めているかを知っておく価値があります。</div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💭</span>
+        <div><strong>内心の一文は二役をこなします。</strong>要約ブロック内の「キャラクターが考えていること」の行は、読者には内面描写として読まれます——しかし機能的には、<strong>次のターンの方向を左右します。</strong>応答の最後にキャラクターが抱いた考えが、次の応答が書かれる際のコンテキストになります。単なる味付けではなく、物語の舵取りをする要素として扱いましょう：扉を閉じる考えは次の展開を狭め、扉を開く考えは広げます。</div>
+      </div>
+
+      <div style="margin-top:18px;padding:12px 14px;border-left:2px solid var(--border-bright);background:rgba(255,255,255,0.02);border-radius:0 6px 6px 0">
+        <div style="font-size:12px;color:var(--text-dim);line-height:1.7">
+          <strong style="color:var(--text-muted)">↓ では、なぜスタートノードに「いいえ」があるのか？</strong><br>
+          「いいえ」に設定したノードは使われないわけではなく——チャットの途中で到達する<strong>分岐の行き先</strong>だからです。
+          下の<a href="#branching" style="color:var(--accent)">シナリオ分岐</a>を参照。
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── character node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="character-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(210,168,255,0.12)">👤</div>
+        <h2>キャラクターノード</h2>
+      </div>
+      <p>NPC1体につき1ノード。外見、性格、口調、人間関係——キャラクターに関する情報はすべてここに入ります。ストーリーノードにつなぐと、メインモデルがそのキャラクターを認識します。</p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>口調は<strong>キャラクターノードの中に直接</strong>書きます。以前は専用のテキストノードがありましたが、今は統合されています。</div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ja/CharacterNode_JP.png" alt="キャラクターノード：プロフィール画像、名前、コアコンテキスト、詳細説明の各フィールド">
+        <figcaption><b>2つのフィールドを取り違えないための一番わかりやすい区別：</b>コアコンテキストは<b>メインモデル</b>が毎ターン読むもの、詳細説明は<b>サブモデル</b>が必要に応じて取り出すもの。（このスクショ内のラベルは、その違いを示すために手で入力したもので、UIの一部ではありません。）左側の<b>感情画像</b>・<b>状況画像</b>ポートにも注目。</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">名前<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（100文字）</span></td>
+            <td class="field-desc">キャラクターの表示名。ラテン文字以外でも問題ありません。</td>
+          </tr>
+          <tr>
+            <td class="field-name">コアコンテキスト<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（300トークン）</span></td>
+            <td class="field-desc"><strong>重要情報パネルに表示されます。</strong>名前・年齢・性別など、必須の属性だけに絞りましょう。予算は意図的に小さいので、ここでのトークンの使い方が重要です。</td>
+          </tr>
+          <tr>
+            <td class="field-name">詳細説明 / 全ストーリー<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（30,000トークン）</span></td>
+            <td class="field-desc">ストーリーノードと同じくサブモデルが検索する場所ですが、内部的には別扱いされていると考えられています（正確な挙動は非公開）。<strong>キャラクター関連の内容だけに絞りましょう</strong>——性格、口調、行動、背景設定、人間関係。</td>
+          </tr>
+          <tr>
+            <td class="field-name">キャラクタープレビューに表示</td>
+            <td class="field-desc">詳細ページのプレビュー欄にこのキャラクターを表示するか。プレイ中に発見させたいキャラクターは、通常オフにしておきます。</td>
+          </tr>
+          <tr>
+            <td class="field-name">title</td>
+            <td class="field-desc">自分用の整理コードラベル。例：<span class="chip purple">KMR</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── lorebook ─── -->
+    <div class="section">
+      <span class="section-anchor" id="lorebook-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,166,87,0.12)">📚</div>
+        <h2>マクロプロンプト（ロアブック）</h2>
+      </div>
+      <p><strong>キーワードで反応する注入メモです。</strong>マクロプロンプトノードにエントリーを書いておくと、登録キーワードがユーザー入力に現れたとき、その内容が<strong>メインコンテキストへ直接注入</strong>されます——間にサブモデルが読んだり加工したりはしません。これは<strong>類似検索ではなくキーワード完全一致</strong>で、トリガーワードが現れたときに反応するだけで、それ以上あいまいなことはしません。</p>
+      <p>常に存在するストーリーノードやキャラクターノードと違い、<strong>マクロプロンプトは状況に応じて動的に注入</strong>されます。</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>1ターンに注入されるのは<strong>最大5件</strong>です。それを超えると、<strong>優先度</strong>の高いものが枠を取ります。重要なルールほど高く設定しましょう。</div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ja/Macro_Lorebook_JP.png" onerror="this.onerror=null;this.src='Macro%28Lorebook%29.png'" alt="Three macro prompt nodes showing empty state, a new entry, and a filled entry">
+        <figcaption><b>3つの段階を1枚に。</b>左：空のノード——「マクロプロンプトエントリーがまだありません」。右：トリガーワードが空の新規エントリー。下：キーワード<b>Call_Keyword</b>を登録し、プロンプトテキストを書き込んだ完成エントリー。トリガーワードの横にある<b>常時</b>トグルに注目——オンにするとキーワードに関係なく毎ターン注入され、5枠のうち1つを恒久的に消費します。</figcaption>
+      </figure>
+
+      <p>1つのエントリーの構成：</p>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">トリガーワード<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（最大5個）</span></td>
+            <td class="field-desc">このエントリーを呼び出すキーワード。1つずつ追加し、それぞれがチップになります。</td>
+          </tr>
+          <tr>
+            <td class="field-name">常時</td>
+            <td class="field-desc">キーワードを完全に無視して、毎ターンこのエントリーを注入します。使いすぎ注意——5枠のうち1つを恒久的に占有します。</td>
+          </tr>
+          <tr>
+            <td class="field-name">プロンプトテキスト<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（300トークン）</span></td>
+            <td class="field-desc">エントリーが呼び出されたときに実際に注入される内容。</td>
+          </tr>
+          <tr>
+            <td class="field-name">優先度</td>
+            <td class="field-desc">値が高いほど5枠を先に取ります。OOCやシステムルールは通常99〜100あたりに設定します。</td>
+          </tr>
+          <tr>
+            <td class="field-name">持続ターン</td>
+            <td class="field-desc">注入が何ターン持続するか。通常は1。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="shot">
+        <img src="/SE_Guide/MacroAlways_On.png" alt="AlwaysトグルをONにし、トリガーワード欄を空にしたマクロプロンプトエントリー">
+        <figcaption><b>Alwaysトグルをオンにした状態。</b>トリガーワード欄が空になっている点に注目——<b>Always：ON</b>ならキーワードは不要で、毎ターン注入されます。すべての応答に必ず存在させたいルール（OOC指示や厳格な制約）を固定する方法で、代わりに5枠のうち1つを恒久的に消費します。</figcaption>
+      </figure>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div>マクロプロンプトノードは複数作って用途で分けてもかまいません——OOCルール用、世界観用、画像ルール用など。1つの巨大な塊よりずっと管理しやすくなります。</div>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>トリガーワードは、普通の文章と被らない語を選びましょう。</strong>一致は文字通りに行われるため、ありふれた語をトリガーにすると、そのエントリーが意図しない場面で何度も作動してしまいます——読者や物語が自然に口にする言葉と重なるキーワードは誤爆し、場面を崩しかねません。日常語より、独特なトークン（造語や珍しい複合語）を選びましょう。<span style="color:var(--text-dim)">（まさにこれで絡まってしまった、<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんからの情報。）</span></div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔀</span>
+        <div><strong>キーワードのもう一つの使い方：読者が切り替える「モード」。</strong>上のAlwaysの挙動とは別物で——こちらは、読者が特定のキーワードを入力するまでエントリーは<em>オフ</em>のままで、入力するとオンになります。よくあるやり方は、<span class="chip">!free mode</span>のような独特なトリガーにモード用のプロンプトを入れておくこと。<strong>これはプリセットノートと役割が重なり</strong>、どちらも有効で、選択は好みの問題です。実際の違いは<strong>消費するトークン量と、優先順位のどこに入るか</strong>です：プリセットノートは読者自身の予算を使い、優先順位の最下部で読まれます。一方マクロエントリーはあなたのノードの予算を使い、優先度を好きなように設定できます。<span style="color:var(--text-dim)">（スクリーンショットとこの提案は<a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a>さんより。）</span></div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/MacroKeyword_Mode.png" alt="AlwaysをOFFにし、!free modeというキーワードをモード切り替えとして使うマクロプロンプトエントリー">
+        <figcaption><b>キーワードで切り替えるモード。</b>ここでは<b>AlwaysがOFF</b>で、トリガーワードは<span style="font-family:monospace">!free mode</span>——読者がこのキーワードを入力するまでエントリーは何もせず、入力するとオンになります。先頭の<span style="font-family:monospace">!</span>は、キーワードを独特にして誤作動しにくくするための慣習です。</figcaption>
+      </figure>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── image node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="image-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,123,114,0.12)">🖼️</div>
+        <h2>画像ノード</h2>
+      </div>
+      <p>キャラクターに表示される画像セットを管理します。各画像は<strong>タグ</strong>に紐づいており、メインモデルのタグ出力によってどの画像を表示するかが決まります。画像ノードはキャラクターノードにつなぎます。</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>ファイル名がそのままタグです。</strong>別途タグ欄に入力するのではなく、ファイルの名前がそのままタグになります。アップロード前に、それを踏まえて命名しましょう。</div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ImageNode01.png" alt="An empty image node beside a filled one showing Situation Image Tags and Paid Unlock Settings">
+        <figcaption><b>左が空のノード、右が中身の入ったノード。</b>アップロードした画像は、シチュエーション画像タグの下に<b>smile</b>というタグを持っています。その下の<b>有料アンロック設定</b>——オンにすると、読者はクレジットを使ってその画像を表示します（ここでは1枚50）。</figcaption>
+      </figure>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/ja/ImageNode02_JP.png" alt="Bulk tag editing panel with Bulk Tag Application, Add Images, Filter by Tag and CSV export controls">
+        <figcaption><b>一括編集パネル——画像が数枚を超えるなら早めに開く価値あり。</b><b>一括タグ適用</b>で全画像に一度にタグを追加／削除、<b>タグでフィルター</b>で表示を絞り込み、<b>CSVとしてコピー / タグのみコピー</b>でタグ一覧を外部に書き出せます。50枚を1枚ずつ付け直すのは、本当につらい午後になります。</figcaption>
+      </figure>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── categorize ─── -->
+    <div class="section">
+      <span class="section-anchor" id="image-category"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,123,114,0.12)">🗂️</div>
+        <h2>イメージタグを分類</h2>
+      </div>
+      <p>StoryEngineの画像は、<strong>プロンプトの延長ではなく独立したモジュール</strong>として動作します。そのためAIがどの画像がどの場面に合うかを判断できるよう、タグをカテゴリーに分類し、説明を自分で書く必要があります。</p>
+      <p>トップメニューの<strong>キャンバス → イメージタグを分類</strong>にあります。</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>カテゴリーの説明は<strong>25トークン未満に収める</strong>必要があります。長すぎる説明は正しく機能しません。</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/ja/ImageCategorize_JP.png" alt="Categorize Image Tags dialog showing an uncategorized smile tag and an empty category list">
+        <figcaption><b>何もしていない状態の見た目。</b>タグ<b>smile</b>が未分類のシチュエーションタグとして左にあり、カテゴリーはまだありません。下に出る警告——<b>「分類されていないシチュエーションタグが存在します」</b>——に注目。これは、AIがその画像をいつ使えばいいか分かっていない、とプラットフォームが教えてくれているのです。</figcaption>
+      </figure>
+
+      <p>手順：</p>
+
+      <table class="field-table">
+        <thead><tr><th>Step</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">1. カテゴリーを作る</td>
+            <td class="field-desc">名前を入力して追加します。例：<span class="chip">Emotions</span> <span class="chip">Locations</span> <span class="chip">Activities</span></td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">2. 説明を書く</td>
+            <td class="field-desc">25トークン未満で、そのカテゴリーが<strong>いつ・どんな状況で</strong>当てはまるかを書きます。AIはこれを読んでどの画像を使うか判断します。</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">3. タグを割り当てる</td>
+            <td class="field-desc">画像ノードのタグを、対応するカテゴリーに追加します。例：Emotions → <span class="chip">smile</span> <span class="chip">angry</span> <span class="chip">sad</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>カテゴリーの説明は、AIが読む「生きた指示」です。<strong>短く、あいまいさなく</strong>——「感情を表現するときに使う」くらいがちょうどいい塩梅です。カテゴリーの質が高いほど、画像が正確に当たります。</div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ImageCategorize_Flow.gif" alt="画面録画：イメージタグを分類パネルを開き、カテゴリーを作成し、説明を書き、タグを割り当てるまでの流れ">
+        <figcaption><b>最初から最後までの流れ。</b>左に未分類タグがある状態でパネルを開き、右でカテゴリーを追加し、説明を書き、タグを割り当てていきます。上部の<b>未分類のシチュエーションタグ</b>警告に注目——これはタグがまだ分類されずに残っているために出ているもので、これを解消するのが目的です。</figcaption>
+      </figure>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── variable node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="variable-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(133,232,157,0.12)">🔢</div>
+        <h2>変数ノード</h2>
+      </div>
+      <p>チャットを通して追跡する値を保存します。ブール値・数値・文字列に対応。変数は、トリガーノードに読まれて条件判定に使われるか、カスタムのステータスビューに表示されます。</p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div><strong>基本パターン：</strong>変数は普通、トリガーを通しません。<span class="chip green">変数ノード</span>を<span class="chip purple">アップデートルールノード</span>と組にして、<strong>ストーリーノードに直接ぶら下げます。</strong>トリガーとアチーブメントは、変数をマイルストーンのイベントにしたいときだけ足す追加の枝です。</div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/VariableNode.png" alt="Three variable nodes of type String, Number and Boolean feeding into a single Update Rule node">
+        <figcaption><b>3つの変数——A（文字列）、B（数値）、C（ブール値）——がすべて1つのアップデートルールノードにつながっています。</b>イベント周りの作業の大半はこの形になります。1つのアップデートルールで複数の変数をまとめて扱えるので、変数ごとに別々のルールは要りません。</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">変数名<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（100文字）</span></td>
+            <td class="field-desc">
+              変数の識別子。<br>
+              <span class="chip green">var_</span>という接頭辞を付けると、ステータスビューのHTMLパネルから<code style="font-family:monospace">{{var_NAME}}</code>として読めます。<br>
+              接頭辞が<strong>厳密に必須</strong>なのはステータスビュー表示のときだけで——なくてもトリガーやアチーブメントの配線は動きます。ただし、それだけではありません（下の注記を参照）。習慣として付けておく価値があります。
+            </td>
+          </tr>
+          <tr>
+            <td class="field-name">変数タイプ</td>
+            <td class="field-desc"><span class="chip">ブール値</span> <span class="chip">数値</span> <span class="chip">文字列</span></td>
+          </tr>
+          <tr>
+            <td class="field-name">初期値</td>
+            <td class="field-desc">開始時の状態。ブール値は「いいえ」、数値は0、文字列は空がデフォルト。</td>
+          </tr>
+          <tr>
+            <td class="field-name">title</td>
+            <td class="field-desc">内部整理用のコードラベル。関連するトリガーやアチーブメントと同じラベルにしておくと、後で対応関係が分かりやすくなります。例：<span class="chip purple">A1</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>変数名は、互いにはっきり区別できるものにしましょう。</strong>見た目が似た名前は混ざることがあります——ある変数向けの更新が別の変数に当たったり、値が知らないうちに入れ替わったり。隣の変数と見間違えようのない名前を付ければ（<span class="chip">affection</span> / <span class="chip">affection2</span>のような紛らわしい形ではなく、一目で違うと分かる名前で）、この問題は起きません。</div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔎</span>
+        <div><strong><code style="font-family:monospace">var_</code>接頭辞は、そもそもどこから来たのか。</strong>公式ドキュメントには記載がなく、古いビルドでは使われていませんでした——比較的最近になって導入されたようです。調べてみると、この接頭辞は、キャンバスが大きく複雑になるにつれて<strong>コンパイル中に変数データが混ざるのを防ぐ</strong>ために存在しているようです。つまり上と同じ「衝突」の問題を、命名規則で対処したものです。<strong>付けなくても動作はしますが、付けることが推奨されます。</strong><span style="color:var(--text-dim)">（公式に確認された情報ではなく、確定的な答えは運営への問い合わせが必要です。<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんの指摘により、一緒に確認しました。）</span></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── trigger node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="trigger-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,184,108,0.12)">⚡</div>
+        <h2>トリガーノード</h2>
+      </div>
+      <p>変数が条件を満たしたときにアチーブメントを作動させます。ストーリーノードと変数ノードを入力に取り、条件が満たされると、つながったアチーブメントノードに信号を送ります。<strong>トリガーが必要なのは、アチーブメントを解除させたいときだけ</strong>です。ただ値を追跡するだけの変数には要りません。</p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div><strong>イベントシステムの組み立て方：</strong>ストーリーノード + 変数ノード + トリガーノード + アップデートルールノード、そして<strong>必要に応じてアチーブメントノード</strong>。下の流れは、アチーブメントまで到達する枝です。</div>
+      </div>
+
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-box" style="background:rgba(121,192,255,0.08);border:1px solid rgba(121,192,255,0.2);color:#79c0ff">Story node</div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-box" style="background:rgba(133,232,157,0.08);border:1px solid rgba(133,232,157,0.2);color:#85e89d">Variable node</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(255,184,108,0.08);border:1px solid rgba(255,184,108,0.2);color:#ffb86c">Trigger node</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(240,198,116,0.08);border:1px solid rgba(240,198,116,0.2);color:#f0c674">Achievement <span style="font-size:11px;opacity:0.7">(optional)</span></div>
+        </div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ja/TriggerNode_JP.png" alt="変数ノードがトリガーノードを介してアチーブメントノードにつながり、上にアップデートルールがある構成">
+        <figcaption><b>鎖全体を配線した状態。</b>変数<b>C</b>（ブール値、初期値「いいえ」）が、値<b>はい</b>を監視するトリガーへつながり、右のアチーブメントノードを作動させます。上にあるアップデートルールノードは別途つながっており、プレイ中にCを「いいえ」から「はい」へ実際に動かす役割です。</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">監視する変数</td>
+            <td class="field-desc">このトリガーが監視する変数。つながった変数ノードの名前と一致する必要があります。</td>
+          </tr>
+          <tr>
+            <td class="field-name">値</td>
+            <td class="field-desc">監視中の変数がこの値になるとトリガーが引かれます。ブール値なら通常<span class="chip">はい</span>。</td>
+          </tr>
+          <tr>
+            <td class="field-name">title</td>
+            <td class="field-desc">対になる変数・アチーブメントと同じラベルを使います。例：<span class="chip purple">A1</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── achievement node ─── -->
+    <div class="section">
+      <span class="section-anchor" id="achievement-node"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,198,116,0.12)">🏆</div>
+        <h2>アチーブメントノード</h2>
+      </div>
+      <p>トリガーが引かれたときに読者へ表示されるマイルストーンです。アチーブメントノードをストーリーノードに戻してつなぐと、獲得されたことに物語自身が反応できます。</p>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ja/Trigger_ACH_JP.png" alt="A production canvas with four variable-to-trigger-to-achievement chains running in parallel, each achievement carrying its own image, name, description and priority">
+        <figcaption><b>デモではなく実際のキャンバス——4本のアチーブメントの鎖が並んで動いています。</b>各行は同じ形の繰り返しです：ブール値の<b>変数</b> → それが<span style="font-family:monospace">はい</span>になるのを監視する<b>トリガー</b> → 独自の画像・名前・説明を持つ<b>アチーブメント</b>。<b>変数名は作者がぼかしています</b>。ここで大事なのは「繰り返し」です。複数の解除要素を持つ物語を実際に組むとこうなり、だからこそセットごとにtitleラベルを揃える手間に意味があります——この密度では、配線だけではどのトリガーがどのアチーブメントに対応するか分かりません。</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">アチーブメント画像</td>
+            <td class="field-desc">解除時に表示される任意の画像。クリックまたはドラッグ＆ドロップで設定します。</td>
+          </tr>
+          <tr>
+            <td class="field-name">アチーブメント名<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（100文字）</span></td>
+            <td class="field-desc">読者に表示される名前。</td>
+          </tr>
+          <tr>
+            <td class="field-name">説明</td>
+            <td class="field-desc">アチーブメント獲得時に表示されるフレーバーテキスト。</td>
+          </tr>
+          <tr>
+            <td class="field-name">表示優先度</td>
+            <td class="field-desc">数字が大きいほどアチーブメント一覧の先頭に出ます。物語上重要な解除を上に置くのに便利。</td>
+          </tr>
+          <tr>
+            <td class="field-name">非公開アチーブメント</td>
+            <td class="field-desc">獲得するまで名前と説明の両方を隠します。ネタバレになるものにおすすめ。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div>セットになる変数・トリガー・アチーブメントには<strong>同じtitleラベル</strong>（A1, A2, A3…）を付けましょう。キャンバスが混み合ってくると、これが「構造を一目で読めるか」「配線をたどって探す羽目になるか」の分かれ目になります。</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── scenario branching ─── -->
+    <div class="section">
+      <span class="section-anchor" id="branching"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(255,123,114,0.12)">🔀</div>
+        <h2>シナリオ分岐 — 1つの物語に複数のルート</h2>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">🙏</span>
+        <div>この手法は私が見つけたものではなく、<strong><a href="https://storyengine.live/c/osoond" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">ㅇㅅㅇㅇㄴㄷ</a>さんからの報告</strong>によるものです。ありがとうございます。<span style="color:var(--text-dim)">（以前のエラーで英語ハンドルが消えたため、ページには韓国語ハンドルが表示されています。）</span></div>
+      </div>
+
+      <p><span class="chip">スタートノード：いいえ</span>に設定したストーリーノードは、余り物ではありません——<strong>チャットの途中で到達する「行き先」</strong>です。そこにトリガーを配線すると、トリガーが引かれたときに物語がそのノードへ引き継がれます。実際の結果は<strong>ノベルゲーム風のルート選択</strong>：1つの作品の中に複数の異なる道が入っている状態です。</p>
+
+      <div class="flow">
+        <div class="flow-row">
+          <div class="flow-box" style="background:rgba(133,232,157,0.08);border:1px solid rgba(133,232,157,0.2);color:#85e89d">Variable</div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-box" style="background:rgba(210,168,255,0.08);border:1px solid rgba(210,168,255,0.2);color:#d2a8ff">Update Rule</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(255,184,108,0.08);border:1px solid rgba(255,184,108,0.2);color:#ffb86c">Trigger</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box" style="background:rgba(121,192,255,0.08);border:1px solid rgba(121,192,255,0.2);color:#79c0ff">Story node <span style="font-size:11px;opacity:0.7">(Is Start: No)</span></div>
+        </div>
+      </div>
+
+      <p>アチーブメントですでに使っているのと同じ鎖ですが、1点だけ違います：<strong>終端がアチーブメントノードではなく、ストーリーノードになっている</strong>ことです。</p>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ScenarioBranching.png" alt="A canvas showing an opening story node, two variables with update rule and triggers, feeding two separate story nodes set to Is Start No">
+        <figcaption><b>1つの冒頭から2つのルートを配線した例。</b>左が開始ストーリーノード（<b>スタートノード：はい</b>）。中央は文字列変数<b>part1</b>・<b>part2</b>とアップデートルールで、それぞれが特定の値——<b>P1</b>・<b>P2</b>——を監視するトリガーにつながります。右はルートごとに1つずつ、<b>スタートノード：いいえ</b>に設定した2つのストーリーノード。<b>この図は検証済みの実ビルドではなく、口頭の説明から組んだものです</b>——ピン単位でそのまま真似する設計図としてではなく、「大まかな形」として読んでください。</figcaption>
+      </figure>
+
+      <p>実際の流れ：</p>
+
+      <table class="field-table">
+        <thead><tr><th>Step</th><th>What happens</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">1. 選択肢を提示</td>
+            <td class="field-desc">冒頭のシナリオで、読者が選べる手段を用意します。特定のキーワードを入力させる指示、キャラクターからの問いかけ、プロローグに書いたメニューなど——物語に合う方法で。<strong>これを動かすのは読者の入力</strong>なので、見つけられる形にしておく必要があります。</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">2. 変数を更新</td>
+            <td class="field-desc">アップデートルールが入力を捉え、対応する値を変数に書き込みます。スクショでは文字列で——<span class="chip">part1</span>が<em>wait</em>から始まり、選択されると<em>P1</em>に変わります。</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">3. トリガーが作動</td>
+            <td class="field-desc">その変数を監視しているトリガーが値を検知して反応します。アチーブメントのときとまったく同じです。</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">4. ルートが開く</td>
+            <td class="field-desc">トリガーの先にあるストーリーノードが引き継ぎ、チャットは元のノードではなくそのノードのコンテキストから続きます。これが分岐です。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>ルートごとに専用の変数とトリガーを用意し、アチーブメントと同じ要領で対になるラベル（<span class="chip purple">P1</span>, <span class="chip purple">P2</span>…）を付けましょう。分岐のあるキャンバスはすぐ混み合うので、ラベルこそが可読性を保つ鍵です。</div>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>このセクションは<strong>本ガイドの他の部分より新しく、検証が浅い</strong>です——繰り返し組んだ結果ではなく、1件の報告に基づいています。試してみて挙動が違ったら、ぜひ<a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">教えてください</a>。</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── preset notes ─── -->
+    <div class="section">
+      <span class="section-anchor" id="preset-notes"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(88,166,255,0.12)">📝</div>
+        <h2>プリセットノート — 読者が切り替えるプロンプトモジュール</h2>
+      </div>
+      <p>プリセットノートは、<strong>あなたが書き、読者がオンにする任意のプロンプトブロック</strong>です。それぞれにアイコン、タイトル、読者に見える短い説明、そして有効化時に注入されるプロンプトテキストがあります。物語に対する「読者が選ぶ」修飾——追加モード、内容の強調、トーンの変化など——だと考えてください。あなたが強制するのではなく、読者が選ぶものです。</p>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/ja/PresetNotes_Canvas_JP.png" alt="The preset note node on the canvas, showing Icon, Title, Description, Prompt and Priority fields for two notes, with the prompt bodies deliberately blurred">
+        <figcaption><b>作者側——キャンバス上のプリセットノートノード。</b>各ノートは、アイコン、タイトル、説明（読者に見える部分）、プロンプト（実際に注入される内容、500トークンまで）、優先度で構成されます。<b>ここではプロンプト本文をわざとぼかしています</b>——これは作者自身のもので、実際のチュートリアル用ビルドなら空欄にして、あなたが埋める形にします。見るべきはフィールドの配置であって、中身ではありません。</figcaption>
+      </figure>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>重要な落とし穴：プリセットノートは、読者が他のことにも必要とするトークン予算を消費します。</strong>読者には<strong>2,000トークンの枠</strong>があり、これは<strong>ユーザーノートとユーザーペルソナで共有</strong>されます。プリセットノートをオンにすると、同じ枠から引かれます。2,000を超えると、<strong>追加600トークンごとに利用料が10%上がります。</strong><br><br>
+        つまり重いプリセットノートは、読者自身のノートやペルソナの場所を奪うだけでなく——<strong>読者をより多くの支払いへ押しやる可能性がある</strong>のです。<span style="color:var(--text-dim)">（予算の数値は<a href="https://storyengine.live/c/osoond" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">ㅇㅅㅇㅇㄴㄷ</a>さんの報告によるもの。このセクションが最初に誤った数値で公開された後、確認してくれました。）</span></div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🧮</span>
+        <div><strong>計算例</strong>、下のスクショの2つのノートで。Sweat Overdriveは368トークン、Event Overlordは408。両方オンにすると、読者が自分のペルソナやノートを1文字も書かないうちに<strong>共有の2,000のうち776</strong>が消えます。さらに数個足すか、詳細なペルソナを持つ読者だと、より高い料金の領域に入ります。<strong>プリセットノートに入れるトークンは、どれも読者に支払わせる可能性のあるトークンです。</strong></div>
+      </div>
+
+      <p>ここから2つの帰結が生まれ、どちらも制作時に重要です：</p>
+
+      <table class="field-table">
+        <thead><tr><th>Consequence</th><th>What it means for you</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">全部同時には使えない</td>
+            <td class="field-desc">プリセットノートは最大<strong>10個</strong>まで定義できますが、読者が全部を同時にオンにはできません——消費するたびに有限の予算から引かれるので、枠が尽きます。全部オンにする前提の積み重ねではなく、<strong>選択肢</strong>として設計しましょう。</td>
+          </tr>
+          <tr>
+            <td class="field-name" style="white-space:nowrap">1つ1つを軽く保つ</td>
+            <td class="field-desc">重いプリセットノート（実物は約370〜410トークン）は、それだけで共有の2,000のかなりの部分を食います。いくつも重なると、読者は自分のペルソナを1文字書く前に予算のかなりを使ってしまいます。大きくせざるを得ないなら、その価値に見合うものにしましょう。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/PresetNotes.png" alt="The reader-side User Notes menu, showing a personal notes field above a list of preset notes with ON/OFF toggles and per-note token counts">
+        <figcaption><b>読者側——同じノートを、読者が見た状態。</b>上部が読者自身の<b>ユーザーノート</b>欄で、トークンカウンター付き。下が作者のプリセットノート——それぞれON/OFFスイッチ、有効化前に全文を読める<b>View full</b>リンク、そして<b>トークンコスト</b>（368, 408）があります。ヘッダーには<b>0/10 notes active</b>：10枠あり、ここではどれもオンになっていません。読者自身の欄の上にあるそのトークンカウンターこそが肝心のメーターで——ノートとペルソナをまとめて含み、プリセットノートも同じ枠から引かれます。</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">アイコン</td>
+            <td class="field-desc">読者の一覧でノートの横に表示される小さな絵文字。</td>
+          </tr>
+          <tr>
+            <td class="field-name">タイトル</td>
+            <td class="field-desc">切り替え一覧で読者に見えるノートの名前。</td>
+          </tr>
+          <tr>
+            <td class="field-name">説明</td>
+            <td class="field-desc">このノートをオンにすると何が起きるかを説明する短い一文——読者が判断するために表示されます。</td>
+          </tr>
+          <tr>
+            <td class="field-name">プロンプト<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（500トークン）</span></td>
+            <td class="field-desc">ノートがオンのときにコンテキストへ注入されるテキスト。これが実際に読者のトークンを消費します。</td>
+          </tr>
+          <tr>
+            <td class="field-name">優先度</td>
+            <td class="field-desc">オンになっているノート間での並び順の値。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>プリセットノートの入力は<strong>優先順位の最下部</strong>に来ます——コアの指示やキャラクターデータより先ではなく、後に読まれます。なのでプリセットノートは物語を「後押し」しますが、上位に設定したルールを上書きはしません。書くときはこれを念頭に：コアコンテキストと矛盾させるのではなく、追加として表現しましょう。</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── other nodes ─── -->
+    <div class="section">
+      <span class="section-anchor" id="other-nodes"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(68,76,86,0.4)">🔧</div>
+        <h2>その他のノード</h2>
+      </div>
+      <p>基本が整うと出会う補助ノードたち。あえて軽めに扱っています——<strong>クリックして何が起きるか見るのが、一番の学び方です。</strong></p>
+
+      <div class="node-grid">
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(210,168,255,0.1);color:#d2a8ff">Update Rule</span>
+            <span class="node-card-title">変数のマイルストーン</span>
+          </div>
+          <div class="node-card-desc"><strong>変数が通過するマイルストーンを定義します。</strong>変数をいつ・どんな条件で・どれだけ更新するかをAIに指示します。ストーリーノードから変数ノードと組で使い、ステータスビューと併用されることが多いです。予算は400トークン。例：好感度、疲労度、位置。</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(63,185,80,0.1);color:#3fb950">Status View</span>
+            <span class="node-card-title">カスタムHTMLパネル</span>
+          </div>
+          <div class="node-card-desc">HTML/CSS/JSで書くステータスパネル。<code style="font-family:monospace">{{var_NAME}}</code>構文で変数の現在値を読めます。ここに表示されるのはvar_接頭辞の付いた変数だけです。<strong>一部の物語が各応答の末尾に出力する要約コードブロックと混同しないこと</strong>——あれはコアコンテキストの指示によってモデルが書くもので、<a href="#story-node" style="color:var(--accent)">ストーリーノードの項</a>で扱っています。</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(255,166,87,0.1);color:#ffa657">Background Image</span>
+            <span class="node-card-title">場面の背景</span>
+          </div>
+          <div class="node-card-desc">ストーリーノードにつないで、チャットの背後の背景を設定します。押して確かめてみてください。</div>
+        </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(139,148,158,0.15);color:#8b949e">注釈ノード</span>
+            <span class="node-card-title">自分用のメモ</span>
+          </div>
+          <div class="node-card-desc"><strong>キャンバス上の付箋——ただそれだけ。</strong><strong>ポートがなく</strong>、何にも接続されず、AIが読むこともありません。キャンバスに自分用のコメントを残すためだけのものです（400文字）。<br><br>これは、かつての<strong>テキストノード</strong>の成れの果てです。以前のテキストノードにはポートがあり、キャラクターノードのシステム部分（口調など）につながっていました。その役割は今やキャラクターノード自体に統合され、残ったノードはこの「メモ専用」の注釈ノードに転用されました。接続できたテキストノードを覚えているなら、その行き先がこれです。</div>
+        </div>
+      </div>
+
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="/SE_Guide/TextNode_Legacy.png" alt="ポートを持ち、キャラクターノードのシステム部分に接続されていた旧テキストノード">
+          <figcaption><b>かつて。</b>旧テキストノード——右側の<b>Text</b>ポートに注目。キャラクターノードにつながり、口調の定義（300トークン）を渡していました。<span style="color:var(--text-dim)">なお、このスクショは作者自身の恥ずかしいほど昔のビルドのものです。🙈</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/SE_Guide/ja/AnnotationNode_JP.png" alt="ポートがなく、400文字のメモ欄を持つ現在の注釈ノード">
+          <figcaption><b>いま。</b>同じノードの現在：<b>注釈ノード</b>に改名され、<b>ポートは一切なく</b>、トークンではなく文字数（400文字）で測られます。配線ではなく、メモです。</figcaption>
+        </figure>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔍</span>
+        <div>ここに載っていないものは、本当に<strong>触ってみる</strong>価値があります。キャンバス上で開いて壊れるものは何もなく、韓国のクリエイターが知っていることの半分は、まさにこうやって学ばれました。</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── advanced settings ─── -->
+    <div class="section">
+      <span class="section-anchor" id="advanced"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(188,140,255,0.12)">⚙️</div>
+        <h2>詳細設定</h2>
+      </div>
+      <p>StoryEngineの組み込み動作の一部をオフにするパネルです。各トグルは<strong>デフォルトでOFF、OFFはその機能が使われている状態</strong>を意味します。<strong>ONにすると、名前の機能が無効化</strong>されます。文字通りに読んでください——「Xをオフにする」がONなら、Xは今オフです。</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>公式ではなく、コミュニティの知見です。</strong>各スイッチが内部で何を取り除くのか、プラットフォームは完全には文書化しておらず、一部は意図的に非公開です。以下は韓国のクリエイターが実使用からつなぎ合わせた内容です。抜けがある前提で読んでください。</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/ja/AdvancedSettings_JP.png" alt="Advanced Settings panel with eight toggles and a token bonus counter at the top">
+        <figcaption><b>上部のカウンターに注目：「コアプロンプトの追加トークン数：+1,800」。</b>この数値は、ここでオンになっている3つのトグルの合計です——コンテンツポリシー（+800）、ナラティブ指示を短縮（+500）、感情画像（+500）。組み込み機能をオフにすると、そのプロンプトが占めていた分が解放され、コアコンテキストに戻されます。</figcaption>
+      </figure>
+
+      <div class="callout info">
+        <span class="callout-icon">🧮</span>
+        <div><strong>これが、キャンバスごとにコアコンテキストの予算が違う理由です。</strong>基準は<strong>2,000トークン</strong>。3,800と表示されるスクショは、単に+1,800分のトグルがオンなだけです。あなたの数値はオンにしたものによって完全に変わります——なので、ネットで見かけた1つの数値を「本当の上限」だと思わないでください。<br><br>
+        以下のボーナスはすべて<strong>1トグルずつ計測</strong>しました。ボーナスのある7つを全部オンにすると<strong>+5,500</strong>増え、コアコンテキストは2,000から<strong>7,500トークン</strong>——デフォルトの約4倍になります。<em>旧式画像タグ付けを使用</em>は予算をまったく変えません。プロンプトを取り除くのではなく方式を入れ替えるだけだからです。</div>
+      </div>
+
+      <table class="field-table">
+        <thead><tr><th>Toggle</th><th>What switching it ON does</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">情報管理をオフにする <span class="chip">+800</span></td>
+            <td class="field-desc">システムが会話メモリを自動管理するのを止めます。実際には<strong>古いコンテキストを保持しておく検索も無効化</strong>され、こちらの方が影響が大きいです。読者はチャット途中で長期記憶の問題に当たりがちです。オフにする理由がはっきり分からないなら、触らないでおきましょう。</td>
+          </tr>
+          <tr>
+            <td class="field-name">長期記憶をオフにする <span class="chip">+1,200</span></td>
+            <td class="field-desc">ストーリー要約を使わず、直近のメッセージだけでチャットが続きます。<strong>注意：</strong>観察できる症状は上の情報管理と大きく重なり、外から見て2つをきれいに区別できたことがありません。独立したものではなく、関連するものとして扱ってください。</td>
+          </tr>
+          <tr>
+            <td class="field-name">マクロプロンプトをオフにする <span class="chip">+1,200</span></td>
+            <td class="field-desc">マクロプロンプトを無効化します——つまり<strong>マクロプロンプトがまったく働かなくなります。</strong>上の2つと違い、これは曖昧さがありません。</td>
+          </tr>
+          <tr>
+            <td class="field-name">コンテンツポリシーをオフにする <span class="chip">+800</span></td>
+            <td class="field-desc">StoryEngineのデフォルトのコンテンツ管理と安全ガイドラインを無効化します。概念的には下の<em>ナラティブ指示を短縮</em>と対になり——どちらも運営が用意した基盤プロンプトを取り除きます。このセットで最大のトークン還元。<br><strong>どちらにしてもプラットフォームの規約は適用されます。</strong>このトグルが変えるのはプロンプトであって、あなたの義務ではありません——地域ごとのタイトル制限、利用規約、公開作品のモデレーションはすべて有効なままです。</td>
+          </tr>
+          <tr>
+            <td class="field-name">ナラティブ指示を短縮 <span class="chip">+500</span></td>
+            <td class="field-desc">ナラティブエンジンのプロンプトの短縮版を使います。この運営デフォルトはプロット構成や物語全般の姿勢を担い、<strong>あえて汎用的に</strong>作られています——多くのクリエイターにはそれで十分。ただし自分で緻密なコアロジックを書くなら、その汎用レイヤーが邪魔になります。作り込んだカスタムプロンプトを扱うクリエイターがよくオンにします。</td>
+          </tr>
+          <tr>
+            <td class="field-name">感情画像をオフにする <span class="chip">+500</span></td>
+            <td class="field-desc">キャラクターの会話中の感情画像キューを止めます。通常、やり取りの中で感情が検出されるたびに、キャラクタープロフィール領域が画像を呼び出します。その検出は<strong>計算負荷が高く</strong>、感情ごとの立ち絵が要らないクリエイターは、その理由だけでオフにすることも多いです。</td>
+          </tr>
+          <tr>
+            <td class="field-name">状況画像をオフにする <span class="chip">+500</span></td>
+            <td class="field-desc">キャラクターの感情ではなく、ナレーション中の状況画像キューに同じ考えを適用したものです。</td>
+          </tr>
+          <tr>
+            <td class="field-name">旧式画像タグ付けを使用 <span class="chip" style="opacity:0.6">変化なし</span></td>
+            <td class="field-desc"><strong>やめましょう。</strong>説明を手入力する旧式のタグ付け方式に戻ります。出力の質も精度も落ちます。本当の代償は、失敗が<strong>説明不能になる</strong>こと——完全に正しく見える呼び出しでも動かず、理由を教えてくれるものが何もありません。これはオフのままに。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ─── publish settings ─── -->
+    <div class="section">
+      <span class="section-anchor" id="publish"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,198,116,0.12)">🚀</div>
+        <h2>公開設定 — キャンバスの外のページ</h2>
+      </div>
+      <p>これらのフィールドはキャンバスの<strong>外</strong>にあり、AIには一切影響しません。いわば店頭——読者が「開始」を押す前に見る部分です。ほとんどのクリエイターはキャンバスの作業が終わるまでこのページを完全に無視するので、ここでも最後に置いています。</p>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠️</span>
+        <div>以下の数値——特にファイルサイズ——は<strong>プラットフォームによってわりと頻繁に変わります。</strong>「最終確認時点」の値として扱い、絶対のルールとは思わないでください。訂正は大歓迎です。</div>
+      </div>
+
+      <figure class="shot">
+        <img src="/SE_Guide/ja/Thumbnail_JP.png" alt="The publish settings page showing Thumbnail, Title, Brief Introduction, Description, Tags, Creator Settings, Intro Video and Add Collaborators">
+        <figcaption><b>公開ページ全体を1枚で。</b>左にサムネイルとクリエイター設定、右にそれ以外。イントロ動画の下のアップロード枠が自ら制限を示している点に注目——<b>MP4、最大200MB、最大2分</b>——そして共同制作人員追加欄は、StoryEngineアカウントのメールアドレスを受け付けます。</figcaption>
+      </figure>
+
+      <table class="field-table">
+        <thead><tr><th>Field</th><th>What to know</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="field-name">タイトル</td>
+            <td class="field-desc">作品名。ローカライズを予定しているなら：<strong>韓国（KR）</strong>側では、タイトルに露骨・下品な表現は<strong>認められていません</strong>。翻訳しても通用するものを選びましょう。</td>
+          </tr>
+          <tr>
+            <td class="field-name">概要</td>
+            <td class="field-desc"><strong>40文字制限。</strong>要約ではなく、一行のフック（引き）です。物語が実際どうなったか分かってから、最後に書くのが一番楽です。</td>
+          </tr>
+          <tr>
+            <td class="field-name">詳細説明</td>
+            <td class="field-desc"><strong>最小限のMarkdown</strong>に対応：太字、多少の文字サイズ調整、簡単な表、外部ホスティングの画像。フルのMarkdownは期待しないでください——凝ったものは表示されません。画像は外部でホスティングしてリンクする必要があります。</td>
+          </tr>
+          <tr>
+            <td class="field-name">タグ</td>
+            <td class="field-desc"><strong>対応言語すべてのタグを一度に全部</strong>入れてかまいません。プラットフォームが閲覧者の言語に合うタグだけを自動で表示するので、全言語で付けても損はありません。やっておきましょう。</td>
+          </tr>
+          <tr>
+            <td class="field-name">サムネイル</td>
+            <td class="field-desc"><strong>4:5比率。</strong>WebPは<strong>最大5&nbsp;MB</strong>までアップロード可能（2026年半ばの更新で、旧来の約2〜3&nbsp;MBの上限から引き上げ）。GIFは最終確認時点で約<strong>10&nbsp;MB</strong>。プラットフォーム自身の注意書きに注目：<strong>高容量・多フレームの画像は</strong>、メイン画面に表示される縮小サムネイルで<strong>画質が落ちることがあります</strong>。理由不明でアップロードが失敗したら、まず容量を確認。</td>
+          </tr>
+          <tr>
+            <td class="field-name">イントロ動画</td>
+            <td class="field-desc"><strong>MP4、最大200MB、2分の厳格な上限。</strong>長さに融通はききません——アップロード前にカットしましょう。</td>
+          </tr>
+          <tr>
+            <td class="field-name">共同制作人員追加</td>
+            <td class="field-desc">他のクリエイターの<strong>StoryEngineアカウントのメール</strong>を入力して、作品に参加させます。相手にキャンバスへのアクセスを与えるかを制御でき、収益は<strong>10%刻み</strong>で分配できます。</td>
+          </tr>
+          <tr>
+            <td class="field-name">クリエイター設定</td>
+            <td class="field-desc">どの共同制作者を<strong>代表クリエイター</strong>として表示するかを選びます。クリエイターのニックネームまたはOIDを入力。</td>
+          </tr>
+          <tr>
+            <td class="field-name">StoryEngineオリジナル</td>
+            <td class="field-desc"><strong>StoryEngineに独占提供</strong>する作品向けの、任意の独占指定です。条件は<strong>2026年半ばに全面改定</strong>されました——精算率に%ポイントのボーナスが付くという古い説明を読んだことがあるなら、それはもう当てはまりません。以下の文面は<strong>英語圏のクリエイターが照合し、同一だと確認された</strong>ので、韓国限定ではありません。<br><br>
+            <strong>有効化：</strong><strong>初回公開の前、または公開後6時間以内</strong>にオンにします。<strong>月2作品まで</strong>で、コラボ作品は全参加者それぞれの月上限に数えられます。<br>
+            <strong>報酬：</strong>率のボーナスではなく、固定のマイルストーンで支払われます——<strong>1万チャット達成で10万ウォン</strong>、さらに<strong>5万で20万ウォン</strong>、作品の保存された収益分配率に従って分けられます。<strong>集計されるのは有効化後のチャットだけ</strong>なので、有効化が遅れるとそれ以前の分はすべて失われます。<br>
+            <strong>180日間ロック：</strong>作品の削除、非公開化、Originalの解除、他所へのアップロードができません。Originalが有効な間は共同制作者と収益分配率も変更できません——それらは有効化<em>前</em>に確定させておきましょう。<br><br>
+            <strong>抜け道を狙わないこと。</strong>運営チームははっきり明言しています——他所で先に公開して時間差でここに上げる、あるいは同じビルドを別名で上げ直す、といった裏技は、例外なくBANになります。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <span class="callout-icon">🌏</span>
+        <div><strong>はい、このOriginalの条件はあなたにも同じです。</strong>マイルストーンの金額は<strong>ウォン（KRW）</strong>で表記されており、韓国外のクリエイターには違うものが見えるのでは、という疑問は当然です。<strong>違いません。</strong>英語圏で活動するクリエイター<a href="https://storyengine.live/c/scootster" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Scoot</a>さんが自分のアカウントでパネルを確認したところ、文面は同一でした——同じ対象条件、同じ6時間の有効化枠、同じ月2作品の上限、同じウォンのマイルストーン、同じ180日ロック。許可を得て共有しています。ありがとうございます。<br><br>
+        <span style="color:var(--text-dim)">これが何であるかを正確に言うと：会社からの公式発表ではなく、<strong>クリエイター同士の相互確認</strong>です。パネルが地域を問わず同じだという良い証拠ですが、あなたのアカウントで違いを見つけたら、ぜひ<a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">教えてください</a>。</span></div>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">🚨</span>
+        <div><strong>多言語での公開——公開前に必ず読んでください。</strong>ローカライズしたテキストは、実際にアップロードボタンを押すまで<strong>反映されません</strong>。気づかないうちに中途保存の状態が生まれやすいので、すべての言語をアップロードして確認するまでは<strong>公開設定をPrivate</strong>にしておき、全部そろってから公開に切り替えましょう。</div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>韓国のクリエイターの一般的なやり方：付けられる言語すべてでタグを付ける、上限が変わっても後で壊れないようサムネイルは表記された上限より余裕を持たせる、そして共同制作者の収益分配は公開後ではなく<strong>公開前</strong>に確定させる。</div>
+      </div>
+    </div>
+
+    <div class="callout tip" style="margin-top:36px">
+      <span class="callout-icon">🐟</span>
+      <div>ツアーは以上です。ここに間違いがあったら——プラットフォームは動くので、いくつかは必ずあります——ぜひ教えてください：<a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600">GitHubでissueを開く</a>。訂正も計測も、クレジット付きで次のバージョンに直接反映します。<br><br>
+      <strong>英語で書くのが苦手ですか？</strong><strong>自分の言語</strong>でissueを開いて、どの言語かを書いてください——韓国語・英語・日本語・スペイン語ならどれでも大丈夫で、書かれた言語で返せるよう最善を尽くします。ざっくりした機械翻訳でも全然かまいません。言語のせいで報告をあきらめられるより、報告があるほうがずっといいので。<br><br>
+      さあ、キャンバスを開いて、いろいろ押してみましょう。</div>
+    </div>
+
+    <div class="section" style="margin-top:40px">
+      <span class="section-anchor" id="contributors"></span>
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(63,185,80,0.12)">🙏</div>
+        <h2>協力してくれた方々</h2>
+      </div>
+      <p>このガイドの正確な部分の多くは、他のクリエイターが時間を割いて訂正・検証・翻訳してくれたおかげです。感謝を込めてお名前を記します：</p>
+      <table class="field-table">
+        <tbody>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/osoond" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">ㅇㅅㅇㅇㄴㄷ</a></td><td class="field-desc">シナリオ分岐の手法。読者のトークン予算（ペルソナと共有の2,000）の訂正。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/scootster" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Scoot</a></td><td class="field-desc">StoryEngine Originalの条件を英語圏から照合。</td></tr>
+          <tr><td class="field-name"><a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a></td><td class="field-desc">サブモデルの記憶・変数の役割、トークン計測ツール、プロローグメッセージがAIにも読まれる点、ポート接続の一覧が全ノード共通である点、被りにくいトリガーワードの助言。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/yatoming" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">yatoming</a></td><td class="field-desc">日本語版の表現をネイティブ校正。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/689947bee7c5df8723a5c5d2?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">夢見月ひいな</a></td><td class="field-desc">Originalのロック期間が90日から180日に変わったことを指摘。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a></td><td class="field-desc">Alwaysトグルと、マクロのキーワードをモード切り替えに使う例のスクリーンショット。</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--text-dim);font-size:13px">報告したのに載っていない、または表記を変えてほしい場合は教えてください——抜けているのは単なる見落としで、他意はありません。</p>
+    </div>
+
+  </main>
+</div>
+
+<style>
+  .fish-sign { position: fixed; bottom: 18px; right: 20px; z-index: 50; display: flex; align-items: center; gap: 8px; text-decoration: none; user-select: none; cursor: pointer; }
+  .fish-sign-tip { font-size: 12px; line-height: 1.4; color: var(--text-muted); background: var(--bg3); border: 1px solid var(--border-bright); padding: 6px 11px; border-radius: 999px; white-space: nowrap; box-shadow: 0 4px 14px rgba(0,0,0,0.35); opacity: 0; transform: translateX(8px); transition: opacity 0.22s ease, transform 0.22s ease; pointer-events: none; }
+  .fish-sign-tip b { color: var(--accent3); font-weight: 600; }
+  .fish-sign-emoji { font-size: 26px; opacity: 0.55; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); transition: opacity 0.22s ease, transform 0.22s ease; }
+  .fish-sign:hover .fish-sign-tip { opacity: 1; transform: translateX(0); }
+  .fish-sign:hover .fish-sign-emoji { opacity: 1; transform: translateY(-2px) scale(1.08); }
+</style>
+<a class="fish-sign" href="https://storyengine.live/c/frozen_tuna" target="_blank" rel="noopener noreferrer" aria-label="制作：冷凍ツナ — StoryEngineページを開く">
+  <span class="fish-sign-tip">🐟制作：<b>冷凍ツナ</b>🐟</span>
+  <span class="fish-sign-emoji">🐟</span>
+</a>
+<script>
+  // active nav highlight on scroll
+  (function () {
+    var navItems = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+    var targets = navItems.map(function (item) {
+      var id = item.getAttribute('href').slice(1);
+      return { item: item, el: document.getElementById(id) };
+    }).filter(function (t) { return t.el; });
+
+    if (!targets.length) return;
+
+    var OFFSET = 120;   // treat a section as "current" once its top passes this
+    var ticking = false;
+
+    function setActive(active) {
+      targets.forEach(function (t) {
+        t.item.classList.toggle('active', t.item === active);
+      });
+    }
+
+    function update() {
+      ticking = false;
+      var y = window.scrollY || window.pageYOffset;
+      var atBottom = (window.innerHeight + y) >= (document.body.scrollHeight - 4);
+
+      // bottom of page: always light up the last entry, since short final
+      // sections can never scroll far enough to become "current" on their own
+      if (atBottom) {
+        setActive(targets[targets.length - 1].item);
+        return;
+      }
+
+      var current = targets[0].item;
+      for (var i = 0; i < targets.length; i++) {
+        var top = targets[i].el.getBoundingClientRect().top + y;
+        if (top - OFFSET <= y) current = targets[i].item;
+        else break;
+      }
+      setActive(current);
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+
+    // smooth scroll on nav click
+    navItems.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        var el = document.getElementById(item.getAttribute('href').slice(1));
+        if (!el) return;
+        e.preventDefault();
+        var top = el.getBoundingClientRect().top + (window.scrollY || window.pageYOffset) - 24;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

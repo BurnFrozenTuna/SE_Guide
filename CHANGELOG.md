@@ -1,5 +1,21 @@
 # Changelog
 
+## v2.13.1
+
+- Added a then/now image pair to the Annotation node: the old Text node with its port and
+  300-token speech-style field, next to the current port-less 400-character Annotation, so
+  the change is visible at a glance. (Added a small shot-row style for side-by-side figures.)
+  Legacy screenshot shared across both editions; current-state screenshot is per-language.
+
+## v2.13.0
+
+- **Documented the Annotation node — and what happened to the old Text node.** The former
+  Text node (which had a port and fed the character node's system part, e.g. speech style)
+  has lost that role: it now has no ports, the AI doesn't read it, and its limit changed
+  from 300 tokens to 400 characters. It's been repurposed into a note-only Annotation node.
+  Added as a card under Other nodes, with the history noted for anyone who remembers the
+  connectable Text node. Both editions.
+
 ## v2.12.1
 
 - **Renamed the section to match the UI.** The in-product label is "Macro Prompts," so the

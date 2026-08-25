@@ -514,6 +514,10 @@
   .lang-tabs a.active {
     background: var(--accent); color: #fff; border-color: var(--accent);
   }
+
+  .shot-row { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
+  .shot-row .shot { flex: 1; min-width: 240px; margin: 0; }
+  @media (max-width: 560px) { .shot-row { flex-direction: column; } }
 </style>
 <body>
 
@@ -524,7 +528,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.12.1</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.13.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -597,7 +601,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.12.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.13.1</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -1326,6 +1330,24 @@
           </div>
           <div class="node-card-desc">Connects to the story node to set the backdrop behind the chat. Go press it and see.</div>
         </div>
+        <div class="node-card">
+          <div class="node-card-head">
+            <span class="node-badge" style="background:rgba(139,148,158,0.15);color:#8b949e">Annotation</span>
+            <span class="node-card-title">A note to yourself</span>
+          </div>
+          <div class="node-card-desc"><strong>A canvas sticky note — nothing more.</strong> It has <strong>no ports</strong>, so it connects to nothing and the AI never reads it. Purely for leaving yourself a comment on the canvas (400 characters). <br><br>This is what became of the old <strong>Text node</strong>. That one used to have a port and fed the character node's system part (speech style and the like); that role has since been folded into the character node itself, and the leftover node was repurposed into this note-only Annotation. If you remember a connectable Text node, this is where it went.</div>
+        </div>
+      </div>
+
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="TextNode_Legacy.png" alt="The old Text node, which had a Text output port wiring into a character node's system section">
+          <figcaption><b>Then.</b> The old Text node — note the <b>Text</b> port on the right, wired into the character node, carrying a speech-style definition (300 tokens). <span style="color:var(--text-dim)">The author will admit this screenshot is from an embarrassingly old build of their own. 🙈</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="AnnotationNode.png" alt="The current Annotation node, with no ports and a 400-character note field">
+          <figcaption><b>Now.</b> The same node today: renamed <b>Annotation</b>, <b>no port at all</b>, and measured in characters (400) rather than tokens. A note, not a wire.</figcaption>
+        </figure>
       </div>
 
       <div class="callout info">
