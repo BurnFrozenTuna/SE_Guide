@@ -525,7 +525,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.13.1</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.14.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -598,7 +598,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.13.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.14.0</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -827,6 +827,18 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="callout warn">
+        <span class="callout-icon">👥</span>
+        <div><strong>キャラクターが20人を超えると、全員が同時に読み込まれるわけではありません。</strong>1つのセッションで自動的に読み込まれるのは<strong>最大20人</strong>まで。<strong>21人以上</strong>いる場合、1セッションにつき20人だけが<strong>ランダムに</strong>読み込まれます——つまり、当てにしていたキャラクターがそのセッションにいない、ということが起こり得ます。<br><br>
+        読者側の対処が、ユーザーノートメニューにある<strong>キャラクター情報を常時ロード</strong>です。読者は特定のキャラクターを毎回読み込むよう固定できます（<strong>最大50人</strong>）。<strong>作者として知っておくべき2点：</strong>これを切り替えるのは<strong>読者</strong>であって作者ではないこと——そして固定した各キャラクターは、名前の横に表示されるトークン数のぶんだけ<strong>読者自身のトークン予算</strong>（ユーザーノートやペルソナと共有の2,000）を消費すること。大人数のキャストでこれに頼ると、読者のトークンを静かに消費します。<br><br>
+        実用的な結論：<strong>20人以下で物語を語れるなら、そうするのが得策</strong>です——ランダム読み込みの問題を丸ごと回避できます。20人を超えるなら、要となる数人を固定するよう読者を導くことを想定しておきましょう。</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/ja/AlwaysLoadChar_JP.png" alt="読者のユーザーノートメニュー。キャラクター情報を常時ロードの一覧に、各キャラクターのトークンコストとON/OFFトグルが並び、ヘッダーは0/50選択中と表示">
+        <figcaption><b>読者側の画面。</b>読者自身のユーザーノート欄の下に<b>キャラクター情報を常時ロード</b>——物語のキャラクター一覧が並び、それぞれに<b>トークンコスト</b>（225, 208, 212…）とON/OFFトグル、上限は<b>0/50 選択中</b>。これは読者が「常にいてほしいキャラ」を固定する場所で、オンにするたびに読者の共有トークン予算から引かれます。<span style="color:var(--text-dim)">（スクリーンショットは、実際にこの規模のキャストを運用している<a href="https://storyengine.live/creatorhome/661546fd4eb65b8366077b4d" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">NAFE</a>さんのご厚意により提供。）</span></figcaption>
+      </figure>
     </div>
 
     <hr class="divider">
@@ -1525,6 +1537,7 @@
           <tr><td class="field-name"><a href="https://storyengine.live/c/yatoming" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">yatoming</a></td><td class="field-desc">日本語版の表現をネイティブ校正。</td></tr>
           <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/689947bee7c5df8723a5c5d2?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">夢見月ひいな</a></td><td class="field-desc">Originalのロック期間が90日から180日に変わったことを指摘。</td></tr>
           <tr><td class="field-name"><a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a></td><td class="field-desc">Alwaysトグルと、マクロのキーワードをモード切り替えに使う例のスクリーンショット。</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/661546fd4eb65b8366077b4d" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">NAFE</a></td><td class="field-desc">20人以上のキャストを持つ作品から、キャラクター情報を常時ロードのスクリーンショット提供。</td></tr>
         </tbody>
       </table>
       <p style="color:var(--text-dim);font-size:13px">報告したのに載っていない、または表記を変えてほしい場合は教えてください——抜けているのは単なる見落としで、他意はありません。</p>

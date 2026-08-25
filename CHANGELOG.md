@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.14.0
+
+- **Documented the 20-character load limit and Always Load Character Info.** A session
+  auto-loads up to 20 characters; with 21+, only 20 load per session, chosen at random.
+  Readers can pin specific characters (up to 50) via Always Load Character Info in the User
+  Notes menu, which spends the reader's own shared token budget. Added to the Character node
+  section with a screenshot, plus the practical advice to stay at/under 20 where possible.
+  Screenshot from a 20+ character story courtesy of NAFE (added to Contributors). Both editions.
+
 ## v2.13.1
 
 - Added a then/now image pair to the Annotation node: the old Text node with its port and

@@ -528,7 +528,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.13.1</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.14.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -601,7 +601,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.13.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.14.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -830,6 +830,18 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="callout warn">
+        <span class="callout-icon">👥</span>
+        <div><strong>Past 20 characters, not all of them load at once.</strong> A single session pulls in <strong>up to 20 characters</strong> automatically. If your story has <strong>21 or more</strong>, only 20 are loaded per session — <strong>chosen at random</strong> — so a character you were counting on may simply not be present that session.<br><br>
+        The reader-side fix is <strong>Always Load Character Info</strong>, in the User Notes menu: the reader can pin specific characters to load every time (<strong>up to 50</strong>). <strong>Two things worth knowing as an author:</strong> it's the <strong>reader</strong> who toggles this, not you — and each pinned character <strong>spends the reader's own token budget</strong> (the same 2,000 shared with User Notes and persona), by the per-character token amount shown next to each name. So a big cast that leans on this quietly costs the reader tokens.<br><br>
+        The practical takeaway: <strong>if you can tell your story with 20 characters or fewer, do</strong> — it sidesteps the random-load problem entirely. Above 20, expect to guide readers toward pinning the essential few.</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="AlwaysLoadChar.png" alt="The reader's User Notes menu with an Always Load Character Info list, each character showing a token cost and an ON/OFF toggle, header reading 0 of 50 selected">
+        <figcaption><b>The reader's view.</b> Below their own User Notes field sits <b>Always Load Character Info</b> — a list of the story's characters, each with its <b>token cost</b> (225, 208, 212…) and an ON/OFF toggle, capped at <b>0/50 selected</b>. This is the reader pinning who must always be present; every toggle they flip on draws from their shared token budget. <span style="color:var(--text-dim)">(Screenshot kindly provided by <a href="https://storyengine.live/creatorhome/661546fd4eb65b8366077b4d" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">NAFE</a>, whose story actually runs a cast this large.)</span></figcaption>
+      </figure>
     </div>
 
     <hr class="divider">
@@ -1528,6 +1540,7 @@
           <tr><td class="field-name"><a href="https://storyengine.live/c/yatoming" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">yatoming</a></td><td class="field-desc">Native-speaker review of the Japanese edition's phrasing.</td></tr>
           <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/689947bee7c5df8723a5c5d2?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">夢見月ひいな</a></td><td class="field-desc">Caught the Original lock period changing from 90 to 180 days.</td></tr>
           <tr><td class="field-name"><a href="https://storyengine.live/c/mukchi" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Mukmul</a></td><td class="field-desc">Screenshots for the Always toggle and using a macro keyword as a mode switch.</td></tr>
+          <tr><td class="field-name"><a href="https://storyengine.live/creatorhome/661546fd4eb65b8366077b4d" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">NAFE</a></td><td class="field-desc">Screenshot of Always Load Character Info from a 20+ character story.</td></tr>
         </tbody>
       </table>
       <p style="color:var(--text-dim);font-size:13px">If you reported something and aren't listed, or want your name shown differently, tell me — the omission is an oversight, not a slight.</p>
