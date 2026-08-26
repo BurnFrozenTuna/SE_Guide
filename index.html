@@ -528,7 +528,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.14.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.14.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -601,7 +601,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.14.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.14.1</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -1511,6 +1511,16 @@
         <span class="callout-icon">🚨</span>
         <div><strong>Multi-language releases — read this before you publish.</strong> Localized text does <strong>not</strong> apply until you actually press the upload button. Half-saved states are easy to create without noticing, so keep <strong>Publicity set to Private</strong> until every language is uploaded and confirmed, then flip it public once everything is in.</div>
       </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔶</span>
+        <div><strong>A recent patch made those "half-saved" states visible.</strong> Each language has its own independent canvas and compiles separately, and the language tabs now carry a small status badge: an <strong style="color:#e3a008">orange (!)</strong> means that language's canvas has unsaved changes and <strong>needs compiling</strong>, and a <strong style="color:#f85149">red (!)</strong> means it has an <strong>error</strong>. Before this there was no indicator at all — you just had to remember. Now, if a tab is wearing an orange mark, that edition isn't fully saved yet; clear every badge before you rely on a language being live.</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="CompileBadge.png" alt="Language tabs KO, EN, JP with an orange exclamation badge on the EN and JP tabs indicating those canvases need compiling">
+        <figcaption><b>The new per-tab status badge.</b> Here the <b>EN</b> and <b>JP</b> tabs each show an orange (!) — those canvases have changes waiting to be compiled. Because each language is a separate canvas, the marks are per-tab: clearing one doesn't clear the others.</figcaption>
+      </figure>
 
       <div class="callout info">
         <span class="callout-icon">💡</span>

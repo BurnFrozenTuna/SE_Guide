@@ -525,7 +525,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.14.0</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.14.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -598,7 +598,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.14.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.14.1</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -1508,6 +1508,16 @@
         <span class="callout-icon">🚨</span>
         <div><strong>多言語での公開——公開前に必ず読んでください。</strong>ローカライズしたテキストは、実際にアップロードボタンを押すまで<strong>反映されません</strong>。気づかないうちに中途保存の状態が生まれやすいので、すべての言語をアップロードして確認するまでは<strong>公開設定をPrivate</strong>にしておき、全部そろってから公開に切り替えましょう。</div>
       </div>
+
+      <div class="callout info">
+        <span class="callout-icon">🔶</span>
+        <div><strong>最近のパッチで、その「中途保存」状態が目に見えるようになりました。</strong>各言語は独立したキャンバスを持ち、コンパイルも別々に行われますが、言語タブに小さなステータスバッジが付くようになりました：<strong style="color:#e3a008">オレンジの(!)</strong>はその言語のキャンバスに未保存の変更があり<strong>コンパイルが必要</strong>なこと、<strong style="color:#f85149">赤の(!)</strong>は<strong>エラー</strong>があることを示します。以前はこうした表示が一切なく、自分で覚えておくしかありませんでした。今は、タブにオレンジの印が付いていれば、その言語版はまだ完全に保存されていないということ。ある言語が反映済みだと当てにする前に、すべてのバッジを消しておきましょう。</div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/ja/CompileBadge_JP.png" alt="言語タブKO・EN・JP。ENとJPのタブにオレンジの感嘆符バッジが付き、それらのキャンバスがコンパイルを必要としていることを示す">
+        <figcaption><b>新しいタブ別ステータスバッジ。</b>ここでは<b>EN</b>と<b>JP</b>のタブにそれぞれオレンジの(!)——これらのキャンバスにコンパイル待ちの変更があります。各言語が別々のキャンバスなので、印はタブごと：1つを消しても他は消えません。</figcaption>
+      </figure>
 
       <div class="callout info">
         <span class="callout-icon">💡</span>

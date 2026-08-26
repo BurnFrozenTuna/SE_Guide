@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.14.1
+
+- **Documented the new compile-status badge on the language tabs.** A recent patch added a
+  per-tab indicator: an orange (!) means that language's canvas has unsaved changes needing
+  compile, a red (!) means an error. Since each language is an independent canvas that
+  compiles separately, the badges are per-tab. Placed next to the existing multi-language
+  publish note (it makes the previously invisible "half-saved" state visible). Screenshot in
+  both editions.
+
 ## v2.14.0
 
 - **Documented the 20-character load limit and Always Load Character Info.** A session
