@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.14.2
+
+- Extended the compile-status badge note: the same orange/red (!) indicator now also appears
+  in the creator work list (added the same day, shortly after the tab badge), so works needing
+  a compile or carrying an error can be spotted without opening each canvas. Added two work-list
+  screenshots (red = error, orange = needs compile). Both editions.
+
 ## v2.14.1
 
 - **Documented the new compile-status badge on the language tabs.** A recent patch added a
