@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.15.0
+
+- **Added a prominent regional content-rules section to Publish.** Thumbnail / title / tag
+  rules differ by region and are easy to break unknowingly, which gets works de-listed or
+  flagged. Summarised the KR rules (upper-body thumbnails; no genital/pubic/anus exposure;
+  no nipples in photorealistic images; no semen; no intercourse depiction mosaic-or-not; no
+  dildos; etc.), with two points creators keep missing: a mosaic/blur is NOT enough (paint
+  the outline out with a solid fill), and openly showing genitals is simply not allowed. JP
+  was told (last year) to follow publication-censorship norms — check directly before
+  publishing. EN: confirm your own region's rules. Framed as last-confirmed, not official,
+  and as protecting the platform from regional legal risk. Both editions.
+
 ## v2.14.2
 
 - Extended the compile-status badge note: the same orange/red (!) indicator now also appears
