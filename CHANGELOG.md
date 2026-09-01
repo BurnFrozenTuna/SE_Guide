@@ -1,5 +1,23 @@
 # Changelog
 
+## v2.15.3
+
+- Simplified the トリ（STORY ENGINE）credit: the handle now appears without the "| 非公式"
+  suffix inline, and the "not an official account, despite the name" clarification lives once
+  in the Contributors description instead. Both editions.
+
+## v2.15.2
+
+- Cleaned up the トリ（STORY ENGINE）| 非公式 credit wording — dropped a phrase that could read
+  as "the information is unofficial." The "非公式" is part of the handle (their account name
+  contains STORY ENGINE, so they mark it unofficial to avoid being mistaken for the official
+  account); the credit now just shows the handle and their contribution. Both editions.
+
+## v2.15.1
+
+- Credited トリ（STORY ENGINE）| 非公式 for flagging the compile-status badge — inline on the
+  badge note and in Contributors, by their request (X: JContactS). Both editions.
+
 ## v2.15.0
 
 - **Added a prominent regional content-rules section to Publish.** Thumbnail / title / tag
