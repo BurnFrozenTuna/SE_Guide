@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.16.0
+
+- **Linked the companion page, Fish In the Toolbox.** A platform-agnostic notes page for
+  things that didn't fit a StoryEngine-specific guide — GPT typography/backgrounds/chibi
+  layouts, and displaying externally hosted images with an NSFW-sorted hosting rundown.
+  Added as a highlighted link just before Contributors, pointing each edition to its matching
+  language (EN/JA). Both editions.
+
 ## v2.15.3
 
 - Simplified the トリ（STORY ENGINE）credit: the handle now appears without the "| 非公式"
