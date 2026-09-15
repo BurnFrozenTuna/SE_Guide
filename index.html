@@ -528,7 +528,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.16.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.17.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -601,7 +601,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.16.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.17.1</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -746,9 +746,10 @@
             <td class="field-desc"><strong>The sub-model's retrieval space.</strong> Worldbuilding knowledge, location details, per-scene setup — all the bulk goes here. Unlike Core Context it is <strong>not</strong> always injected; the sub-model pulls from it as the situation calls for. The internal search method is undisclosed.</td>
           </tr>
           <tr>
-            <td class="field-name">Prologue Message<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(700 tokens)</span></td>
+            <td class="field-name">Prologue Message<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(1,000 tokens)</span></td>
             <td class="field-desc">The opening scene shown on the chat start screen — the first thing a user sees on entry. <strong>But it isn't only for the reader: the AI reads it too</strong>, and treats it as established opening context — which characters are present, what's already been set in motion, whether a macro should fire from the very first turn. So write it as a scene that primes the story, not just a greeting.<br><br>
-              A practical use of that: <strong>Prologue Guide is only 300 tokens</strong>, which gets tight. When first-turn setup won't fit there, creators often seed the overflow here instead — folding a hint or a bit of initial state into the prologue message, since the AI reads this anyway.</td>
+              A practical use of that: <strong>Prologue Guide is only 300 tokens</strong>, which gets tight. When first-turn setup won't fit there, creators often seed the overflow here instead — folding a hint or a bit of initial state into the prologue message, since the AI reads this anyway. <span style="color:var(--text-dim)">(The budget was raised from 700 to 1,000 tokens in a recent update, so there's a little more room now.)</span><br><br>
+              <strong>You can also show a registered image right in the opening.</strong> Write a line like <code style="font-family:monospace">(Subjects:CharacterName, Tags:ImageTag)</code> in the prologue — <em>Subjects</em> is the character's name, <em>Tags</em> is one of that character's image tags (your normal tag, like <span style="font-family:monospace">smile</span>) — and the matching image is displayed on the start screen. And there's now a <strong>Preview start message</strong> button so you can see exactly how the opening (text and images together) will look before you publish.</td>
           </tr>
           <tr>
             <td class="field-name">Prologue Guide<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(300 tokens)</span></td>
@@ -760,6 +761,17 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="PrologueImage_Write.png" alt="The prologue message editor with a line reading Subjects Wooreok, Tags A10 embedded in the opening text, plus Insert emotion image, Insert scene image, and Preview start message buttons">
+          <figcaption><b>Writing it.</b> Inside the prologue, the line <span style="font-family:monospace">(Subjects:Wooreok, Tags:A10)</span> tells the start screen to show Wooreok's image. <span style="color:var(--text-dim)">Here <span style="font-family:monospace">A10</span> is this author's own custom tag scheme (the default image-call rule was turned off and replaced) — you'd normally just put your usual image tag here, like <span style="font-family:monospace">smile</span>.</span> Note the <b>Preview start message</b> button top-right, and the raised <b>1000-token</b> limit.</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="PrologueImage_Preview.png" alt="The Preview start message view rendering the opening with the called character image displayed inline">
+          <figcaption><b>Previewing it.</b> <b>Preview start message</b> renders the opening as the reader will see it — text and the called image together — so you can check it before publishing.</figcaption>
+        </figure>
+      </div>
 
       <div class="callout tip">
         <span class="callout-icon">🧭</span>

@@ -1,5 +1,21 @@
 # Changelog
 
+## v2.17.1
+
+- Clarified the prologue image-call example: the A10 tag shown in the screenshot is the
+  author's own custom tag scheme (default image-call rule turned off and replaced), not a
+  standard format. The text now says to use your normal image tag (e.g. smile), so nobody
+  copies the custom code as if it were required. Both editions.
+
+## v2.17.0
+
+- **Prologue Message updates.** (1) The token limit was raised from 700 to 1,000. (2) You can
+  now display a registered image in the opening by writing a line like
+  (Subjects:CharacterName, Tags:ImageTag) — Subjects is the character, Tags is one of their
+  image tags. (3) A new Preview start message button renders the opening (text + called
+  images) before publishing. Updated the field limit and description, and added write/preview
+  screenshots. Both editions.
+
 ## v2.16.0
 
 - **Linked the companion page, Fish In the Toolbox.** A platform-agnostic notes page for

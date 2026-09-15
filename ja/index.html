@@ -525,7 +525,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.16.0</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.17.1</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -598,7 +598,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.16.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.17.1</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -743,9 +743,10 @@
             <td class="field-desc"><strong>サブモデルが検索する場所。</strong>世界観の知識、場所の詳細、場面ごとの設定——大量の情報はここに入れます。コアコンテキストと違い、常時注入されるわけでは<strong>ありません</strong>。サブモデルが場面に応じて取り出します。内部の検索方式は非公開です。</td>
           </tr>
           <tr>
-            <td class="field-name">プロローグメッセージ<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（700トークン）</span></td>
+            <td class="field-name">プロローグメッセージ<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（1,000トークン）</span></td>
             <td class="field-desc">チャット開始画面に表示される冒頭シーン——入室時にユーザーが最初に目にするものです。<strong>ただし読者向けだけではありません：AIもこれを読み</strong>、確定した開始状況として扱います——どのキャラクターがその場にいるか、すでに何が動き出しているか、初手からマクロを作動させるべきか、など。ですから単なる挨拶ではなく、物語を方向づける「場面」として書きましょう。<br><br>
-              その実用的な使い方：<strong>スタートガイドは300トークンしかなく</strong>、手狭になりがちです。初手の設定がそこに収まらないとき、クリエイターはあふれた分をここに仕込むことがよくあります——AIはどのみちこれを読むので、ヒントや初期状態の一部をプロローグメッセージに織り込むわけです。</td>
+              その実用的な使い方：<strong>スタートガイドは300トークンしかなく</strong>、手狭になりがちです。初手の設定がそこに収まらないとき、クリエイターはあふれた分をここに仕込むことがよくあります——AIはどのみちこれを読むので、ヒントや初期状態の一部をプロローグメッセージに織り込むわけです。<span style="color:var(--text-dim)">（予算は最近のアップデートで700から1,000トークンに引き上げられたので、今は少し余裕があります。）</span><br><br>
+              <strong>登録済みの画像を、冒頭にそのまま表示させることもできます。</strong>プロローグに<code style="font-family:monospace">(Subjects:キャラクター名, Tags:画像タグ)</code>のような行を書くと——<em>Subjects</em>はキャラクターの名前、<em>Tags</em>はそのキャラクターの画像タグ（<span style="font-family:monospace">smile</span>のような、普段使っているタグ）——一致する画像が開始画面に表示されます。さらに<strong>Preview start message（開始メッセージのプレビュー）</strong>ボタンが追加され、公開前に冒頭（テキストと画像を合わせた見た目）がどうなるかを正確に確認できるようになりました。</td>
           </tr>
           <tr>
             <td class="field-name">スタートガイド<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（300トークン）</span></td>
@@ -757,6 +758,17 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="shot-row">
+        <figure class="shot">
+          <img src="/SE_Guide/PrologueImage_Write.png" alt="プロローグメッセージのエディタ。冒頭のテキストに Subjects:Wooreok, Tags:A10 の行が埋め込まれ、感情画像を挿入・シーン画像を挿入・開始メッセージのプレビューのボタンがある">
+          <figcaption><b>書き方。</b>プロローグ内の<span style="font-family:monospace">(Subjects:Wooreok, Tags:A10)</span>という行が、開始画面にWooreokの画像を表示させます。<span style="color:var(--text-dim)">ここでの<span style="font-family:monospace">A10</span>は作者独自のカスタムタグ体系です（デフォルトの画像呼び出しルールをオフにして置き換えたもの）——普通は<span style="font-family:monospace">smile</span>のような、いつもの画像タグをそのまま入れます。</span>右上の<b>Preview start message</b>ボタンと、引き上げられた<b>1000トークン</b>の上限にも注目。</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="/SE_Guide/PrologueImage_Preview.png" alt="開始メッセージのプレビュー画面。呼び出されたキャラクター画像がインラインで表示された冒頭がレンダリングされている">
+          <figcaption><b>プレビュー。</b><b>Preview start message</b>は、読者が見るとおりに冒頭を——テキストと呼び出された画像を合わせて——レンダリングするので、公開前に確認できます。</figcaption>
+        </figure>
+      </div>
 
       <div class="callout tip">
         <span class="callout-icon">🧭</span>
