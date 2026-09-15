@@ -528,7 +528,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.17.1</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.17.2</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -601,7 +601,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.17.1</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.17.2</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -778,8 +778,8 @@
         <div><strong>Craft tip — the in-reply summary block, and why its position matters.</strong><br><br>
         A common pattern is to instruct the model, from Core Context, to end each reply with a <strong>code block summarising the current state</strong> — stats, relationship values, what each character is thinking. This is <strong>not</strong> the <a href="#other-nodes" style="color:var(--accent)">Status View node</a>, which is a separate side panel; this block is written by the model as part of its own output, because you told it to in Core Context.<br><br>
         Since a language model writes top to bottom, <strong>where you ask for that block decides what it can draw on.</strong><br><br>
-        <strong>At the end of the reply</strong> (the usual choice): the scene is already written by the time the model reaches the block, so the values are <strong>derived from the prose immediately above.</strong> State follows narration — the numbers describe what just happened.<br><br>
-        <strong>At the start</strong>: the block is committed before the prose exists, so the figures come first and the narration is written to justify them. Neither is wrong — they simply run in opposite directions, and it's worth knowing which one you're asking for.</div>
+        <strong>At the end of the reply</strong> (the usual choice): the scene is already written by the time the model reaches the block, so the values are <strong>derived from the prose immediately above.</strong> State follows narration — the summary reflects what just happened.<br><br>
+        <strong>At the start</strong>: the block is committed before the prose exists, so the summary comes first and the narration is written to justify it. Neither is wrong — they simply run in opposite directions, and it's worth knowing which one you're asking for.</div>
       </div>
 
       <div class="callout info">

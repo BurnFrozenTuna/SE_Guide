@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.17.2
+
+- Reworded the summary-block craft tip: "the numbers" / "the figures" could be misread as
+  image tag numbers (a custom, non-standard scheme), and it implied a numeric summary is
+  always present. Changed to "the summary" in both the end-of-reply and start-of-reply cases
+  so it doesn't read as a fixed rule. Both editions.
+
 ## v2.17.1
 
 - Clarified the prologue image-call example: the A10 tag shown in the screenshot is the
