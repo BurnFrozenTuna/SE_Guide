@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.18.0
+
+- **Linked two in-browser tools from the Toolbox where they're relevant.** In the Image node
+  section: a PNG → WebP converter (strips metadata, smaller files). In the Thumbnail field: an
+  animated-WebP compressor that gets a file under the 5 MB cap. Both run entirely client-side
+  and each tool page links back to this guide. Both editions, language-matched (en/ja).
+
 ## v2.17.2
 
 - Reworded the summary-block craft tip: "the numbers" / "the figures" could be misread as
