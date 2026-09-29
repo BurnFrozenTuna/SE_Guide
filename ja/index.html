@@ -525,7 +525,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.18.0</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.19.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -598,7 +598,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.18.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.19.0</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -1446,6 +1446,25 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="callout warn" style="border-left-width:4px">
+        <span class="callout-icon">💳</span>
+        <div><strong style="font-size:15px">プロンプト入力の拡張 — これだけは毛色が違う、お金のかかるトグルです。</strong><br><br>
+        上のトグルはすべて、組み込み機能を<em>オフ</em>にして予算を無料で空けるものでした。<strong>これはその逆</strong>で——2026年9月下旬に始まった従量課金ベータの一部として、ストーリーノードの重要情報の<strong>入力容量を買い足す</strong>新しい<strong>有料</strong>オプションです。<br><br>
+        <ul style="margin:6px 0 6px 18px;padding:0;line-height:1.7">
+          <li>上限を<strong>最大10段階</strong>まで拡張でき、1段階につき<strong>+1,200トークン</strong>（最大+12,000）。スクショでは1段階で、コアプロンプトのボーナスが+1,800から+3,000になっています。</li>
+          <li><strong>料金は読者に課金されます。</strong>プラットフォームの告知によれば、1,200トークンの1段階ごとに、利用時のモデル基本料金に<strong>10%（最低1クレジット）</strong>が上乗せされます。これを使った作品は、詳細ページとチャットメニューにその旨が表示されます。</li>
+          <li>追加料金がかかるのは<strong>定額制（定量制）のときだけ</strong>です。従量制では、読者は実際に使った分だけの課金のままです。</li>
+          <li><strong>この追加料金は、あなたのクリエイター精算金には含まれません。</strong>つまり、あなたの収入ではなく読者に負担してもらうコストなので——<strong>作品が本当にその容量を必要とするときだけ</strong>オンにしましょう。</li>
+          <li><strong>⚠️ データ消失の注意：</strong>上限を上げて、増えた領域にプロンプトを書き込み、その後また下げると、その追加領域に書いたプロンプトが失われることがあります。</li>
+        </ul>
+        <span style="color:var(--text-dim)">ここの数値はプラットフォーム自身の告知と有効化ダイアログ（2026年9月下旬のベータ）に基づきます。課金の詳細は変わり得るので、当てにする前に最新の記述を確認してください。</span></div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="/SE_Guide/ja/PromptExpansion_JP.png" alt="プロンプト入力の拡張をオンにした詳細設定。1段階 +1,200トークンのスライダーが1から10まであり、コアプロンプトのトークン合計が+3,000に上がっている">
+        <figcaption><b>プロンプト入力の拡張、オンの状態。</b><b>1段階 · +1,200トークン</b>のスライダーは1〜10で、上部のコアプロンプト合計が<b>+1,800</b>から<b>+3,000</b>に。説明にもはっきり書かれています——「利用すると料金が増加します」。</figcaption>
+      </figure>
     </div>
 
     <hr class="divider">

@@ -528,7 +528,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.18.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.19.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -601,7 +601,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.18.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.19.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -1449,6 +1449,25 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="callout warn" style="border-left-width:4px">
+        <span class="callout-icon">💳</span>
+        <div><strong style="font-size:15px">Prompt input expansion — a different kind of toggle: this one costs money.</strong><br><br>
+        Everything above frees up budget by turning built-in features <em>off</em>, for free. <strong>This one is the opposite</strong> — it's a new <strong>paid</strong> option (part of the metered-billing beta that opened late September 2026) that <strong>buys extra input capacity</strong> for the story node's important information.<br><br>
+        <ul style="margin:6px 0 6px 18px;padding:0;line-height:1.7">
+          <li>It expands the limit in <strong>up to 10 steps</strong>, each step adding <strong>+1,200 tokens</strong> (so up to +12,000). In the screenshot, step 1 takes the core-prompt bonus from +1,800 to +3,000.</li>
+          <li><strong>It charges the reader.</strong> Per the platform notice: each 1,200-token step adds <strong>10% (minimum 1 credit)</strong> on top of the model's base price when the story is used. A story using it shows that on its detail page and in the chat menu.</li>
+          <li>The surcharge applies on the <strong>fixed-rate (quota) plan only</strong>; on the pay-as-you-go plan readers are still billed only for what they actually use.</li>
+          <li><strong>The extra fee is not included in your creator settlement.</strong> So it's a cost you're asking readers to bear, not income for you — turn it on <strong>only when the story genuinely needs the room.</strong></li>
+          <li><strong>⚠️ Data-loss warning:</strong> if you raise the limit, write prompts into the new space, then lower it again, the prompts you'd written in that extra room can be lost.</li>
+        </ul>
+        <span style="color:var(--text-dim)">Figures here are from the platform's own notice and activation dialog (late September 2026 beta); billing details can change, so check the current wording before relying on them.</span></div>
+      </div>
+
+      <figure class="shot narrow">
+        <img src="PromptExpansion.png" alt="Advanced Settings with Prompt input expansion turned ON, showing a Step 1 plus 1,200 tokens slider from 1 to 10, and the core-prompt token total raised to plus 3,000">
+        <figcaption><b>Prompt input expansion, switched on.</b> The <b>Step 1 · +1,200 tokens</b> slider runs 1–10, and the core-prompt total at the top has gone from <b>+1,800</b> to <b>+3,000</b>. The description spells it out: "Using this option increases the cost."</figcaption>
+      </figure>
     </div>
 
     <hr class="divider">

@@ -1,5 +1,15 @@
 # Changelog
 
+## v2.19.0
+
+- **Documented Prompt input expansion — the new paid token toggle** (part of the metered-billing
+  beta that opened late Sept 2026). Unlike the other Advanced Settings toggles (which free budget
+  for free), this one buys extra story-node input capacity: up to 10 steps of +1,200 tokens each.
+  Key creator-facing points: it charges the reader (+10%, min 1 credit, per step, on the fixed-rate
+  plan; pay-as-you-go still bills only actual use), the surcharge is NOT part of creator settlement,
+  and lowering the limit after writing into the extra room can lose those prompts. Framed as
+  from-the-notice / last-confirmed. Added with an ON-state screenshot. Both editions.
+
 ## v2.18.0
 
 - **Linked two in-browser tools from the Toolbox where they're relevant.** In the Image node
