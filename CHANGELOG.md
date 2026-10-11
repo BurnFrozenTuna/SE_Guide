@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.20.1
+
+- Softened the wording of the var_ correction so it doesn't read as blaming a contributor —
+  framed アヤイヤオ as the one who first raised the question, with this as the confirmed answer,
+  rather than as the source of the earlier mistake. Both editions.
+
 ## v2.20.0
 
 - **Corrected what the var_ prefix actually is — this overturns earlier guidance.** var_ is NOT
@@ -9,7 +15,7 @@
   It's an automatic *reference* prefix, not part of the stored name. Typing var_ into the name
   yourself risks the double-prefix bug var_var_name. Fixed the Variable node Name field, the
   "where var_ comes from" note (was flagged unconfirmed; now confirmed), and the Status View card.
-  Both editions. Original flag: アヤイヤオ.
+  Both editions. アヤイヤオ first raised the var_ question; this is the confirmed answer.
 
 ## v2.19.0
 
