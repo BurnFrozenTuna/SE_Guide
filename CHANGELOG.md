@@ -1,5 +1,16 @@
 # Changelog
 
+## v2.20.0
+
+- **Corrected what the var_ prefix actually is — this overturns earlier guidance.** var_ is NOT
+  something you add to a variable's name. You register the variable with a clean name (e.g.
+  known_characters_list); when you create a block that *calls* it (status view / HUD / summary
+  template), the system auto-prepends var_, so the reference reads {{var_known_characters_list}}.
+  It's an automatic *reference* prefix, not part of the stored name. Typing var_ into the name
+  yourself risks the double-prefix bug var_var_name. Fixed the Variable node Name field, the
+  "where var_ comes from" note (was flagged unconfirmed; now confirmed), and the Status View card.
+  Both editions. Original flag: アヤイヤオ.
+
 ## v2.19.0
 
 - **Documented Prompt input expansion — the new paid token toggle** (part of the metered-billing

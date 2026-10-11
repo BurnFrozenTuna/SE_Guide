@@ -525,7 +525,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.19.0</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.20.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -598,7 +598,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.19.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.20.0</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -1042,8 +1042,7 @@
             <td class="field-name">変数名<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（100文字）</span></td>
             <td class="field-desc">
               変数の識別子。<br>
-              <span class="chip green">var_</span>という接頭辞を付けると、ステータスビューのHTMLパネルから<code style="font-family:monospace">{{var_NAME}}</code>として読めます。<br>
-              接頭辞が<strong>厳密に必須</strong>なのはステータスビュー表示のときだけで——なくてもトリガーやアチーブメントの配線は動きます。ただし、それだけではありません（下の注記を参照）。習慣として付けておく価値があります。
+              ステータスビューやHUDのテンプレートから読むときは<code style="font-family:monospace">{{var_NAME}}</code>として参照しますが——<strong>この<span class="chip green">var_</span>は参照するときに付くもので、ここの名前に自分で入力するものではありません。</strong>変数は素の名前で付けましょう（例：<span style="font-family:monospace">satiety_bar</span>）。トリガーやアチーブメントの配線もその素の名前を使います。下の注記も参照——そして<span style="font-family:monospace">var_</span>を名前に自分で入れないこと。
             </td>
           </tr>
           <tr>
@@ -1068,7 +1067,8 @@
 
       <div class="callout info">
         <span class="callout-icon">🔎</span>
-        <div><strong><code style="font-family:monospace">var_</code>接頭辞は、そもそもどこから来たのか。</strong>公式ドキュメントには記載がなく、古いビルドでは使われていませんでした——比較的最近になって導入されたようです。調べてみると、この接頭辞は、キャンバスが大きく複雑になるにつれて<strong>コンパイル中に変数データが混ざるのを防ぐ</strong>ために存在しているようです。つまり上と同じ「衝突」の問題を、命名規則で対処したものです。<strong>付けなくても動作はしますが、付けることが推奨されます。</strong><span style="color:var(--text-dim)">（公式に確認された情報ではなく、確定的な答えは運営への問い合わせが必要です。<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さんの指摘により、一緒に確認しました。）</span></div>
+        <div><strong><code style="font-family:monospace">var_</code>接頭辞の正体が、ついに判明しました。</strong>これは変数の名前に自分で付けるものでは<strong>ありません</strong>。変数は素の名前で登録し（例：<span style="font-family:monospace">known_characters_list</span>）、その変数を<strong>呼び出す</strong>ブロックを作るとき——ステータスビュー、HUD、要約テンプレートなど——システムが<strong>自動的に<span class="chip green">var_</span>を先頭に付け</strong>、参照は<code style="font-family:monospace">{{var_known_characters_list}}</code>として出てきます。仕組みはこれだけです：<strong>var_は自動で付く「参照用」の接頭辞であって、保存される名前の一部ではありません。</strong><br><br>
+        <strong>⚠️ だから名前に自分で入力しないこと。</strong>入力<em>できます</em>が、そうするとシステムが参照時にもう一つ付けて、二重接頭辞のバグ<code style="font-family:monospace">var_var_名前</code>になります。名前は素のままにして、<span style="font-family:monospace">var_</span>は参照側に任せましょう。<span style="color:var(--text-dim)">（これは、var_を名前に付けるよう誤って勧めていた以前の記述を訂正するものです。最初の指摘は<a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>さん。）</span></div>
       </div>
     </div>
 
@@ -1347,7 +1347,7 @@
             <span class="node-badge" style="background:rgba(63,185,80,0.1);color:#3fb950">Status View</span>
             <span class="node-card-title">カスタムHTMLパネル</span>
           </div>
-          <div class="node-card-desc">HTML/CSS/JSで書くステータスパネル。<code style="font-family:monospace">{{var_NAME}}</code>構文で変数の現在値を読めます。ここに表示されるのはvar_接頭辞の付いた変数だけです。<strong>一部の物語が各応答の末尾に出力する要約コードブロックと混同しないこと</strong>——あれはコアコンテキストの指示によってモデルが書くもので、<a href="#story-node" style="color:var(--accent)">ストーリーノードの項</a>で扱っています。</div>
+          <div class="node-card-desc">HTML/CSS/JSで書くステータスパネル。<code style="font-family:monospace">{{var_NAME}}</code>構文で変数の現在値を読めます——この<span style="font-family:monospace">var_</span>はシステムが参照時に自動で付ける接頭辞で、変数自体の名前は素のままです（<a href="#variable-node" style="color:var(--accent)">変数ノード</a>を参照）。<strong>一部の物語が各応答の末尾に出力する要約コードブロックと混同しないこと</strong>——あれはコアコンテキストの指示によってモデルが書くもので、<a href="#story-node" style="color:var(--accent)">ストーリーノードの項</a>で扱っています。</div>
         </div>
         <div class="node-card">
           <div class="node-card-head">

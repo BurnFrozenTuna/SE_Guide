@@ -528,7 +528,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.19.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.20.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -601,7 +601,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.19.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.20.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -1045,8 +1045,7 @@
             <td class="field-name">Variable Name<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(100 chars)</span></td>
             <td class="field-desc">
               The variable's identifier.<br>
-              A <span class="chip green">var_</span> prefix makes it readable from a status view HTML panel as <code style="font-family:monospace">{{var_NAME}}</code>.<br>
-              The prefix is <strong>only strictly required</strong> for status view display — without it, trigger and achievement wiring still works. But there's more to it (see the note below), so prefixing is worth doing as a habit.
+              To read it from a status view / HUD template you reference it as <code style="font-family:monospace">{{var_NAME}}</code> — but <strong>the <span class="chip green">var_</span> is added when you reference it, not something you type into the name here.</strong> Name the variable cleanly (e.g. <span style="font-family:monospace">satiety_bar</span>); trigger and achievement wiring uses that plain name. See the note below — and don't put <span style="font-family:monospace">var_</span> in the name yourself.
             </td>
           </tr>
           <tr>
@@ -1071,7 +1070,8 @@
 
       <div class="callout info">
         <span class="callout-icon">🔎</span>
-        <div><strong>Where the <code style="font-family:monospace">var_</code> prefix actually comes from.</strong> It isn't in the official documentation, and older builds didn't use it — it appears to have been introduced fairly recently. Looking into it: the prefix seems to exist to <strong>keep variable data from getting crossed during compilation</strong> as canvases grew larger and more crowded. In other words it's the same collision problem as above, addressed with a naming convention. <strong>Things still run without it, but prefixing is recommended.</strong> <span style="color:var(--text-dim)">(Not officially confirmed — a definitive answer would need to come from the platform. Flagged by <a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>, checked together.)</span></div>
+        <div><strong>Where the <code style="font-family:monospace">var_</code> prefix actually comes from — now confirmed.</strong> It is <strong>not</strong> something you add to a variable's name. You register a variable with a clean name (e.g. <span style="font-family:monospace">known_characters_list</span>); then, when you create a block that <strong>calls</strong> that variable — for a status view, a HUD, or a summary template — the system <strong>automatically prepends <span class="chip green">var_</span></strong>, so the reference comes out as <code style="font-family:monospace">{{var_known_characters_list}}</code>. That's the whole mechanism: <strong>var_ is an automatic <em>reference</em> prefix, not part of the stored name.</strong><br><br>
+        <strong>⚠️ So don't type it into the name yourself.</strong> You <em>can</em>, but then the system adds its own on reference and you get the double-prefix bug <code style="font-family:monospace">var_var_name</code>. Leave the name clean and let the reference carry the <span style="font-family:monospace">var_</span>. <span style="color:var(--text-dim)">(This corrects the earlier guidance here, which wrongly suggested adding var_ to the name. Originally flagged by <a href="https://rplay.live/creatorhome/69283f10021cb8099d2576e1?page=storyChat" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">アヤイヤオ</a>.)</span></div>
       </div>
     </div>
 
@@ -1350,7 +1350,7 @@
             <span class="node-badge" style="background:rgba(63,185,80,0.1);color:#3fb950">Status View</span>
             <span class="node-card-title">Custom HTML panel</span>
           </div>
-          <div class="node-card-desc">A status panel you write in HTML/CSS/JS. Read live variable values with the <code style="font-family:monospace">{{var_NAME}}</code> syntax. Only variables carrying the var_ prefix are visible here. <strong>Don't confuse this with the summary code block</strong> some stories print at the end of each reply — that one is written by the model because Core Context told it to, and is covered <a href="#story-node" style="color:var(--accent)">up in Story node</a>.</div>
+          <div class="node-card-desc">A status panel you write in HTML/CSS/JS. Read live variable values with the <code style="font-family:monospace">{{var_NAME}}</code> syntax — the <span style="font-family:monospace">var_</span> is the system's automatic reference prefix, so the variable's own name stays clean (see <a href="#variable-node" style="color:var(--accent)">Variable node</a>). <strong>Don't confuse this with the summary code block</strong> some stories print at the end of each reply — that one is written by the model because Core Context told it to, and is covered <a href="#story-node" style="color:var(--accent)">up in Story node</a>.</div>
         </div>
         <div class="node-card">
           <div class="node-card-head">
