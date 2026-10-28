@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.21.0
+
+- **Added a second token tool to the tip box: SE Token Counter** (token.sentinel-archive.com).
+  Unlike Tiktokenizer, it also shows the upper token limit for the node/field you pick (marked
+  confirmed or provisional) alongside the count — browser-only, also o200k_base. Interface is
+  Japanese only, noted on the English side too. Made by 正宗 (X: FL_BOM_REG_A), shared with
+  permission; added to Contributors. Both editions.
+
 ## v2.20.1
 
 - Softened the wording of the var_ correction so it doesn't read as blaming a contributor —
