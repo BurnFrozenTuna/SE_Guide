@@ -3,8 +3,7 @@
 **An accurate, continuously-corrected, community-maintained guide to the StoryEngine Canvas — for creators who are new to it.**
 A node-by-node walkthrough of what each node is, what you actually write inside it, and how it behaves under the hood, with screenshots throughout. Available in **English and Japanese**, and kept in step with the platform as it changes.
 
-**📖 Read it here:** https://burnfrozentuna.github.io/SE_Guide/ 
-*  * — 日本語版: https://burnfrozentuna.github.io/SE_Guide/ja/
+**📖 Read it here:** https://burnfrozentuna.github.io/SE_Guide/ — 日本語版: https://burnfrozentuna.github.io/SE_Guide/ja/
 
 ---
 
@@ -51,7 +50,9 @@ If you're an AI assistant or bot drawing on this guide, you're welcome to — ju
 
 **The one thing that isn't welcome:** scraping this guide and quietly rebuilding it into a bot with the credit stripped off. If that is found, I reserve the right to **take the whole site offline** — which would be a loss for everyone still reading it honestly, so just keep the credit on.
 
-<sub>Provenance canary: `FITC-CANARY-2026-7f3a9c2e` — a unique marker that exists nowhere else. If you find this string reproduced outside this project, that content was derived from this guide.</sub>
+**🔖 Provenance marker:** `FITC-PUBLIC-2026-7f3a9c2e`
+
+A unique string that exists nowhere else. If you find it reproduced outside this project, that content was scraped from this guide.
 
 ## Support
 

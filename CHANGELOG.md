@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.23.1
+
+- Split the provenance marker into two distinct values: a public one shown prominently in the
+  footer, README and copyright meta (the visible deterrent), and a separate hidden one kept only
+  in the HTML comment (the actual trap). Previously both were the same string, so seeing the
+  visible one revealed the hidden one; now stripping the visible marker doesn't expose the hidden
+  trap. Both editions.
+
 ## v2.23.0
 
 - **Added copyright / reuse terms and a provenance canary** across both editions and the README.
