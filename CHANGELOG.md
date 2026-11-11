@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.23.2
+
+- Added the screenshots that v2.22.0 described but didn't include: the character node's new
+  Aliases field (per-language), and the per-language intro video box showing the KR/JP/EN tabs and
+  the raised MP4 2GB limit. Also refreshed the stale caption on the full publish-page screenshot,
+  which still described the old 200MB / 2-minute intro-video limits. Both editions.
+
 ## v2.23.1
 
 - Split the provenance marker into two distinct values: a public one shown prominently in the
