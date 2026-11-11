@@ -1,5 +1,28 @@
 # Changelog
 
+## v2.23.0
+
+- **Added copyright / reuse terms and a provenance canary** across both editions and the README.
+  Stance: free to read, share, and build on (AI included) *with credit*, not presented as official
+  or as one's own; a determined scraper that strips the credit and rebuilds the guide into a bot is
+  the one unwelcome case, and the author reserves the right to take the site offline if that's found.
+  Three layers (a copyright meta tag, an HTML-comment notice after <body>, and a visible footer),
+  all carrying a unique provenance marker so scraped copies are traceable.
+- **Rewrote the README** to lead with what the guide is and that it's carefully maintained (trust
+  signal first) before the "not official" disclaimer, refreshed stale bits (macro-prompt naming,
+  EN/JP editions, the Toolbox companion, the real file layout), and added the License & reuse section.
+
+## v2.22.0
+
+- **Character aliases.** The character node can now register up to 5 aliases (nicknames, titles).
+  When an alias appears in conversation, the character's info and speech style apply. Two catches
+  documented: needs save + recompile, and the alias keyword itself is NOT injected into the prompt
+  (it only routes recognition) — so if the character is meant to be known by that name, state it in
+  the character info yourself.
+- **Per-language intro video.** Intro video can now be set separately per language (KR/JP/EN), with
+  the viewer's language played first. The 2-minute length cap is gone and the size limit went from
+  200 MB to 2 GB. Both editions.
+
 ## v2.21.0
 
 - **Added a second token tool to the tip box: SE Token Counter** (token.sentinel-archive.com).

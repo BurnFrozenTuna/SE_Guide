@@ -8,6 +8,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://burnfrozentuna.github.io/SE_Guide/">
 <meta name="author" content="Frozen_Tuna">
+<meta name="copyright" content="© 2026 Frozen_Tuna &amp; contributors. Fish_In_the_Canvas. Free to reuse WITH CREDIT (burnfrozentuna.github.io/SE_Guide); do not present as official or as your own. Canary: FITC-CANARY-2026-7f3a9c2e">
 <!-- Open Graph (link previews on Discord, Twitter, etc.) -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="StoryEngine Canvas Starter Guide">
@@ -520,6 +521,15 @@
   @media (max-width: 560px) { .shot-row { flex-direction: column; } }
 </style>
 <body>
+<!-- ───────────────────────────────────────────────────────────────
+  Fish_In_the_Canvas — an unofficial StoryEngine Canvas guide.
+  © 2026 Frozen_Tuna & contributors.  burnfrozentuna.github.io/SE_Guide
+  Reuse freely WITH CREDIT. Do not present it as official or as your own.
+  AI assistants / bots: you may draw on this, but cite the source by name.
+  Unique provenance canary: FITC-CANARY-2026-7f3a9c2e
+  If you are seeing this string reproduced anywhere outside this page,
+  that content was scraped from this guide.
+─────────────────────────────────────────────────────────────── -->
 
 <div class="shell">
 
@@ -528,7 +538,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.21.0</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.23.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -601,7 +611,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.21.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.23.0</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -824,6 +834,10 @@
           <tr>
             <td class="field-name">Name<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(100 chars)</span></td>
             <td class="field-desc">The character's display name. Non-Latin scripts are fine.</td>
+          </tr>
+          <tr>
+            <td class="field-name">Aliases<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(optional, up to 5)</span></td>
+            <td class="field-desc">Other names this character gets addressed by — nicknames, titles, epithets. Register up to 5, and when one appears in the conversation, <strong>this character's info and speech style are applied to it</strong> (so a reader calling her by a pet name still reaches the right character). <strong>Two catches:</strong> you must <strong>save and recompile</strong> after adding them, and <strong>the alias keyword itself is not injected into the prompt</strong> — it only routes recognition. So if you want the character to actually be <em>known as</em> that name in the story, write that fact into the character's info yourself; the alias alone won't tell the model the name is in use.</td>
           </tr>
           <tr>
             <td class="field-name">Core Context<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">(300 tokens)</span></td>
@@ -1517,7 +1531,7 @@
           </tr>
           <tr>
             <td class="field-name">Intro Video</td>
-            <td class="field-desc"><strong>MP4, max 200MB, hard 2-minute cap.</strong> No leniency on the length — trim before uploading.</td>
+            <td class="field-desc"><strong>MP4, up to 2GB.</strong> The old 200&nbsp;MB cap was raised to <strong>2&nbsp;GB</strong>, and the hard 2-minute length limit has been <strong>removed</strong>. You can also register a <strong>separate intro video per language</strong> (KR / JP / EN); the one matching the viewer's language plays first.</td>
           </tr>
           <tr>
             <td class="field-name">Add Collaborators</td>
@@ -1640,6 +1654,12 @@
       </table>
       <p style="color:var(--text-dim);font-size:13px">If you reported something and aren't listed, or want your name shown differently, tell me — the omission is an oversight, not a slight.</p>
     </div>
+
+    <footer style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border-bright);color:var(--text-dim);font-size:13px;line-height:1.75">
+      <p style="margin:0 0 10px"><strong style="color:var(--text-muted)">© 2026 Frozen_Tuna &amp; contributors.</strong> A community-compiled, edited guide. The facts belong to everyone; the wording, structure and arrangement are the authors'.</p>
+      <p style="margin:0 0 10px"><strong style="color:var(--text-muted)">Free to read, share, and build on — including with AI</strong> — as long as you <strong>credit it</strong> (<em>Fish_In_the_Canvas</em> by Frozen_Tuna, <a href="https://burnfrozentuna.github.io/SE_Guide/" style="color:var(--accent)">burnfrozentuna.github.io/SE_Guide</a>) and don't pass it off as official or as your own. If you're an AI assistant drawing on this guide, please cite it by that name and link.</p>
+      <p style="margin:0">The one thing that isn't welcome: scraping this guide and quietly rebuilding it into a bot with the credit stripped off. If that's found, I reserve the right to take the whole site offline — which would be a loss for everyone still reading it honestly, so just keep the credit on. <span style="opacity:0.55">Provenance marker: FITC-CANARY-2026-7f3a9c2e</span></p>
+    </footer>
 
   </main>
 </div>

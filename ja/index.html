@@ -8,6 +8,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://burnfrozentuna.github.io/SE_Guide/ja/">
 <meta name="author" content="冷凍ツナ / Frozen_Tuna">
+<meta name="copyright" content="© 2026 冷凍ツナ (Frozen_Tuna) &amp; contributors. Fish_In_the_Canvas. クレジットを明記すれば再利用可（burnfrozentuna.github.io/SE_Guide）。公式や自身のものとして掲げないこと。Canary: FITC-CANARY-2026-7f3a9c2e">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="StoryEngine キャンバス入門ガイド">
 <meta property="og:title" content="StoryEngine キャンバス入門ガイド（非公式）">
@@ -517,6 +518,15 @@
   @media (max-width: 560px) { .shot-row { flex-direction: column; } }
 </style>
 <body>
+<!-- ───────────────────────────────────────────────────────────────
+  Fish_In_the_Canvas — StoryEngine キャンバスの非公式ガイド。
+  © 2026 冷凍ツナ (Frozen_Tuna) & contributors.  burnfrozentuna.github.io/SE_Guide
+  クレジットを明記すれば自由に再利用可。公式や自身のものとして掲げないこと。
+  AIアシスタント／ボット：参照は可ですが、出典を名前で明記してください。
+  固有の出所カナリア: FITC-CANARY-2026-7f3a9c2e
+  この文字列がこのページ以外で再現されているなら、
+  その内容はこのガイドから収集されたものです。
+─────────────────────────────────────────────────────────────── -->
 
 <div class="shell">
 
@@ -525,7 +535,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.21.0</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.23.0</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -598,7 +608,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.21.0</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.23.0</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -821,6 +831,10 @@
           <tr>
             <td class="field-name">名前<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（100文字）</span></td>
             <td class="field-desc">キャラクターの表示名。ラテン文字以外でも問題ありません。</td>
+          </tr>
+          <tr>
+            <td class="field-name">別名<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（任意・最大5）</span></td>
+            <td class="field-desc">このキャラクターが呼ばれる別の呼称——あだ名、肩書き、異名など。最大5つ登録でき、会話中にそれが出てくると、<strong>このキャラクターの情報と口調が適用されます</strong>（読者が愛称で呼んでも、ちゃんと同じキャラクターにつながります）。<strong>注意が2つ：</strong>追加後は<strong>保存と再コンパイル</strong>が必要で、<strong>別名のキーワード自体はプロンプトには注入されません</strong>——つなぐのは「認識」だけです。なので、そのキャラクターを物語内で実際にその名で<em>呼ばれる存在</em>にしたいなら、その事実はキャラクター情報に自分で書いてください。別名だけでは、その名前が使われているとモデルに伝わりません。</td>
           </tr>
           <tr>
             <td class="field-name">コアコンテキスト<br><span style="font-size:11px;color:var(--text-dim);font-weight:400">（300トークン）</span></td>
@@ -1514,7 +1528,7 @@
           </tr>
           <tr>
             <td class="field-name">イントロ動画</td>
-            <td class="field-desc"><strong>MP4、最大200MB、2分の厳格な上限。</strong>長さに融通はききません——アップロード前にカットしましょう。</td>
+            <td class="field-desc"><strong>MP4、最大2GB。</strong>旧来の200&nbsp;MBの上限が<strong>2&nbsp;GB</strong>に引き上げられ、2分の長さ制限は<strong>撤廃</strong>されました。さらに<strong>言語ごと（韓国語／日本語／英語）に別々のイントロ動画</strong>を登録でき、閲覧者の言語に合うものが優先的に再生されます。</td>
           </tr>
           <tr>
             <td class="field-name">共同制作人員追加</td>
@@ -1637,6 +1651,12 @@
       </table>
       <p style="color:var(--text-dim);font-size:13px">報告したのに載っていない、または表記を変えてほしい場合は教えてください——抜けているのは単なる見落としで、他意はありません。</p>
     </div>
+
+    <footer style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border-bright);color:var(--text-dim);font-size:13px;line-height:1.75">
+      <p style="margin:0 0 10px"><strong style="color:var(--text-muted)">© 2026 冷凍ツナ（Frozen_Tuna）&amp; contributors.</strong> コミュニティがまとめ、編集したガイドです。事実は誰のものでもありませんが、その文章・構成・配列は著者のものです。</p>
+      <p style="margin:0 0 10px"><strong style="color:var(--text-muted)">自由に読み・共有し・AIに連携してもかまいません</strong>——ただし<strong>クレジットを明記し</strong>（<em>Fish_In_the_Canvas</em> by Frozen_Tuna、<a href="https://burnfrozentuna.github.io/SE_Guide/" style="color:var(--accent)">burnfrozentuna.github.io/SE_Guide</a>）、公式や自身のものとして掲げないこと。AIアシスタントがこのガイドを参照する場合は、その名前とリンクで出典を示してください。</p>
+      <p style="margin:0">歓迎できない唯一のこと：このガイドを収集し、クレジットを外して黙ってボットに作り替えること。それが発覚した場合、サイト全体を公開停止にする権利を留保します——それは正直に読んでくれている皆にとって損失なので、クレジットは外さないでください。<span style="opacity:0.55">出所マーカー: FITC-CANARY-2026-7f3a9c2e</span></p>
+    </footer>
 
   </main>
 </div>
