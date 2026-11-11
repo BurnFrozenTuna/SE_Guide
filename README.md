@@ -3,7 +3,8 @@
 **An accurate, continuously-corrected, community-maintained guide to the StoryEngine Canvas — for creators who are new to it.**
 A node-by-node walkthrough of what each node is, what you actually write inside it, and how it behaves under the hood, with screenshots throughout. Available in **English and Japanese**, and kept in step with the platform as it changes.
 
-**📖 Read it here:** https://burnfrozentuna.github.io/SE_Guide/ — 日本語版: https://burnfrozentuna.github.io/SE_Guide/ja/
+**📖 Read it here:** https://burnfrozentuna.github.io/SE_Guide/ 
+*  * — 日本語版: https://burnfrozentuna.github.io/SE_Guide/ja/
 
 ---
 
