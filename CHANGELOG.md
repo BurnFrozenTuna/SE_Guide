@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.23.3
+
+- Added an unconfirmed note under the Aliases field: some creators working from the system-prompt
+  side report that a registered alias also works as a character-call keyword (call the alias and it
+  reaches the character even if the reader doesn't know the real name). Flagged clearly as rumor /
+  not verified. Both editions.
+
 ## v2.23.2
 
 - Added the screenshots that v2.22.0 described but didn't include: the character node's new

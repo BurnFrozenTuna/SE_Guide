@@ -535,7 +535,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.23.2</a></div>
+      <div class="subtitle">キャンバス入門ガイド <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.23.3</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/">English</a>
@@ -608,7 +608,7 @@
 
     <div class="page-header">
       <div class="eyebrow">キャンバス・ノードリファレンス</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.23.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.23.3</a></span></h1>
       <p class="desc">初めてキャンバスを使用するクリエイター向けに、ノード構造を解説したガイドです。各ノードの役割や記述内容、内部での動作について解説します。</p>
     </div>
 
@@ -859,6 +859,11 @@
         <img src="/SE_Guide/ja/AliasField_JP.png" alt="キャラクターノードのプロフィール。別名フィールドが強調されている——任意、0/5、別名を追加の入力欄と追加ボタン">
         <figcaption><b>別名フィールド（丸囲み）。</b>名前のすぐ下に<b>別名（任意・0/5）</b>と<b>追加</b>ボタン。最大5つ登録し、保存して再コンパイル。キーワード自体はプロンプトに注入されないので、あだ名で<em>呼ばれる</em>設定なら、その事実もキャラクター情報に書いておきましょう。</figcaption>
       </figure>
+
+      <div class="callout info">
+        <span class="callout-icon">👂</span>
+        <div><strong>未確認——クリエイターの噂。</strong>システムプロンプト側で制作している一部の人から、登録した別名が<strong>キャラクター呼び出しのキーワード</strong>としても機能する、という報告があります：ここに名前を登録しておくと、読者が本名を知らなくても、その名前を呼べばこのキャラクターにつながる、というもの。このフィールドの狙いとも符合しますが、並べて検証されたわけではありません——今のところは噂として扱い、試した方は<a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">教えてください</a>。</div>
+      </div>
 
       <div class="callout warn">
         <span class="callout-icon">👥</span>

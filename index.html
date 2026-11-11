@@ -538,7 +538,7 @@
     <div class="sidebar-logo">
       <div class="product">StoryEngine</div>
       <div class="title">Fish_In_the_Canvas</div>
-      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.23.2</a></div>
+      <div class="subtitle">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px" title="What changed in this version">v2.23.3</a></div>
     </div>
     <div class="lang-tabs">
       <a href="/SE_Guide/" class="active">English</a>
@@ -611,7 +611,7 @@
 
     <div class="page-header">
       <div class="eyebrow">Canvas Node Reference</div>
-      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.23.2</a></span></h1>
+      <h1>Fish_In_the_Canvas<br><span style="font-size:20px;font-weight:500;color:var(--text-muted)">Canvas Starter Guide <a href="https://github.com/BurnFrozenTuna/SE_Guide/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none;border-bottom:1px dotted currentColor" title="What changed in this version">v2.23.3</a></span></h1>
       <p class="desc">A node-structure walkthrough for creators new to the Canvas. It covers what each node is, what you actually write inside it, and how it behaves under the hood.</p>
     </div>
 
@@ -862,6 +862,11 @@
         <img src="AliasField.png" alt="The character node Profile with the Aliases field highlighted — labelled Optional, 0 of 5, with an Add an alias input and Add button">
         <figcaption><b>The Aliases field (circled).</b> Right under the name — <b>Aliases (optional, 0/5)</b>, with an <b>Add</b> button. Register up to five, save and recompile, and remember the keyword itself isn't injected into the prompt — so if the character is meant to be <em>known</em> by a nickname, say so in their info too.</figcaption>
       </figure>
+
+      <div class="callout info">
+        <span class="callout-icon">👂</span>
+        <div><strong>Unconfirmed — creator rumor.</strong> Some people building from the system-prompt side report that a registered alias also works as a <strong>character-call keyword</strong>: register a name here, and calling that name in play reaches this character even when the reader doesn't know the real one. It lines up with what the field seems designed for, but it hasn't been verified side-by-side — treat it as hearsay for now, and if you test it, <a href="https://github.com/BurnFrozenTuna/SE_Guide/issues" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">let me know</a>.</div>
+      </div>
 
       <div class="callout warn">
         <span class="callout-icon">👥</span>
